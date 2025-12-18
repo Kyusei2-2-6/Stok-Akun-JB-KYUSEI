@@ -553,3 +553,9 @@ h1{
 
 if (isSold) card.classList.add("sold");
 .card { position: relative; }
+
+.soldInline{
+  background:#2a0000;
+  padding:2px 6px;
+  border-radius:6px;
+}
