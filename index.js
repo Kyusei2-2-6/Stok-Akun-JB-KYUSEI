@@ -20,21 +20,21 @@ if (lastPayUrl && resumePay) {
 }
 
 /* =========================
-   SORT SOLD KE BAWAH
+   SORT: SOLD DI PALING BELAKANG
 ========================= */
-function sortSoldLast(list){
-  return list.slice().sort(function(a, b){
-    return (a.sold === true) - (b.sold === true); // false(0) dulu, true(1) belakangan
+function sortSoldLast(list) {
+  return list.slice().sort(function (a, b) {
+    return (a.sold === true) - (b.sold === true); // ready(0) dulu, sold(1) belakangan
   });
 }
 
 /* =========================
    RENDER GRID
 ========================= */
-function render(products){
+function render(products) {
   grid.innerHTML = "";
 
-  for (var i=0; i<products.length; i++){
+  for (var i = 0; i < products.length; i++) {
     var p = products[i];
     var cover = (p.photos && p.photos.length) ? p.photos[0] : "";
 
@@ -43,8 +43,8 @@ function render(products){
     a.href = "product.html?code=" + encodeURIComponent(p.code);
 
     // simpan produk terakhir saat diklik
-    a.addEventListener("click", (function(url){
-      return function(){
+    a.addEventListener("click", (function (url) {
+      return function () {
         localStorage.setItem("lastProductUrl", url);
       };
     })(a.href));
@@ -60,7 +60,7 @@ function render(products){
     nm.className = "name";
     nm.textContent = p.name;
 
-    // SOLD inline di sebelah nama
+    // SOLD inline di samping nama
     if (p.sold === true) {
       var soldTxt = document.createElement("span");
       soldTxt.className = "soldInline";
@@ -83,22 +83,23 @@ function render(products){
 }
 
 /* =========================
-   FILTER + APPLY
+   FILTER + APPLY (PASTI LEWAT SORT)
 ========================= */
 var currentGame = "all";
 
-function applyFilter(){
+function applyFilter() {
   var list = [];
 
   if (currentGame === "all") {
     list = PRODUCTS.slice();
   } else {
-    for (var i=0; i<PRODUCTS.length; i++){
+    for (var i = 0; i < PRODUCTS.length; i++) {
       var g = (PRODUCTS[i].game || "").toLowerCase();
       if (g === currentGame) list.push(PRODUCTS[i]);
     }
   }
 
+  // ini kunci: sold selalu di belakang
   render(sortSoldLast(list));
 }
 
@@ -110,26 +111,26 @@ applyFilter();
 var logoBtn = document.getElementById("logoBtn");
 var dropdown = document.getElementById("dropdown");
 
-function openMenu(){
+function openMenu() {
   dropdown.classList.add("open");
-  dropdown.setAttribute("aria-hidden","false");
-  logoBtn.setAttribute("aria-expanded","true");
+  dropdown.setAttribute("aria-hidden", "false");
+  logoBtn.setAttribute("aria-expanded", "true");
 }
 
-function closeMenu(){
+function closeMenu() {
   dropdown.classList.remove("open");
-  dropdown.setAttribute("aria-hidden","true");
-  logoBtn.setAttribute("aria-expanded","false");
+  dropdown.setAttribute("aria-hidden", "true");
+  logoBtn.setAttribute("aria-expanded", "false");
 }
 
 if (logoBtn && dropdown) {
-  logoBtn.addEventListener("click", function(e){
+  logoBtn.addEventListener("click", function (e) {
     e.stopPropagation();
     if (dropdown.classList.contains("open")) closeMenu();
     else openMenu();
   });
 
-  dropdown.addEventListener("click", function(e){
+  dropdown.addEventListener("click", function (e) {
     var item = e.target.closest(".ddItem");
     if (!item) return;
 
@@ -138,11 +139,12 @@ if (logoBtn && dropdown) {
     closeMenu();
   });
 
-  document.addEventListener("click", function(){
+  document.addEventListener("click", function () {
     closeMenu();
   });
 
-  window.addEventListener("keydown", function(e){
+  window.addEventListener("keydown", function (e) {
     if (e.key === "Escape") closeMenu();
   });
 }
+
