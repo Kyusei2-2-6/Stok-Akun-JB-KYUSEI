@@ -121,3 +121,4 @@ if (logoBtn && dropdown) {
     if (e.key === "Escape") closeMenu();
   });
 }
+
