@@ -32,7 +32,7 @@ var PRODUCTS = [
     code: "Inden",
     name: "Sempak Gusion",
     game: "ml",
-    price: 100000000000,
+    price: 10000000000000,
     sold: true,
     photos: [
       "assets/product/ML/Inden.png"
@@ -65,14 +65,16 @@ var PRODUCTS = [
   }
 
   {
-    code: "A001",
-    name: "Flins,Navia",
+    code: "A002",
+    name: "Durin, Diluc, Keqing, Furina",
     game: "genshin",
-    price: 50000,
+    price: 75000,
     photos: [
-      "assets/product/GI/A001-3/A001.jpg",
-      "assets/product/GI/A001-3/A002.jpg",
-      "assets/product/GI/A001-3/A003.jpg"
+      "assets/product/GI/A004-8/A004.jpg",
+      "assets/product/GI/A004-8/A005.jpg",
+      "assets/product/GI/A004-8/A006.jpg",
+      "assets/product/GI/A004-8/A007.jpg",
+      "assets/product/GI/A004-8/A008.jpg
     ],
     detail: [
       "🌐 Server: Asia",
@@ -96,6 +98,7 @@ function rupiah(n){
   return "Rp" + String(Math.trunc(num))
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
 
 
 
