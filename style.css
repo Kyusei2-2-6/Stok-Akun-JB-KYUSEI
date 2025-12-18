@@ -533,3 +533,22 @@ h1{
   z-index: 21;
   pointer-events: auto;
 }
+
+.soldBadge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #111;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  z-index: 2;
+}
+.card.sold img {
+  filter: grayscale(1);
+  opacity: 0.85;
+}
+
+if (isSold) card.classList.add("sold");
