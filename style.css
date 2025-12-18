@@ -552,3 +552,4 @@ h1{
 }
 
 if (isSold) card.classList.add("sold");
+.card { position: relative; }
