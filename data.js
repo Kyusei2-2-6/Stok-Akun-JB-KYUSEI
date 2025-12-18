@@ -11,9 +11,9 @@ var PRODUCTS = [
     game: "genshin",
     price: 50000,
     photos: [
-      "assets/product/A001.jpg",
-      "assets/product/A002.jpg",
-      "assets/product/A003.jpg"
+      "assets/product/GI/A001-3/A001.jpg",
+      "assets/product/GI/A001-3/A002.jpg",
+      "assets/product/GI/A001-3/A003.jpg"
     ],
     detail: [
       "🌐 Server: Asia",
@@ -35,10 +35,32 @@ var PRODUCTS = [
     price: 100000000000,
     sold: true,
     photos: [
-      "assets/product/Inden.png"
+      "assets/product/ML/Inden.png"
     ],
     detail: [
       "Sempak kebanggaan pro pler"
+    ]
+  }
+
+   {
+    code: "B001",
+    name: "AKUN TORAM 2 CAP",
+    game: "toram",
+    price: 35000
+    photos: [
+      "assets/product/TO/B001-9/B001.jpg"
+      "assets/product/TO/B001-9/B002.jpg"
+      "assets/product/TO/B001-9/B003.jpg"
+      "assets/product/TO/B001-9/B004.jpg"
+      "assets/product/TO/B001-9/B005.jpg"
+      "assets/product/TO/B001-9/B006.jpg"
+      "assets/product/TO/B001-9/B007.jpg"
+      "assets/product/TO/B001-9/B008.jpg"
+      "assets/product/TO/B001-9/B009.jpg"
+    ],
+    detail: [
+      "Akun 2 cap"
+      "Buid DPS Dual-sword & BS Vit"
     ]
   }
 ];
@@ -48,6 +70,7 @@ function rupiah(n){
   return "Rp" + String(Math.trunc(num))
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
 
 
 
