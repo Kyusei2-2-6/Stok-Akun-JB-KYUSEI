@@ -8,19 +8,28 @@ var resumeProduct = document.getElementById("resumeProduct");
 var resumePay = document.getElementById("resumePay");
 
 var lastProductUrl = localStorage.getItem("lastProductUrl");
-if (lastProductUrl) {
+if (lastProductUrl && resumeProduct) {
   resumeProduct.style.display = "inline-flex";
   resumeProduct.href = lastProductUrl;
 }
 
 var lastPayUrl = localStorage.getItem("lastPayUrl");
-if (lastPayUrl) {
+if (lastPayUrl && resumePay) {
   resumePay.style.display = "inline-flex";
   resumePay.href = lastPayUrl;
 }
 
 /* =========================
-   RENDER GRID + FILTER
+   SORT SOLD KE BAWAH
+========================= */
+function sortSoldLast(list){
+  return list.slice().sort(function(a, b){
+    return (a.sold === true) - (b.sold === true); // false(0) dulu, true(1) belakangan
+  });
+}
+
+/* =========================
+   RENDER GRID
 ========================= */
 function render(products){
   grid.innerHTML = "";
@@ -47,17 +56,17 @@ function render(products){
     var meta = document.createElement("div");
     meta.className = "meta";
 
-   var nm = document.createElement("p");
-nm.className = "name";
-nm.textContent = p.name;
+    var nm = document.createElement("p");
+    nm.className = "name";
+    nm.textContent = p.name;
 
-if (p.sold === true) {
-  const soldTxt = document.createElement("span");
-  soldTxt.className = "soldInline";
-  soldTxt.textContent = " SOLD ❌";
-  nm.appendChild(soldTxt);
-}
-
+    // SOLD inline di sebelah nama
+    if (p.sold === true) {
+      var soldTxt = document.createElement("span");
+      soldTxt.className = "soldInline";
+      soldTxt.textContent = " SOLD ❌";
+      nm.appendChild(soldTxt);
+    }
 
     var pr = document.createElement("p");
     pr.className = "price";
@@ -73,16 +82,24 @@ if (p.sold === true) {
   }
 }
 
+/* =========================
+   FILTER + APPLY
+========================= */
 var currentGame = "all";
-function applyFilter(){
-  if (currentGame === "all") return render(PRODUCTS);
 
-  var filtered = [];
-  for (var i=0; i<PRODUCTS.length; i++){
-    var g = (PRODUCTS[i].game || "").toLowerCase();
-    if (g === currentGame) filtered.push(PRODUCTS[i]);
+function applyFilter(){
+  var list = [];
+
+  if (currentGame === "all") {
+    list = PRODUCTS.slice();
+  } else {
+    for (var i=0; i<PRODUCTS.length; i++){
+      var g = (PRODUCTS[i].game || "").toLowerCase();
+      if (g === currentGame) list.push(PRODUCTS[i]);
+    }
   }
-  render(filtered);
+
+  render(sortSoldLast(list));
 }
 
 applyFilter();
@@ -129,16 +146,3 @@ if (logoBtn && dropdown) {
     if (e.key === "Escape") closeMenu();
   });
 }
-const isSold = p.sold === true;
-
-if (isSold) {
-  const soldBadge = document.createElement("div");
-  soldBadge.className = "soldBadge";
-  soldBadge.textContent = "Sold ❌";
-  card.appendChild(soldBadge);
-}
-
-
-
-
-
