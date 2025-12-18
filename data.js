@@ -62,7 +62,7 @@ var PRODUCTS = [
       "Akun 2 cap",
       "Build DPS Dual-sword & BS Vit"
     ]
-  }
+  },
 
   {
     code: "A002",
@@ -74,7 +74,7 @@ var PRODUCTS = [
       "assets/product/GI/A004-8/A005.jpg",
       "assets/product/GI/A004-8/A006.jpg",
       "assets/product/GI/A004-8/A007.jpg",
-      "assets/product/GI/A004-8/A008.jpg
+      "assets/product/GI/A004-8/A008.jpg"
     ],
     detail: [
       "🌐 Server: Asia",
@@ -85,12 +85,10 @@ var PRODUCTS = [
       "🎂 Birthdate (BD): Unset",
       "📝 Note Akun:",
       "- Pity limit -",
-      "- Pity WP -"
+      "- Pity WP -",
       "- Low explore"
     ]
-  },
-
-  
+  }
 ];
 
 function rupiah(n){
@@ -98,6 +96,7 @@ function rupiah(n){
   return "Rp" + String(Math.trunc(num))
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
 
 
 
