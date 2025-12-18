@@ -47,9 +47,17 @@ function render(products){
     var meta = document.createElement("div");
     meta.className = "meta";
 
-    var nm = document.createElement("p");
-    nm.className = "name";
-    nm.textContent = p.name;
+   var nm = document.createElement("p");
+nm.className = "name";
+nm.textContent = p.name;
+
+if (p.sold === true) {
+  const soldTxt = document.createElement("span");
+  soldTxt.className = "soldInline";
+  soldTxt.textContent = " SOLD ❌";
+  nm.appendChild(soldTxt);
+}
+
 
     var pr = document.createElement("p");
     pr.className = "price";
@@ -129,6 +137,7 @@ if (isSold) {
   soldBadge.textContent = "Sold ❌";
   card.appendChild(soldBadge);
 }
+
 
 
 
