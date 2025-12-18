@@ -63,6 +63,32 @@ var PRODUCTS = [
       "Build DPS Dual-sword & BS Vit"
     ]
   }
+
+  {
+    code: "A001",
+    name: "Flins,Navia",
+    game: "genshin",
+    price: 50000,
+    photos: [
+      "assets/product/GI/A001-3/A001.jpg",
+      "assets/product/GI/A001-3/A002.jpg",
+      "assets/product/GI/A001-3/A003.jpg"
+    ],
+    detail: [
+      "🌐 Server: Asia",
+      "🔰 AR: 35",
+      "⭐ Karakter 5★: Durin, Diluc, Keqing, Furina",
+      "⚔️ Weapon 5★: Wolf's Gravestone",
+      "👤 Username: Unset",
+      "🎂 Birthdate (BD): Unset",
+      "📝 Note Akun:",
+      "- Pity limit -",
+      "- Pity WP -"
+      "- Low explore"
+    ]
+  },
+
+  
 ];
 
 function rupiah(n){
@@ -70,6 +96,7 @@ function rupiah(n){
   return "Rp" + String(Math.trunc(num))
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
 
 
 
