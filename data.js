@@ -11,9 +11,9 @@ var PRODUCTS = [
     game: "genshin",
     price: 50000,
     photos: [
-      ".assets/product/GI/A001-3/A001.jpg",
-      ".assets/product/GI/A001-3/A002.jpg",
-      ".assets/product/GI/A001-3/A003.jpg"
+      "assets/product/GI/A001-3/A001.jpg",
+      "assets/product/GI/A001-3/A002.jpg",
+      "assets/product/GI/A001-3/A003.jpg"
     ],
     detail: [
       "🌐 Server: Asia",
@@ -40,27 +40,27 @@ var PRODUCTS = [
     detail: [
       "Sempak kebanggaan pro pler"
     ]
-  }
+  },
 
-   {
+  {
     code: "B001",
     name: "AKUN TORAM 2 CAP",
     game: "toram",
-    price: 35000
+    price: 35000,
     photos: [
-      "assets/product/TO/B001-9/B001.jpg"
-      "assets/product/TO/B001-9/B002.jpg"
-      "assets/product/TO/B001-9/B003.jpg"
-      "assets/product/TO/B001-9/B004.jpg"
-      "assets/product/TO/B001-9/B005.jpg"
-      "assets/product/TO/B001-9/B006.jpg"
-      "assets/product/TO/B001-9/B007.jpg"
-      "assets/product/TO/B001-9/B008.jpg"
+      "assets/product/TO/B001-9/B001.jpg",
+      "assets/product/TO/B001-9/B002.jpg",
+      "assets/product/TO/B001-9/B003.jpg",
+      "assets/product/TO/B001-9/B004.jpg",
+      "assets/product/TO/B001-9/B005.jpg",
+      "assets/product/TO/B001-9/B006.jpg",
+      "assets/product/TO/B001-9/B007.jpg",
+      "assets/product/TO/B001-9/B008.jpg",
       "assets/product/TO/B001-9/B009.jpg"
     ],
     detail: [
-      "Akun 2 cap"
-      "Buid DPS Dual-sword & BS Vit"
+      "Akun 2 cap",
+      "Build DPS Dual-sword & BS Vit"
     ]
   }
 ];
