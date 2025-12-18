@@ -33,6 +33,7 @@ var PRODUCTS = [
     name: "Sempak Gusion",
     game: "ml",
     price: 100000000000,
+    sold: true,
     photos: [
       "assets/product/Inden.png"
     ],
@@ -47,6 +48,7 @@ function rupiah(n){
   return "Rp" + String(Math.trunc(num))
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
 
 
 
