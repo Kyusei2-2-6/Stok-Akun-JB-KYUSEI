@@ -20,16 +20,24 @@ if (!product) {
 }
 
 /* =========================
+   HELPERS
+========================= */
+function resolveAssetUrl(path) {
+  try { return new URL(path, document.baseURI).href; }
+  catch { return path; }
+}
+
+/* =========================
    INIT PAGE
 ========================= */
 document.title = `${product.name} - ${SITE_NAME}`;
 
 const prodName = document.getElementById("prodName");
 const prodMeta = document.getElementById("prodMeta");
-const heroImg = document.getElementById("heroImg");
-const thumbs = document.getElementById("thumbs");
+const heroImg  = document.getElementById("heroImg");
+const thumbs   = document.getElementById("thumbs");
 
-const buyBtn = document.getElementById("buyBtn");
+const buyBtn  = document.getElementById("buyBtn");
 const buyBtn2 = document.getElementById("buyBtn2");
 
 /* simpan produk terakhir (anti reset) */
@@ -38,21 +46,19 @@ localStorage.setItem("lastProductUrl", productUrl);
 localStorage.setItem("lastProductCode", product.code);
 
 prodName.textContent = product.name;
-prodMeta.textContent = `${product.code} • ${rupiah(product.price)} • ${product.photos.length} foto`;
+prodMeta.textContent = `${product.code} • ${rupiah(product.price)} • ${(product.photos?.length || 0)} foto`;
 
 /* =========================
-   SOLD LOGIC (SETELAH ELEMEN ADA)
+   SOLD LOGIC (tombol beli hilang)
 ========================= */
-if (product.sold) {
+if (product.sold === true) {
   buyBtn?.remove();
   buyBtn2?.remove();
   prodMeta.textContent += " • SOLD ❌";
-}
-
-/* =========================
-   BUY / PAY URL (HANYA KALAU BELUM SOLD)
-========================= */
-if (!product.sold) {
+} else {
+  /* =========================
+     BUY / PAY URL (hanya kalau belum sold)
+  ========================= */
   const payUrl =
     `pay.html?code=${encodeURIComponent(product.code)}` +
     `&item=${encodeURIComponent(product.name)}` +
