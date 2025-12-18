@@ -18,6 +18,14 @@ if (!product) {
   `;
   throw new Error("Product not found");
 }
+if (product.sold) {
+  // sembunyikan tombol beli
+  if (buyBtn) buyBtn.remove();
+  if (buyBtn2) buyBtn2.remove();
+
+  // update meta
+  prodMeta.textContent += " • SOLD ❌";
+}
 
 /* =========================
    INIT PAGE
@@ -50,6 +58,8 @@ const payUrl =
 
 buyBtn.href = payUrl;
 buyBtn2.href = payUrl;
+const buyBtn = document.getElementById("buyBtn");
+const buyBtn2 = document.getElementById("buyBtn2");
 
 /* =========================
    IMAGES
@@ -204,3 +214,6 @@ if (detailBtn && detailModal) {
     if (e.key === "Escape") closeDetail();
   });
 }
+const buyBtn = document.getElementById("buyBtn");
+const buyBtn2 = document.getElementById("buyBtn2");
+
