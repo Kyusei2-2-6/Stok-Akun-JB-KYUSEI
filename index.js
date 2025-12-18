@@ -121,4 +121,14 @@ if (logoBtn && dropdown) {
     if (e.key === "Escape") closeMenu();
   });
 }
+const isSold = p.sold === true;
+
+if (isSold) {
+  const soldBadge = document.createElement("div");
+  soldBadge.className = "soldBadge";
+  soldBadge.textContent = "Sold ❌";
+  card.appendChild(soldBadge);
+}
+
+
 
