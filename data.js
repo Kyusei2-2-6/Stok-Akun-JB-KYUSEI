@@ -6,7 +6,7 @@ var SITE_NAME = "Kyusei";
 */
 var PRODUCTS = [
   {
-    code: "P001",
+    code: "A001",
     name: "Flins,Navia",
     game: "genshin",
     price: 50000,
@@ -29,7 +29,7 @@ var PRODUCTS = [
   },
 
   {
-    code: "A1",
+    code: "Inden",
     name: "Sempak Gusion",
     game: "ml",
     price: 100000000000,
@@ -47,6 +47,7 @@ function rupiah(n){
   return "Rp" + String(Math.trunc(num))
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
 
 
 
