@@ -148,3 +148,45 @@ if (logoBtn && dropdown) {
   });
 }
 
+// ===== WELCOME OVERLAY + AUTO MUSIC =====
+document.addEventListener("DOMContentLoaded", () => {
+  const overlay = document.getElementById("welcomeOverlay");
+  const btn = document.getElementById("welcomeBtn");
+  const bgm = document.getElementById("bgm");
+
+  if (!overlay || !btn) return;
+
+  // tampilkan welcome hanya sekali
+  if (!localStorage.getItem("welcome_seen")) {
+    overlay.classList.add("show");
+    overlay.setAttribute("aria-hidden", "false");
+  }
+
+  const closeWelcome = async () => {
+    overlay.classList.remove("show");
+    overlay.setAttribute("aria-hidden", "true");
+    localStorage.setItem("welcome_seen", "1");
+
+    // ===== BONUS: NYALAIN MUSIK =====
+    if (bgm) {
+      try {
+        bgm.volume = 0.2;
+        await bgm.play(); // ini sekarang DIIZINKAN browser
+        localStorage.setItem("bgm_playing", "1");
+      } catch (e) {
+        console.log("Autoplay blocked:", e);
+      }
+    }
+  };
+
+  // klik tombol "Masuk"
+  btn.addEventListener("click", closeWelcome);
+
+  // opsional: klik area gelap juga nutup + nyalain musik
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) closeWelcome();
+  });
+});
+
+
+
