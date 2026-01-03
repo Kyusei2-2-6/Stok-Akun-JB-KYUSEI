@@ -728,3 +728,64 @@ h1{
   transform:scale(.96);
 }
 
+
+/* =========================
+   LIVEN UP: ANIMATIONS
+========================= */
+
+/* Fade-up global */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Stagger untuk card */
+.card{
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp .45s ease forwards;
+  animation-delay: var(--d, 0ms);
+  will-change: transform, opacity;
+}
+
+/* Hover / Tap feedback (HP juga enak) */
+.card{
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.card:hover{
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(255,255,255,.18);
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.35),
+    0 0 22px rgba(160,190,255,.14);
+}
+
+.card:active{
+  transform: translateY(-1px) scale(0.99);
+}
+
+/* Reduce motion (aksesibilitas) */
+@media (prefers-reduced-motion: reduce){
+  .card{ animation: none; opacity: 1; transform: none; }
+}
+
+/* =========================
+   MUSIC DISC: PULSE WHEN PLAYING
+========================= */
+@keyframes discPulse {
+  0%   { box-shadow: 0 0 10px rgba(160,190,255,.25), 0 0 18px rgba(255,190,240,.15), 0 6px 18px rgba(0,0,0,.35); }
+  50%  { box-shadow: 0 0 14px rgba(160,190,255,.45), 0 0 26px rgba(255,190,240,.28), 0 6px 18px rgba(0,0,0,.35); }
+  100% { box-shadow: 0 0 10px rgba(160,190,255,.25), 0 0 18px rgba(255,190,240,.15), 0 6px 18px rgba(0,0,0,.35); }
+}
+
+.music-disc.playing{
+  animation: spinFantasy 7.5s linear infinite, discPulse 2.4s ease-in-out infinite;
+}
+
+/* =========================
+   WELCOME: tampil lebih hidup
+========================= */
+.welcome-card{
+  animation: fadeUp .35s ease both;
+}
