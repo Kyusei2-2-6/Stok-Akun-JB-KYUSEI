@@ -8,10 +8,11 @@
 </head>
 
 <body>
-  <!-- Background Music (taruh di dalam body) -->
+  <!-- ===== BACKGROUND MUSIC (GLOBAL) ===== -->
   <audio id="bgm" loop preload="auto">
-    <source src="assets/bgm.mp3" type="audio/mpeg">
+    <source src="./assets/bgm.mp3" type="audio/mpeg">
   </audio>
+  <!-- ===== /BACKGROUND MUSIC ===== -->
 
   <header class="topbar">
     <div class="wrap">
@@ -25,23 +26,21 @@
           <a id="resumeProduct" class="btn small" style="display:none" href="#">Lanjutkan produk terakhir</a>
           <a id="resumePay" class="btn small primary" style="display:none" href="#">Lanjutkan pembayaran terakhir</a>
 
-          <!-- Tombol Musik -->
-          <button id="musicBtn" class="btn small" type="button">
-            🎵 Play Music
-          </button>
+          <!-- Piringan Music (klik = play/pause) -->
+          <div id="musicDisc" class="music-disc" title="Play / Pause Music"></div>
 
           <!-- LOGO + DROPDOWN -->
           <div class="menu">
-            <button class="logoBtn" id="logoBtn" data-tip="Pilih Game" aria-haspopup="true" aria-expanded="false">
+            <button class="logoBtn" id="logoBtn" data-tip="Pilih Game" aria-haspopup="true" aria-expanded="false" type="button">
               <img src="./LOGO.jpg" alt="Logo Kyusei" />
             </button>
 
             <div class="dropdown" id="dropdown" aria-hidden="true">
-              <button class="ddItem" data-game="all">Semua</button>
-              <button class="ddItem" data-game="genshin">Genshin Impact</button>
-              <button class="ddItem" data-game="toram">Toram Online</button>
-              <button class="ddItem" data-game="ml">Mobile Legends</button>
-              <button class="ddItem" data-game="ff">Free Fire</button>
+              <button class="ddItem" data-game="all" type="button">Semua</button>
+              <button class="ddItem" data-game="genshin" type="button">Genshin Impact</button>
+              <button class="ddItem" data-game="toram" type="button">Toram Online</button>
+              <button class="ddItem" data-game="ml" type="button">Mobile Legends</button>
+              <button class="ddItem" data-game="ff" type="button">Free Fire</button>
             </div>
           </div>
           <!-- /LOGO + DROPDOWN -->
@@ -57,28 +56,54 @@
   <script src="./data.js?v=999"></script>
   <script src="./index.js?v=999"></script>
 
-  <!-- Script Musik: taruh paling bawah biar elementnya sudah ada -->
+  <!-- ===== MUSIC SCRIPT (SINGLE, NO CONFLICT) ===== -->
   <script>
-    const bgm = document.getElementById("bgm");
-    const musicBtn = document.getElementById("musicBtn");
+    window.addEventListener("DOMContentLoaded", () => {
+      const bgm  = document.getElementById("bgm");
+      const disc = document.getElementById("musicDisc");
 
-    bgm.volume = 0.2;
+      bgm.volume = 0.2;
+      bgm.load();
 
-    musicBtn.addEventListener("click", async () => {
-      try {
-        if (bgm.paused) {
-          await bgm.play();
-          musicBtn.textContent = "⏸ Pause Music";
-        } else {
-          bgm.pause();
-          musicBtn.textContent = "🎵 Play Music";
-        }
-      } catch (e) {
-        alert("Klik tombol sekali lagi (browser kadang memblokir audio).");
+      // Auto-resume kalau sebelumnya sedang play
+      if (localStorage.getItem("bgm_playing") === "1") {
+        bgm.play().then(() => {
+          disc.classList.add("playing");
+        }).catch(() => {
+          // autoplay mungkin diblokir, normal
+          localStorage.setItem("bgm_playing", "0");
+          disc.classList.remove("playing");
+        });
       }
+
+      // Klik disc untuk play/pause
+      disc.addEventListener("click", async () => {
+        try {
+          if (bgm.paused) {
+            await bgm.play();
+            disc.classList.add("playing");
+            localStorage.setItem("bgm_playing", "1");
+          } else {
+            bgm.pause();
+            disc.classList.remove("playing");
+            localStorage.setItem("bgm_playing", "0");
+          }
+        } catch (e) {
+          alert("Audio tidak bisa diputar. Cek file ./assets/bgm.mp3");
+          console.log(e);
+        }
+      });
+
+      // Debug kalau file audio gagal
+      bgm.addEventListener("error", () => {
+        alert("Audio gagal dimuat. Pastikan file ada di ./assets/bgm.mp3");
+        console.log("Audio src:", bgm.currentSrc);
+      });
     });
   </script>
+  <!-- ===== /MUSIC SCRIPT ===== -->
 </body>
 </html>
+
 
 
