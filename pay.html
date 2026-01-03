@@ -6,14 +6,25 @@
   <title>Pembayaran</title>
   <link rel="stylesheet" href="./style.css" />
 </head>
+
 <body>
+  <!-- ===== BACKGROUND MUSIC (GLOBAL) ===== -->
+  <audio id="bgm" loop preload="auto">
+    <source src="./assets/bgm.mp3" type="audio/mpeg">
+  </audio>
+  <!-- ===== /BACKGROUND MUSIC ===== -->
+
   <header class="topbar">
     <div class="wrap row">
       <a id="backBtn" class="btn small" href="./index.html">← Kembali</a>
+
       <div class="grow">
         <h1>Pembayaran QRIS</h1>
         <p class="sub" id="info"></p>
       </div>
+
+      <!-- Piringan Music -->
+      <div id="musicDisc" class="music-disc" title="Play / Pause Music"></div>
     </div>
   </header>
 
@@ -36,6 +47,54 @@
   </main>
 
   <script src="./data.js"></script>
-<script src="./pay.js"></script>
+  <script src="./pay.js"></script>
+
+  <!-- ===== MUSIC SCRIPT (SINGLE, AUTO-RESUME) ===== -->
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const bgm  = document.getElementById("bgm");
+      const disc = document.getElementById("musicDisc");
+
+      bgm.volume = 0.2;
+      bgm.load();
+
+      // auto-resume kalau sebelumnya play
+      if (localStorage.getItem("bgm_playing") === "1") {
+        bgm.play().then(() => {
+          disc.classList.add("playing");
+        }).catch(() => {
+          localStorage.setItem("bgm_playing", "0");
+          disc.classList.remove("playing");
+        });
+      }
+
+      // toggle play/pause dari piringan
+      disc.addEventListener("click", async () => {
+        try {
+          if (bgm.paused) {
+            await bgm.play();
+            disc.classList.add("playing");
+            localStorage.setItem("bgm_playing", "1");
+          } else {
+            bgm.pause();
+            disc.classList.remove("playing");
+            localStorage.setItem("bgm_playing", "0");
+          }
+        } catch (e) {
+          alert("Audio tidak bisa diputar. Cek file ./assets/bgm.mp3");
+          console.log(e);
+        }
+      });
+
+      // debug kalau audio gagal dimuat
+      bgm.addEventListener("error", () => {
+        alert("Audio gagal dimuat. Pastikan file ada di ./assets/bgm.mp3");
+        console.log("Audio src:", bgm.currentSrc);
+      });
+    });
+  </script>
+  <!-- ===== /MUSIC SCRIPT ===== -->
 </body>
 </html>
+
+
