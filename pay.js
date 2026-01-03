@@ -1,17 +1,69 @@
-var PHONE = "6283863831670"; // <-- GANTI nomor WA kamu (format 62..., tanpa +)
+var PHONE = "6283863831670"; // format 62..., tanpa +
 
 var params = new URLSearchParams(location.search);
 var code = params.get("code") || "";
 var item = params.get("item") || "Produk";
 var price = params.get("price") || "";
 
+/* =========================
+   HELPERS
+========================= */
 function rupiahSafe(n){
-  // kalau data.js punya rupiah(), pakai itu
   if (typeof rupiah === "function") return rupiah(n);
   return "Rp" + String(Number(n || 0)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-// cari produk dari PRODUCTS (kalau ada)
+function resolveAssetUrl(path) {
+  try { return new URL(path, document.baseURI).href; }
+  catch { return path; }
+}
+
+/* =========================
+   MUSIC (BGM RESUME) - OPTIONAL
+   NOTE: butuh <audio id="bgm"> dan <div id="musicDisc"> di pay.html
+========================= */
+document.addEventListener("DOMContentLoaded", function () {
+  var bgm = document.getElementById("bgm");
+  var disc = document.getElementById("musicDisc");
+
+  if (!bgm || !disc) return;
+
+  bgm.volume = 0.2;
+  bgm.load();
+
+  // resume kalau sebelumnya playing
+  if (localStorage.getItem("bgm_playing") === "1") {
+    bgm.play().then(function () {
+      disc.classList.add("playing");
+    }).catch(function () {
+      disc.classList.remove("playing");
+    });
+  }
+
+  bgm.addEventListener("play", function () {
+    localStorage.setItem("bgm_playing", "1");
+    disc.classList.add("playing");
+  });
+
+  bgm.addEventListener("pause", function () {
+    localStorage.setItem("bgm_playing", "0");
+    disc.classList.remove("playing");
+  });
+
+  disc.addEventListener("click", function () {
+    if (bgm.paused) {
+      bgm.play().catch(function () {
+        alert("Audio tidak bisa diputar. Pastikan file ada di ./assets/bgm.mp3");
+      });
+    } else {
+      bgm.pause();
+    }
+  });
+});
+
+/* =========================
+   FIND PRODUCT (optional)
+========================= */
 var p = null;
 if (typeof PRODUCTS !== "undefined" && Array.isArray(PRODUCTS)) {
   for (var i=0; i<PRODUCTS.length; i++){
@@ -19,37 +71,58 @@ if (typeof PRODUCTS !== "undefined" && Array.isArray(PRODUCTS)) {
   }
 }
 
-// info header
+/* =========================
+   INFO HEADER
+========================= */
 var info = document.getElementById("info");
-info.textContent = code + " • " + item + " • " + rupiahSafe(price || 0);
+if (info) {
+  info.textContent = code + " • " + item + " • " + rupiahSafe(price || 0);
+}
 
-// tombol balik ke produk yang benar
+/* =========================
+   LINK BACK TO PRODUCT
+========================= */
 var productUrl = code ? ("product.html?code=" + encodeURIComponent(code)) : "./index.html";
-document.getElementById("productBtn").href = productUrl;
-document.getElementById("backBtn").href = productUrl;
 
-// simpan posisi terakhir (anti reset)
+var productBtn = document.getElementById("productBtn");
+if (productBtn) productBtn.href = productUrl;
+
+var backBtn = document.getElementById("backBtn");
+if (backBtn) backBtn.href = productUrl;
+
+/* =========================
+   SAVE LAST STATE (resume)
+========================= */
 localStorage.setItem("lastProductUrl", productUrl);
 localStorage.setItem("lastPayUrl", location.href);
 
-// QRIS: ambil dari data.js kalau ada, kalau tidak fallback ke rule lama
+/* =========================
+   QRIS IMAGE
+========================= */
 var qrisPath = (p && p.qris) ? p.qris : ("qris/" + code + ".jpg");
 
 var qrisImg = document.getElementById("qrisImg");
-qrisImg.src = qrisPath;
-qrisImg.alt = "QRIS untuk " + code;
+if (qrisImg) {
+  qrisImg.src = resolveAssetUrl(qrisPath);
+  qrisImg.alt = "QRIS untuk " + code;
 
-qrisImg.onerror = function(){
-  qrisImg.alt = "QRIS tidak ditemukan: " + qrisPath;
-};
+  qrisImg.onerror = function(){
+    qrisImg.alt = "QRIS tidak ditemukan: " + qrisPath;
+  };
+}
 
-// WhatsApp konfirmasi
+/* =========================
+   WHATSAPP CONFIRMATION
+========================= */
 var text =
   "Halo kak, saya sudah bayar QRIS.\n\n" +
   "Kode: " + code + "\n" +
   "Produk: " + item + "\n" +
-  "Harga: " + price + "\n\n" +
-  "sertakan bukti transfer;";
+  "Harga: " + rupiahSafe(price || 0) + "\n\n" +
+  "Saya lampirkan bukti transfer ya kak. Terima kasih 🙏";
+
 var wa = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(text);
 
-document.getElementById("paidBtn").href = wa;
+var paidBtn = document.getElementById("paidBtn");
+if (paidBtn) paidBtn.href = wa;
+
