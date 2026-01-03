@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="id">
 <head>
@@ -6,7 +7,14 @@
   <title>Produk</title>
   <link rel="stylesheet" href="./style.css" />
 </head>
+
 <body>
+  <!-- ===== BACKGROUND MUSIC (GLOBAL) ===== -->
+  <audio id="bgm" loop preload="auto">
+    <source src="./assets/bgm.mp3" type="audio/mpeg">
+  </audio>
+  <!-- ===== /BACKGROUND MUSIC ===== -->
+
   <header class="topbar">
     <div class="wrap">
       <div class="topbar__inner topbar__inner--product">
@@ -18,6 +26,9 @@
         </div>
 
         <div class="topbar__actions">
+          <!-- Piringan Music -->
+          <div id="musicDisc" class="music-disc" title="Play / Pause Music"></div>
+
           <a id="buyBtn" class="btn primary small" href="#">Beli</a>
         </div>
       </div>
@@ -30,11 +41,10 @@
     </div>
 
     <div class="productActions">
-  <button id="openLightboxBtn" class="btn">Lihat Foto (Slide)</button>
-  <button id="detailBtn" class="btn">Detail</button>
-  <a id="buyBtn2" class="btn primary" href="#">Beli</a>
-</div>
-
+      <button id="openLightboxBtn" class="btn" type="button">Lihat Foto (Slide)</button>
+      <button id="detailBtn" class="btn" type="button">Detail</button>
+      <a id="buyBtn2" class="btn primary" href="#">Beli</a>
+    </div>
 
     <h2 class="h2">Foto lainnya</h2>
     <div id="thumbs" class="thumbs"></div>
@@ -46,37 +56,82 @@
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
-    <button class="iconBtn lbClose" id="lbClose" aria-label="Tutup">✕</button>
-    <button class="iconBtn lbPrev" id="lbPrev" aria-label="Sebelumnya">‹</button>
+    <button class="iconBtn lbClose" id="lbClose" aria-label="Tutup" type="button">✕</button>
+    <button class="iconBtn lbPrev" id="lbPrev" aria-label="Sebelumnya" type="button">‹</button>
 
     <img id="lbImg" class="lbImg" alt="Preview">
 
-    <button class="iconBtn lbNext" id="lbNext" aria-label="Berikutnya">›</button>
+    <button class="iconBtn lbNext" id="lbNext" aria-label="Berikutnya" type="button">›</button>
     <div class="lbCaption" id="lbCaption"></div>
   </div>
 
- <script src="./data.js"></script>
-<script defer src="./product.js"></script>
-
   <!-- Detail Modal -->
-<div class="modal" id="detailModal" aria-hidden="true">
-  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
-    <div class="modal__head">
-      <div>
-        <div class="modal__title" id="detailTitle">Detail Akun</div>
-        <div class="modal__sub" id="detailSub"></div>
+  <div class="modal" id="detailModal" aria-hidden="true">
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+      <div class="modal__head">
+        <div>
+          <div class="modal__title" id="detailTitle">Detail Akun</div>
+          <div class="modal__sub" id="detailSub"></div>
+        </div>
+        <button class="modal__close" id="detailClose" aria-label="Tutup" type="button">✕</button>
       </div>
-      <button class="modal__close" id="detailClose" aria-label="Tutup">✕</button>
-    </div>
 
-    <div class="modal__body">
-      <ul class="detailList" id="detailList"></ul>
-      <div class="modal__empty" id="detailEmpty" style="display:none;">
-        Detail belum diisi.
+      <div class="modal__body">
+        <ul class="detailList" id="detailList"></ul>
+        <div class="modal__empty" id="detailEmpty" style="display:none;">
+          Detail belum diisi.
+        </div>
       </div>
     </div>
   </div>
-</div>
 
+  <script src="./data.js"></script>
+  <script defer src="./product.js"></script>
+
+  <!-- ===== MUSIC SCRIPT (SINGLE, AUTO-RESUME) ===== -->
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const bgm  = document.getElementById("bgm");
+      const disc = document.getElementById("musicDisc");
+
+      bgm.volume = 0.2;
+      bgm.load();
+
+      // auto-resume kalau sebelumnya play
+      if (localStorage.getItem("bgm_playing") === "1") {
+        bgm.play().then(() => {
+          disc.classList.add("playing");
+        }).catch(() => {
+          localStorage.setItem("bgm_playing", "0");
+          disc.classList.remove("playing");
+        });
+      }
+
+      // toggle play/pause dari piringan
+      disc.addEventListener("click", async () => {
+        try {
+          if (bgm.paused) {
+            await bgm.play();
+            disc.classList.add("playing");
+            localStorage.setItem("bgm_playing", "1");
+          } else {
+            bgm.pause();
+            disc.classList.remove("playing");
+            localStorage.setItem("bgm_playing", "0");
+          }
+        } catch (e) {
+          alert("Audio tidak bisa diputar. Cek file ./assets/bgm.mp3");
+          console.log(e);
+        }
+      });
+
+      // debug kalau audio gagal dimuat
+      bgm.addEventListener("error", () => {
+        alert("Audio gagal dimuat. Pastikan file ada di ./assets/bgm.mp3");
+        console.log("Audio src:", bgm.currentSrc);
+      });
+    });
+  </script>
+  <!-- ===== /MUSIC SCRIPT ===== -->
 </body>
 </html>
