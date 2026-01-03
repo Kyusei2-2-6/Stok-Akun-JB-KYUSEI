@@ -47,8 +47,7 @@
         </div>
 
         <div class="topbar__actions">
-
-          <!-- RESUME PANEL (UI baru) -->
+          <!-- RESUME PANEL -->
           <div class="resumeWrap" id="resumeWrap">
             <a id="resumeProduct" class="resumeChip" style="display:none" href="#">
               <span class="resumeIco">🧾</span>
@@ -86,7 +85,6 @@
             </div>
           </div>
           <!-- /LOGO + DROPDOWN -->
-
         </div>
       </div>
     </div>
@@ -98,100 +96,8 @@
 
   <script src="./data.js?v=999"></script>
   <script src="./index.js?v=999"></script>
-
-  <!-- ===== WELCOME + MUSIC (SAFE) ===== -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const overlay = document.getElementById("welcomeOverlay");
-      const btn = document.getElementById("welcomeBtn");
-      const bgm = document.getElementById("bgm");
-      const disc = document.getElementById("musicDisc");
-
-      // ---- MUSIC RESUME LINTAS HALAMAN ----
-      if (bgm) {
-        bgm.volume = 0.2;
-        bgm.load();
-
-        // kalau sebelumnya user nyalain musik, coba lanjutkan (autoplay bisa diblokir)
-        if (localStorage.getItem("bgm_playing") === "1") {
-          bgm.play().then(() => {
-            disc && disc.classList.add("playing");
-          }).catch(() => {
-            // normal kalau diblokir
-            disc && disc.classList.remove("playing");
-          });
-        }
-
-        // update icon disk
-        bgm.addEventListener("play", () => {
-          localStorage.setItem("bgm_playing","1");
-          disc && disc.classList.add("playing");
-        });
-        bgm.addEventListener("pause", () => {
-          localStorage.setItem("bgm_playing","0");
-          disc && disc.classList.remove("playing");
-        });
-      }
-
-      // klik disk = toggle
-      if (disc && bgm) {
-        disc.addEventListener("click", async () => {
-          try {
-            if (bgm.paused) await bgm.play();
-            else bgm.pause();
-          } catch (e) {
-            alert("Audio tidak bisa diputar. Pastikan file ada di ./assets/bgm.mp3");
-            console.log(e);
-          }
-        });
-      }
-
-      // ---- WELCOME MUNCUL TIAP BUKA WEB (per sesi/tab) ----
-      if (overlay && btn) {
-        if (!sessionStorage.getItem("welcome_seen")) {
-          overlay.classList.add("show");
-          overlay.setAttribute("aria-hidden","false");
-        }
-
-        const closeWelcome = async () => {
-          overlay.classList.remove("show");
-          overlay.setAttribute("aria-hidden","true");
-          sessionStorage.setItem("welcome_seen","1");
-
-          // BONUS: nyalain musik setelah klik "Masuk" (diizinkan browser)
-          if (bgm) {
-            try {
-              bgm.volume = 0.2;
-              await bgm.play();
-              localStorage.setItem("bgm_playing","1");
-            } catch (e) {
-              console.log("Music blocked:", e);
-            }
-          }
-        };
-
-        btn.addEventListener("click", closeWelcome);
-        overlay.addEventListener("click", (e) => {
-          if (e.target === overlay) closeWelcome();
-        });
-
-        // HP kadang balik dari cache, pastikan welcome tetap muncul kalau belum klik
-        window.addEventListener("pageshow", () => {
-          if (!sessionStorage.getItem("welcome_seen")) {
-            overlay.classList.add("show");
-            overlay.setAttribute("aria-hidden","false");
-          }
-        });
-      }
-    });
-  </script>
-  <!-- ===== /WELCOME + MUSIC ===== -->
 </body>
 </html>
-
-
-
-
 
 
 
