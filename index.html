@@ -6,48 +6,77 @@
   <title>Katalog</title>
   <link rel="stylesheet" href="./style.css" />
 </head>
+
 <body>
+  <!-- Background Music (taruh di dalam body) -->
+  <audio id="bgm" loop preload="auto">
+    <source src="./assets/bgm.mp3" type="audio/mpeg">
+  </audio>
+
   <header class="topbar">
-  <div class="wrap">
-    <div class="topbar__inner">
-      <div class="topbar__text">
-        <h1 id="siteName">Nama Web</h1>
-        <p class="sub">Klik produk untuk lihat detail & foto</p>
-      </div>
-
-      <div class="topbar__actions">
-        <a id="resumeProduct" class="btn small" style="display:none" href="#">Lanjutkan produk terakhir</a>
-        <a id="resumePay" class="btn small primary" style="display:none" href="#">Lanjutkan pembayaran terakhir</a>
-
-        <!-- LOGO + DROPDOWN -->
-        <div class="menu">
-          <button class="logoBtn" id="logoBtn" data-tip="Pilih Game" aria-haspopup="true" aria-expanded="false">
-  <img src="./LOGO.jpg" alt="Logo Kyusei" />
-</button>
-
-
-
-          <div class="dropdown" id="dropdown" aria-hidden="true">
-            <button class="ddItem" data-game="all">Semua</button>
-            <button class="ddItem" data-game="genshin">Genshin Impact</button>
-            <button class="ddItem" data-game="toram">Toram Online</button>
-            <button class="ddItem" data-game="ml">Mobile Legends</button>
-            <button class="ddItem" data-game="ff">Free Fire</button>
-          </div>
+    <div class="wrap">
+      <div class="topbar__inner">
+        <div class="topbar__text">
+          <h1 id="siteName">Kyusei</h1>
+          <p class="sub">Klik produk untuk lihat detail & foto</p>
         </div>
-        <!-- /LOGO + DROPDOWN -->
+
+        <div class="topbar__actions">
+          <a id="resumeProduct" class="btn small" style="display:none" href="#">Lanjutkan produk terakhir</a>
+          <a id="resumePay" class="btn small primary" style="display:none" href="#">Lanjutkan pembayaran terakhir</a>
+
+          <!-- Tombol Musik -->
+          <button id="musicBtn" class="btn small" type="button">
+            🎵 Play Music
+          </button>
+
+          <!-- LOGO + DROPDOWN -->
+          <div class="menu">
+            <button class="logoBtn" id="logoBtn" data-tip="Pilih Game" aria-haspopup="true" aria-expanded="false">
+              <img src="./LOGO.jpg" alt="Logo Kyusei" />
+            </button>
+
+            <div class="dropdown" id="dropdown" aria-hidden="true">
+              <button class="ddItem" data-game="all">Semua</button>
+              <button class="ddItem" data-game="genshin">Genshin Impact</button>
+              <button class="ddItem" data-game="toram">Toram Online</button>
+              <button class="ddItem" data-game="ml">Mobile Legends</button>
+              <button class="ddItem" data-game="ff">Free Fire</button>
+            </div>
+          </div>
+          <!-- /LOGO + DROPDOWN -->
+        </div>
       </div>
     </div>
-  </div>
-</header>
-
+  </header>
 
   <main class="wrap">
     <section id="grid" class="grid"></section>
   </main>
 
   <script src="./data.js?v=999"></script>
-<script src="./index.js?v=999"></script>
+  <script src="./index.js?v=999"></script>
+
+  <!-- Script Musik: taruh paling bawah biar elementnya sudah ada -->
+  <script>
+    const bgm = document.getElementById("bgm");
+    const musicBtn = document.getElementById("musicBtn");
+
+    bgm.volume = 0.2;
+
+    musicBtn.addEventListener("click", async () => {
+      try {
+        if (bgm.paused) {
+          await bgm.play();
+          musicBtn.textContent = "⏸ Pause Music";
+        } else {
+          bgm.pause();
+          musicBtn.textContent = "🎵 Play Music";
+        }
+      } catch (e) {
+        alert("Klik tombol sekali lagi (browser kadang memblokir audio).");
+      }
+    });
+  </script>
 </body>
 </html>
-
