@@ -188,5 +188,26 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// ===== STAGGER ANIMATION FOR CARDS =====
+document.addEventListener("DOMContentLoaded", () => {
+  const applyStagger = () => {
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card, i) => {
+      card.style.setProperty("--d", `${i * 45}ms`); // 45ms per card
+    });
+  };
+
+  // jalankan sekali saat load
+  applyStagger();
+
+  // kalau grid kamu dirender ulang oleh filter/dropdown, panggil lagi:
+  // (aman walau tidak ada)
+  const grid = document.getElementById("grid");
+  if (grid) {
+    const obs = new MutationObserver(() => applyStagger());
+    obs.observe(grid, { childList: true, subtree: false });
+  }
+});
+
 
 
