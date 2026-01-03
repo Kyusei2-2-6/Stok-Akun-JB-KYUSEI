@@ -9,13 +9,13 @@ var resumePay = document.getElementById("resumePay");
 
 var lastProductUrl = localStorage.getItem("lastProductUrl");
 if (lastProductUrl && resumeProduct) {
-  resumeProduct.style.display = "inline-flex";
+  resumeProduct.style.display = "flex";   // lebih cocok buat resumeChip
   resumeProduct.href = lastProductUrl;
 }
 
 var lastPayUrl = localStorage.getItem("lastPayUrl");
 if (lastPayUrl && resumePay) {
-  resumePay.style.display = "inline-flex";
+  resumePay.style.display = "flex";       // lebih cocok buat resumeChip
   resumePay.href = lastPayUrl;
 }
 
@@ -26,6 +26,16 @@ function sortSoldLast(list) {
   return list.slice().sort(function (a, b) {
     return (a.sold === true) - (b.sold === true); // ready(0) dulu, sold(1) belakangan
   });
+}
+
+/* =========================
+   STAGGER HELPER
+========================= */
+function applyStagger() {
+  var cards = document.querySelectorAll(".card");
+  for (var i = 0; i < cards.length; i++) {
+    cards[i].style.setProperty("--d", (i * 45) + "ms");
+  }
 }
 
 /* =========================
@@ -66,6 +76,7 @@ function render(products) {
       soldTxt.className = "soldInline";
       soldTxt.textContent = " SOLD ❌";
       nm.appendChild(soldTxt);
+      a.classList.add("sold"); // biar grayscale jalan
     }
 
     var pr = document.createElement("p");
@@ -80,6 +91,9 @@ function render(products) {
 
     grid.appendChild(a);
   }
+
+  // biar animasi card pasti kebagian setelah render
+  applyStagger();
 }
 
 /* =========================
@@ -99,7 +113,7 @@ function applyFilter() {
     }
   }
 
-  // ini kunci: sold selalu di belakang
+  // sold selalu di belakang
   render(sortSoldLast(list));
 }
 
@@ -148,32 +162,77 @@ if (logoBtn && dropdown) {
   });
 }
 
-// ===== WELCOME OVERLAY (MUNCUL TIAP BUKA WEB) + AUTO MUSIC =====
-document.addEventListener("DOMContentLoaded", () => {
-  const overlay = document.getElementById("welcomeOverlay");
-  const btn = document.getElementById("welcomeBtn");
-  const bgm = document.getElementById("bgm");
+/* =========================
+   MUSIC DISC (PLAY/PAUSE) + RESUME LINTAS HALAMAN
+========================= */
+document.addEventListener("DOMContentLoaded", function () {
+  var bgm = document.getElementById("bgm");
+  var disc = document.getElementById("musicDisc");
+
+  if (!bgm || !disc) return;
+
+  bgm.volume = 0.2;
+  bgm.load();
+
+  // kalau sebelumnya user nyalain musik, coba lanjutkan
+  if (localStorage.getItem("bgm_playing") === "1") {
+    bgm.play().then(function () {
+      disc.classList.add("playing");
+    }).catch(function () {
+      // autoplay bisa diblokir, normal
+      disc.classList.remove("playing");
+    });
+  }
+
+  // sync class playing
+  bgm.addEventListener("play", function () {
+    localStorage.setItem("bgm_playing", "1");
+    disc.classList.add("playing");
+  });
+
+  bgm.addEventListener("pause", function () {
+    localStorage.setItem("bgm_playing", "0");
+    disc.classList.remove("playing");
+  });
+
+  // klik disc = toggle
+  disc.addEventListener("click", function () {
+    if (bgm.paused) {
+      bgm.play().catch(function () {
+        alert("Audio tidak bisa diputar. Pastikan file ada di ./assets/bgm.mp3");
+      });
+    } else {
+      bgm.pause();
+    }
+  });
+});
+
+/* =========================
+   WELCOME OVERLAY (MUNCUL TIAP BUKA WEB) + AUTO MUSIC
+========================= */
+document.addEventListener("DOMContentLoaded", function () {
+  var overlay = document.getElementById("welcomeOverlay");
+  var btn = document.getElementById("welcomeBtn");
+  var bgm = document.getElementById("bgm");
 
   if (!overlay || !btn) return;
 
-  // MUNCUL TIAP BUKA WEB (per tab/session)
-  // sessionStorage akan hilang saat tab/browser ditutup
   if (!sessionStorage.getItem("welcome_seen")) {
     overlay.classList.add("show");
     overlay.setAttribute("aria-hidden", "false");
   }
 
-  const closeWelcome = async () => {
+  var closeWelcome = async function () {
     overlay.classList.remove("show");
     overlay.setAttribute("aria-hidden", "true");
     sessionStorage.setItem("welcome_seen", "1");
 
-    // BONUS: nyalain musik pas klik "Masuk" (diizinkan browser karena user gesture)
+    // nyalain musik setelah klik (user gesture)
     if (bgm) {
       try {
         bgm.volume = 0.2;
         await bgm.play();
-        localStorage.setItem("bgm_playing", "1"); // supaya auto-resume di halaman lain
+        localStorage.setItem("bgm_playing", "1");
       } catch (e) {
         console.log("Music blocked:", e);
       }
@@ -182,39 +241,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   btn.addEventListener("click", closeWelcome);
 
-  // klik area gelap untuk tutup juga
-  overlay.addEventListener("click", (e) => {
+  overlay.addEventListener("click", function (e) {
     if (e.target === overlay) closeWelcome();
   });
 
-  // kalau balik dari cache (HP suka begitu), tetap pastikan welcome muncul kalau belum klik Masuk
-  window.addEventListener("pageshow", () => {
+  // kalau balik dari cache (HP suka begitu), tetap pastikan welcome muncul kalau belum klik
+  window.addEventListener("pageshow", function () {
     if (!sessionStorage.getItem("welcome_seen")) {
       overlay.classList.add("show");
       overlay.setAttribute("aria-hidden", "false");
     }
   });
-});
-
-// ===== STAGGER ANIMATION FOR CARDS =====
-document.addEventListener("DOMContentLoaded", () => {
-  const applyStagger = () => {
-    const cards = document.querySelectorAll(".card");
-    cards.forEach((card, i) => {
-      card.style.setProperty("--d", `${i * 45}ms`); // 45ms per card
-    });
-  };
-
-  // jalankan sekali saat load
-  applyStagger();
-
-  // kalau grid kamu dirender ulang oleh filter/dropdown, panggil lagi:
-  // (aman walau tidak ada)
-  const grid = document.getElementById("grid");
-  if (grid) {
-    const obs = new MutationObserver(() => applyStagger());
-    obs.observe(grid, { childList: true, subtree: false });
-  }
 });
 
 
