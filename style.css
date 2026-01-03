@@ -559,3 +559,48 @@ if (isSold) card.classList.add("sold");
   padding:2px 6px;
   border-radius:6px;
 }
+.music-disc{
+  width: 44px;
+  height: 44px;
+  margin-left: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.95) 0 10%, rgba(255,255,255,.15) 11% 18%, transparent 19%),
+    conic-gradient(from 220deg,
+      rgba(180,160,255,.9),
+      rgba(120,220,255,.85),
+      rgba(255,180,240,.85),
+      rgba(180,160,255,.9)
+    );
+
+  box-shadow:
+    0 0 10px rgba(160,190,255,.35),
+    0 0 18px rgba(255,190,240,.25),
+    0 6px 18px rgba(0,0,0,.35);
+
+  border: 1px solid rgba(255,255,255,.18);
+}
+
+.music-disc::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff, rgba(255,255,255,.2));
+}
+
+@keyframes spinFantasy {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.music-disc.playing{
+  animation: spinFantasy 7.5s linear infinite;
+}
