@@ -148,7 +148,7 @@ if (logoBtn && dropdown) {
   });
 }
 
-// ===== WELCOME OVERLAY + AUTO MUSIC =====
+// ===== WELCOME OVERLAY (MUNCUL TIAP BUKA WEB) + AUTO MUSIC =====
 document.addEventListener("DOMContentLoaded", () => {
   const overlay = document.getElementById("welcomeOverlay");
   const btn = document.getElementById("welcomeBtn");
@@ -156,8 +156,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!overlay || !btn) return;
 
-  // tampilkan welcome hanya sekali
-  if (!localStorage.getItem("welcome_seen")) {
+  // MUNCUL TIAP BUKA WEB (per tab/session)
+  // sessionStorage akan hilang saat tab/browser ditutup
+  if (!sessionStorage.getItem("welcome_seen")) {
     overlay.classList.add("show");
     overlay.setAttribute("aria-hidden", "false");
   }
@@ -165,26 +166,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeWelcome = async () => {
     overlay.classList.remove("show");
     overlay.setAttribute("aria-hidden", "true");
-    localStorage.setItem("welcome_seen", "1");
+    sessionStorage.setItem("welcome_seen", "1");
 
-    // ===== BONUS: NYALAIN MUSIK =====
+    // BONUS: nyalain musik pas klik "Masuk" (diizinkan browser karena user gesture)
     if (bgm) {
       try {
         bgm.volume = 0.2;
-        await bgm.play(); // ini sekarang DIIZINKAN browser
-        localStorage.setItem("bgm_playing", "1");
+        await bgm.play();
+        localStorage.setItem("bgm_playing", "1"); // supaya auto-resume di halaman lain
       } catch (e) {
-        console.log("Autoplay blocked:", e);
+        console.log("Music blocked:", e);
       }
     }
   };
 
-  // klik tombol "Masuk"
   btn.addEventListener("click", closeWelcome);
 
-  // opsional: klik area gelap juga nutup + nyalain musik
+  // klik area gelap untuk tutup juga
   overlay.addEventListener("click", (e) => {
     if (e.target === overlay) closeWelcome();
+  });
+
+  // kalau balik dari cache (HP suka begitu), tetap pastikan welcome muncul kalau belum klik Masuk
+  window.addEventListener("pageshow", () => {
+    if (!sessionStorage.getItem("welcome_seen")) {
+      overlay.classList.add("show");
+      overlay.setAttribute("aria-hidden", "false");
+    }
   });
 });
 
@@ -208,6 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
     obs.observe(grid, { childList: true, subtree: false });
   }
 });
+
 
 
 
