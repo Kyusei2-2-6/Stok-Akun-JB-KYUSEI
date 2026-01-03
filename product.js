@@ -28,6 +28,46 @@ function resolveAssetUrl(path) {
 }
 
 /* =========================
+   MUSIC (BGM RESUME) - OPTIONAL (aman kalau element ga ada)
+   NOTE: butuh <audio id="bgm"> dan <div id="musicDisc"> di product.html
+========================= */
+document.addEventListener("DOMContentLoaded", () => {
+  const bgm = document.getElementById("bgm");
+  const disc = document.getElementById("musicDisc");
+
+  if (!bgm || !disc) return;
+
+  bgm.volume = 0.2;
+  bgm.load();
+
+  // resume kalau sebelumnya playing
+  if (localStorage.getItem("bgm_playing") === "1") {
+    bgm.play().then(() => disc.classList.add("playing"))
+      .catch(() => disc.classList.remove("playing"));
+  }
+
+  bgm.addEventListener("play", () => {
+    localStorage.setItem("bgm_playing", "1");
+    disc.classList.add("playing");
+  });
+
+  bgm.addEventListener("pause", () => {
+    localStorage.setItem("bgm_playing", "0");
+    disc.classList.remove("playing");
+  });
+
+  disc.addEventListener("click", async () => {
+    try {
+      if (bgm.paused) await bgm.play();
+      else bgm.pause();
+    } catch (e) {
+      alert("Audio tidak bisa diputar. Pastikan file ada di ./assets/bgm.mp3");
+      console.log(e);
+    }
+  });
+});
+
+/* =========================
    INIT PAGE
 ========================= */
 document.title = `${product.name} - ${SITE_NAME}`;
@@ -53,6 +93,8 @@ prodMeta.textContent = `${product.code} • ${rupiah(product.price)} • ${(prod
 ========================= */
 const isSold = (product.sold === true);
 
+let payUrl = null;
+
 if (isSold) {
   buyBtn?.remove();
   buyBtn2?.remove();
@@ -61,13 +103,20 @@ if (isSold) {
   /* =========================
      BUY / PAY URL (hanya kalau belum sold)
   ========================= */
-  const payUrl =
+  payUrl =
     `pay.html?code=${encodeURIComponent(product.code)}` +
     `&item=${encodeURIComponent(product.name)}` +
     `&price=${encodeURIComponent(String(product.price))}`;
 
   if (buyBtn) buyBtn.href = payUrl;
   if (buyBtn2) buyBtn2.href = payUrl;
+
+  // simpan pembayaran terakhir saat tombol beli diklik
+  const saveLastPay = () => {
+    localStorage.setItem("lastPayUrl", payUrl);
+  };
+  buyBtn?.addEventListener("click", saveLastPay);
+  buyBtn2?.addEventListener("click", saveLastPay);
 }
 
 /* =========================
@@ -86,7 +135,6 @@ function setHero(idx) {
 if (photos.length) {
   setHero(0);
 } else {
-  // kalau gak ada foto, kosongin biar ga broken image
   heroImg.removeAttribute("src");
   heroImg.alt = "Tidak ada foto";
 }
@@ -101,7 +149,6 @@ photos.forEach((src, index) => {
   img.src = resolveAssetUrl(src);
   img.alt = `${product.name} ${index + 1}`;
 
-  // enak: klik thumb ganti hero + buka lightbox
   img.addEventListener("click", () => {
     setHero(index);
     openLightbox(index);
