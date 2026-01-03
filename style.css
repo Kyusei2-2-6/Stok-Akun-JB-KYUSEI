@@ -696,3 +696,13 @@ h1{ margin:0; font-size:20px; }
   /* logo & piringan tetap kanan */
   .menu, .music-disc{ margin-left:auto; }
 }
+
+/* pay header biar piringan sejajar & ga nabrak */
+.topbar .wrap.row{
+  gap:12px;
+}
+
+.topbar .wrap.row .music-disc{
+  margin-left:auto;
+}
+
