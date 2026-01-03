@@ -809,3 +809,38 @@ h1{
   50%{ transform: translateY(-8px); opacity:.7; }
   100%{ transform: translateY(0); opacity:.45; }
 }
+
+/* =========================
+   FIX NABRAK TOPBAR (MOBILE)
+========================= */
+@media (max-width:720px){
+  .topbar__inner{
+    flex-wrap:wrap;
+    row-gap:10px;
+  }
+
+  /* teks judul ambil 1 baris penuh */
+  .topbar__text{
+    width:100%;
+  }
+
+  /* tombol lanjutkan pindah ke baris bawah */
+  .topbar__actions{
+    width:100%;
+    justify-content:flex-start;
+    flex-wrap:wrap;
+  }
+
+  /* tombol resume jangan kepanjangan */
+  #resumeProduct,
+  #resumePay{
+    flex:1 1 100%;
+  }
+
+  /* logo & piringan tetap di kanan */
+  .menu,
+  .music-disc{
+    margin-left:auto;
+  }
+}
+
