@@ -8,36 +8,35 @@
 </head>
 
 <body>
-  <!-- ===== WELCOME OVERLAY ===== -->
-<div id="welcomeOverlay" class="welcome-overlay" aria-hidden="true">
-  <div class="welcome-card">
-
-    <!-- FOTO WELCOME -->
-    <div class="welcome-image">
-      <img src="Welcome.png" alt="Welcome Kyusei">
-    </div>
-
-    <h2 class="welcome-title">✨ Selamat Datang ✨</h2>
-
-    <p class="welcome-text">
-      Selamat datang di <b>Kyusei Store</b><br>
-      Tempat jual akun game pilihan ✨<br>
-      Silakan pilih game & akun favoritmu.
-    </p>
-
-    <button id="welcomeBtn" class="welcome-btn">
-      Masuk ✨
-    </button>
-
-  </div>
-</div>
-<!-- ===== /WELCOME OVERLAY ===== -->
-
   <!-- ===== BACKGROUND MUSIC (GLOBAL) ===== -->
   <audio id="bgm" loop preload="auto">
     <source src="./assets/bgm.mp3" type="audio/mpeg">
   </audio>
   <!-- ===== /BACKGROUND MUSIC ===== -->
+
+  <!-- ===== WELCOME OVERLAY ===== -->
+  <div id="welcomeOverlay" class="welcome-overlay" aria-hidden="true">
+    <div class="welcome-card">
+      <div class="welcome-glow"></div>
+
+      <div class="welcome-image">
+        <img src="./assets/Welcome.png" alt="Welcome Kyusei">
+      </div>
+
+      <h2 class="welcome-title">✨ Selamat Datang ✨</h2>
+
+      <p class="welcome-text">
+        Selamat datang di <b>Kyusei Store</b><br>
+        Tempat jual akun game pilihan ✨<br>
+        Silakan pilih game & akun favoritmu.
+      </p>
+
+      <button id="welcomeBtn" class="welcome-btn" type="button">
+        Masuk ✨
+      </button>
+    </div>
+  </div>
+  <!-- ===== /WELCOME OVERLAY ===== -->
 
   <header class="topbar">
     <div class="wrap">
@@ -48,10 +47,28 @@
         </div>
 
         <div class="topbar__actions">
-          <a id="resumeProduct" class="btn small" style="display:none" href="#">Lanjutkan produk terakhir</a>
-          <a id="resumePay" class="btn small primary" style="display:none" href="#">Lanjutkan pembayaran terakhir</a>
 
-          <!-- Piringan Music (klik = play/pause) -->
+          <!-- RESUME PANEL (UI baru) -->
+          <div class="resumeWrap" id="resumeWrap">
+            <a id="resumeProduct" class="resumeChip" style="display:none" href="#">
+              <span class="resumeIco">🧾</span>
+              <span class="resumeTxt">
+                <b>Lanjutkan</b><small>produk terakhir</small>
+              </span>
+              <span class="resumeGo">›</span>
+            </a>
+
+            <a id="resumePay" class="resumeChip isPrimary" style="display:none" href="#">
+              <span class="resumeIco">💳</span>
+              <span class="resumeTxt">
+                <b>Lanjutkan</b><small>pembayaran terakhir</small>
+              </span>
+              <span class="resumeGo">›</span>
+            </a>
+          </div>
+          <!-- /RESUME PANEL -->
+
+          <!-- Piringan Musik -->
           <div id="musicDisc" class="music-disc" title="Play / Pause Music"></div>
 
           <!-- LOGO + DROPDOWN -->
@@ -69,6 +86,7 @@
             </div>
           </div>
           <!-- /LOGO + DROPDOWN -->
+
         </div>
       </div>
     </div>
@@ -81,91 +99,97 @@
   <script src="./data.js?v=999"></script>
   <script src="./index.js?v=999"></script>
 
-  <!-- ===== MUSIC SCRIPT (SINGLE, NO CONFLICT) ===== -->
- <script>
-  window.addEventListener("DOMContentLoaded", () => {
-    const bgm  = document.getElementById("bgm");
-    const disc = document.getElementById("musicDisc");
+  <!-- ===== WELCOME + MUSIC (SAFE) ===== -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const overlay = document.getElementById("welcomeOverlay");
+      const btn = document.getElementById("welcomeBtn");
+      const bgm = document.getElementById("bgm");
+      const disc = document.getElementById("musicDisc");
 
-    bgm.volume = 0.2;
-    bgm.load();
+      // ---- MUSIC RESUME LINTAS HALAMAN ----
+      if (bgm) {
+        bgm.volume = 0.2;
+        bgm.load();
 
-    const wantPlay = localStorage.getItem("bgm_playing") === "1";
-
-    // kalau sebelumnya user sudah nyalain musik, coba lanjutkan
-    const tryResume = async () => {
-      if (!wantPlay) return;
-      try {
-        await bgm.play();
-        disc && disc.classList.add("playing");
-      } catch {
-        // Autoplay diblokir, kita tunggu 1x klik user
-        showTapHint();
-      }
-    };
-
-    // overlay kecil "Tap to enable music" (muncul cuma kalau diblokir)
-    const showTapHint = () => {
-      if (document.getElementById("tapMusicHint")) return;
-
-      const hint = document.createElement("div");
-      hint.id = "tapMusicHint";
-      hint.textContent = "Tap di mana saja untuk menyalakan musik 🎵";
-      hint.style.cssText = `
-        position:fixed; left:50%; bottom:18px; transform:translateX(-50%);
-        background:rgba(0,0,0,.65); color:#fff; padding:10px 14px;
-        border-radius:999px; font-weight:700; font-size:13px;
-        z-index:99999; backdrop-filter:blur(8px);
-      `;
-      document.body.appendChild(hint);
-
-      const unlock = async () => {
-        try {
-          await bgm.play();
-          disc && disc.classList.add("playing");
-          hint.remove();
-          window.removeEventListener("pointerdown", unlock);
-        } catch {}
-      };
-
-      // 1x tap/klik di mana saja untuk unlock audio
-      window.addEventListener("pointerdown", unlock, { once: true });
-    };
-
-    // klik disc = toggle play/pause
-    if (disc) {
-      disc.addEventListener("click", async () => {
-        try {
-          if (bgm.paused) {
-            await bgm.play();
-            disc.classList.add("playing");
-            localStorage.setItem("bgm_playing", "1");
-          } else {
-            bgm.pause();
-            disc.classList.remove("playing");
-            localStorage.setItem("bgm_playing", "0");
-          }
-        } catch {
-          showTapHint();
+        // kalau sebelumnya user nyalain musik, coba lanjutkan (autoplay bisa diblokir)
+        if (localStorage.getItem("bgm_playing") === "1") {
+          bgm.play().then(() => {
+            disc && disc.classList.add("playing");
+          }).catch(() => {
+            // normal kalau diblokir
+            disc && disc.classList.remove("playing");
+          });
         }
-      });
-    }
 
-    bgm.addEventListener("play", () => localStorage.setItem("bgm_playing", "1"));
-    bgm.addEventListener("pause", () => localStorage.setItem("bgm_playing", "0"));
+        // update icon disk
+        bgm.addEventListener("play", () => {
+          localStorage.setItem("bgm_playing","1");
+          disc && disc.classList.add("playing");
+        });
+        bgm.addEventListener("pause", () => {
+          localStorage.setItem("bgm_playing","0");
+          disc && disc.classList.remove("playing");
+        });
+      }
 
-    bgm.addEventListener("error", () => {
-      alert("Audio gagal dimuat. Cek file ./assets/bgm.mp3");
-      console.log("Audio src:", bgm.currentSrc);
+      // klik disk = toggle
+      if (disc && bgm) {
+        disc.addEventListener("click", async () => {
+          try {
+            if (bgm.paused) await bgm.play();
+            else bgm.pause();
+          } catch (e) {
+            alert("Audio tidak bisa diputar. Pastikan file ada di ./assets/bgm.mp3");
+            console.log(e);
+          }
+        });
+      }
+
+      // ---- WELCOME MUNCUL TIAP BUKA WEB (per sesi/tab) ----
+      if (overlay && btn) {
+        if (!sessionStorage.getItem("welcome_seen")) {
+          overlay.classList.add("show");
+          overlay.setAttribute("aria-hidden","false");
+        }
+
+        const closeWelcome = async () => {
+          overlay.classList.remove("show");
+          overlay.setAttribute("aria-hidden","true");
+          sessionStorage.setItem("welcome_seen","1");
+
+          // BONUS: nyalain musik setelah klik "Masuk" (diizinkan browser)
+          if (bgm) {
+            try {
+              bgm.volume = 0.2;
+              await bgm.play();
+              localStorage.setItem("bgm_playing","1");
+            } catch (e) {
+              console.log("Music blocked:", e);
+            }
+          }
+        };
+
+        btn.addEventListener("click", closeWelcome);
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) closeWelcome();
+        });
+
+        // HP kadang balik dari cache, pastikan welcome tetap muncul kalau belum klik
+        window.addEventListener("pageshow", () => {
+          if (!sessionStorage.getItem("welcome_seen")) {
+            overlay.classList.add("show");
+            overlay.setAttribute("aria-hidden","false");
+          }
+        });
+      }
     });
-
-    tryResume();
-  });
-</script>
-
-  <!-- ===== /MUSIC SCRIPT ===== -->
+  </script>
+  <!-- ===== /WELCOME + MUSIC ===== -->
 </body>
 </html>
+
+
 
 
 
