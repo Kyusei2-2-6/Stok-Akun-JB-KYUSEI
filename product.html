@@ -90,24 +90,57 @@
 
   <!-- ===== MUSIC SCRIPT (SINGLE, AUTO-RESUME) ===== -->
   <script>
-    window.addEventListener("DOMContentLoaded", () => {
-      const bgm  = document.getElementById("bgm");
-      const disc = document.getElementById("musicDisc");
+  window.addEventListener("DOMContentLoaded", () => {
+    const bgm  = document.getElementById("bgm");
+    const disc = document.getElementById("musicDisc");
 
-      bgm.volume = 0.2;
-      bgm.load();
+    bgm.volume = 0.2;
+    bgm.load();
 
-      // auto-resume kalau sebelumnya play
-      if (localStorage.getItem("bgm_playing") === "1") {
-        bgm.play().then(() => {
-          disc.classList.add("playing");
-        }).catch(() => {
-          localStorage.setItem("bgm_playing", "0");
-          disc.classList.remove("playing");
-        });
+    const wantPlay = localStorage.getItem("bgm_playing") === "1";
+
+    // kalau sebelumnya user sudah nyalain musik, coba lanjutkan
+    const tryResume = async () => {
+      if (!wantPlay) return;
+      try {
+        await bgm.play();
+        disc && disc.classList.add("playing");
+      } catch {
+        // Autoplay diblokir, kita tunggu 1x klik user
+        showTapHint();
       }
+    };
 
-      // toggle play/pause dari piringan
+    // overlay kecil "Tap to enable music" (muncul cuma kalau diblokir)
+    const showTapHint = () => {
+      if (document.getElementById("tapMusicHint")) return;
+
+      const hint = document.createElement("div");
+      hint.id = "tapMusicHint";
+      hint.textContent = "Tap di mana saja untuk menyalakan musik 🎵";
+      hint.style.cssText = `
+        position:fixed; left:50%; bottom:18px; transform:translateX(-50%);
+        background:rgba(0,0,0,.65); color:#fff; padding:10px 14px;
+        border-radius:999px; font-weight:700; font-size:13px;
+        z-index:99999; backdrop-filter:blur(8px);
+      `;
+      document.body.appendChild(hint);
+
+      const unlock = async () => {
+        try {
+          await bgm.play();
+          disc && disc.classList.add("playing");
+          hint.remove();
+          window.removeEventListener("pointerdown", unlock);
+        } catch {}
+      };
+
+      // 1x tap/klik di mana saja untuk unlock audio
+      window.addEventListener("pointerdown", unlock, { once: true });
+    };
+
+    // klik disc = toggle play/pause
+    if (disc) {
       disc.addEventListener("click", async () => {
         try {
           if (bgm.paused) {
@@ -119,19 +152,24 @@
             disc.classList.remove("playing");
             localStorage.setItem("bgm_playing", "0");
           }
-        } catch (e) {
-          alert("Audio tidak bisa diputar. Cek file ./assets/bgm.mp3");
-          console.log(e);
+        } catch {
+          showTapHint();
         }
       });
+    }
 
-      // debug kalau audio gagal dimuat
-      bgm.addEventListener("error", () => {
-        alert("Audio gagal dimuat. Pastikan file ada di ./assets/bgm.mp3");
-        console.log("Audio src:", bgm.currentSrc);
-      });
+    bgm.addEventListener("play", () => localStorage.setItem("bgm_playing", "1"));
+    bgm.addEventListener("pause", () => localStorage.setItem("bgm_playing", "0"));
+
+    bgm.addEventListener("error", () => {
+      alert("Audio gagal dimuat. Cek file ./assets/bgm.mp3");
+      console.log("Audio src:", bgm.currentSrc);
     });
-  </script>
-  <!-- ===== /MUSIC SCRIPT ===== -->
+
+    tryResume();
+  });
+</script>
+
 </body>
 </html>
+
