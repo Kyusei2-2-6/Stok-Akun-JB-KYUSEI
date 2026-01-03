@@ -612,3 +612,86 @@ h1{
 .music-disc.playing{
   animation: spinFantasy 7.5s linear infinite;
 }
+
+/* =========================
+   WELCOME OVERLAY (ANIME / FANTASY)
+========================= */
+.welcome-overlay{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at top, rgba(180,160,255,.25), transparent 60%),
+    rgba(0,0,0,.75);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99999;
+  backdrop-filter: blur(6px);
+}
+
+.welcome-overlay.show{
+  display:flex;
+}
+
+.welcome-card{
+  position:relative;
+  width:min(90vw, 360px);
+  padding:26px 22px;
+  border-radius:20px;
+  text-align:center;
+
+  background:
+    linear-gradient(180deg, rgba(30,40,70,.95), rgba(15,20,40,.95));
+  border:1px solid rgba(255,255,255,.18);
+
+  box-shadow:
+    0 0 30px rgba(160,190,255,.35),
+    0 0 60px rgba(255,190,240,.25);
+}
+
+.welcome-glow{
+  position:absolute;
+  inset:-2px;
+  border-radius:22px;
+  pointer-events:none;
+  box-shadow:
+    0 0 40px rgba(160,190,255,.35),
+    0 0 80px rgba(255,190,240,.25);
+  opacity:.6;
+}
+
+.welcome-title{
+  margin:0 0 12px;
+  font-size:20px;
+  font-weight:900;
+  letter-spacing:.5px;
+  color:#fff;
+}
+
+.welcome-text{
+  font-size:14px;
+  line-height:1.6;
+  color:rgba(255,255,255,.85);
+  margin-bottom:18px;
+}
+
+.welcome-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 18px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.25);
+  background:
+    linear-gradient(135deg, rgba(180,160,255,.9), rgba(255,180,240,.9));
+  color:#111;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,.35);
+  touch-action:manipulation;
+}
+
+.welcome-btn:active{
+  transform:scale(.96);
+}
+
