@@ -17,16 +17,9 @@ body{
   min-height:100vh;
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   color:var(--text);
-
   background:
-    linear-gradient(
-      180deg,
-      rgba(11,18,32,.75) 0%,
-      rgba(11,18,32,.85) 60%,
-      rgba(11,18,32,.95) 100%
-    ),
+    linear-gradient(180deg, rgba(11,18,32,.75) 0%, rgba(11,18,32,.85) 60%, rgba(11,18,32,.95) 100%),
     url("./BGWEB.png");
-
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
@@ -36,38 +29,17 @@ body{
 /* =========================
    LAYOUT
 ========================= */
-.wrap{
-  max-width:1050px;
-  margin:0 auto;
-  padding:16px;
-}
-
-.row{
-  display:flex;
-  align-items:center;
-}
-
+.wrap{ max-width:1050px; margin:0 auto; padding:16px; }
+.row{ display:flex; align-items:center; }
 .grow{ flex:1; min-width:0; }
 .gap{ gap:10px; }
 
 /* =========================
    TYPOGRAPHY
 ========================= */
-h1{
-  margin:0;
-  font-size:20px;
-}
-
-.sub{
-  margin-top:6px;
-  font-size:13px;
-  color:var(--muted);
-}
-
-.h2{
-  margin:16px 0 10px;
-  font-size:16px;
-}
+h1{ margin:0; font-size:20px; }
+.sub{ margin-top:6px; font-size:13px; color:var(--muted); }
+.h2{ margin:16px 0 10px; font-size:16px; }
 
 /* =========================
    BUTTON
@@ -76,30 +48,18 @@ h1{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-
   padding:10px 12px;
   border-radius:12px;
   border:1px solid rgba(255,255,255,.16);
-
   background:rgba(255,255,255,.06);
   color:var(--text);
   font-weight:800;
   text-decoration:none;
   cursor:pointer;
-
   touch-action:manipulation;
 }
-
-.btn.primary{
-  background:rgba(255,255,255,.14);
-  border-color:rgba(255,255,255,.22);
-}
-
-.btn.small{
-  padding:8px 10px;
-  border-radius:10px;
-  font-weight:700;
-}
+.btn.primary{ background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.22); }
+.btn.small{ padding:8px 10px; border-radius:10px; font-weight:700; }
 
 /* =========================
    TOPBAR / HEADER
@@ -108,27 +68,16 @@ h1{
   position:sticky;
   top:0;
   z-index:10;
-
   background-image:
     linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.80)),
     url("./BG.png");
-
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
-
   border-bottom:1px solid rgba(255,255,255,.08);
 }
-
-.topbar .wrap{
-  padding-top: clamp(14px, 4vw, 44px);
-  padding-bottom: clamp(14px, 4vw, 44px);
-}
-
-.topbar h1,
-.topbar .sub{
-  text-shadow:0 2px 18px rgba(0,0,0,.65);
-}
+.topbar .wrap{ padding-top: clamp(14px, 4vw, 44px); padding-bottom: clamp(14px, 4vw, 44px); }
+.topbar h1, .topbar .sub{ text-shadow:0 2px 18px rgba(0,0,0,.65); }
 
 /* =========================
    TOPBAR LAYOUT
@@ -145,33 +94,22 @@ h1{
   align-items:center;
   justify-content:flex-end;
   gap:10px;
-  flex-wrap:nowrap;      /* penting: jangan wrap biar gak “ngaco” di HP */
+  flex-wrap:nowrap;
   margin-top:10px;
   position:relative;
   z-index:20;
 }
 
-/* PRODUCT PAGE: biar tombol back & buy sejajar */
-.topbar__inner--product{
-  align-items:center;
-}
+/* PRODUCT PAGE: sejajar */
+.topbar__inner--product{ align-items:center; }
 
-/* responsive (HP) */
 @media (max-width:720px){
   .topbar__inner{
-    flex-direction:row;      /* penting: tetap row supaya kanan atas stabil */
+    flex-direction:row;
     align-items:center;
   }
-
-  .topbar__text{
-    flex:1;
-    min-width:0;
-  }
-
-  .topbar__actions{
-    margin-top:0;
-    gap:8px;
-  }
+  .topbar__text{ flex:1; min-width:0; }
+  .topbar__actions{ margin-top:0; gap:8px; }
 }
 
 @media (max-width:480px){
@@ -196,7 +134,7 @@ h1{
   cursor:pointer;
   text-decoration:none;
   color:inherit;
-  position:relative; /* soldBadge butuh ini */
+  position:relative;
 }
 
 .card img{
@@ -208,25 +146,13 @@ h1{
 }
 
 .meta{ padding:10px; }
+.meta .name{ margin:0 0 6px; font-weight:900; font-size:14px; }
+.meta .price{ margin:0; font-size:13px; font-weight:700; color:var(--muted); }
 
-.meta .name{
-  margin:0 0 6px;
-  font-weight:900;
-  font-size:14px;
-}
-
-.meta .price{
-  margin:0;
-  font-size:13px;
-  font-weight:700;
-  color:var(--muted);
-}
-
-/* SOLD state */
+/* SOLD */
 .soldBadge{
   position:absolute;
-  top:10px;
-  left:10px;
+  top:10px; left:10px;
   background:#111;
   color:#fff;
   font-weight:700;
@@ -235,17 +161,8 @@ h1{
   border-radius:6px;
   z-index:2;
 }
-
-.card.sold img{
-  filter:grayscale(1);
-  opacity:0.85;
-}
-
-.soldInline{
-  background:#2a0000;
-  padding:2px 6px;
-  border-radius:6px;
-}
+.card.sold img{ filter:grayscale(1); opacity:0.85; }
+.soldInline{ background:#2a0000; padding:2px 6px; border-radius:6px; }
 
 /* =========================
    HERO / DETAIL
@@ -256,7 +173,6 @@ h1{
   border-radius:18px;
   overflow:hidden;
 }
-
 .heroImg{
   width:100%;
   height:min(55vh,520px);
@@ -274,16 +190,10 @@ h1{
   margin-top:12px;
   flex-wrap:wrap;
   position:relative;
-  z-index:20; /* FIX tombol detail */
+  z-index:20;
 }
-
 .productHint{ margin-top:12px; }
-
-#detailBtn{
-  position:relative;
-  z-index:21;
-  pointer-events:auto;
-}
+#detailBtn{ position:relative; z-index:21; pointer-events:auto; }
 
 /* =========================
    THUMBNAILS
@@ -293,7 +203,6 @@ h1{
   grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
   gap:10px;
 }
-
 .thumbs img{
   width:100%;
   aspect-ratio:1/1;
@@ -317,7 +226,6 @@ h1{
   background:rgba(0,0,0,.82);
   z-index:999;
 }
-
 .lightbox.open{ display:flex; }
 
 .lbImg{
@@ -333,39 +241,26 @@ h1{
   position:fixed;
   top:50%;
   transform:translateY(-50%);
-
-  width:42px;
-  height:42px;
+  width:42px; height:42px;
   border-radius:999px;
   border:0;
-
   background:rgba(255,255,255,.12);
   color:#fff;
   font-size:22px;
   cursor:pointer;
-
   display:flex;
   align-items:center;
   justify-content:center;
   backdrop-filter:blur(6px);
-
   touch-action:manipulation;
 }
-
 .lbPrev{ left:12px; }
 .lbNext{ right:12px; }
-
-.lbClose{
-  top:16px;
-  right:16px;
-  transform:none;
-}
-
+.lbClose{ top:16px; right:16px; transform:none; }
 .lbCaption{
   position:fixed;
   bottom:14px;
-  left:0;
-  right:0;
+  left:0; right:0;
   text-align:center;
   font-size:13px;
   color:rgba(255,255,255,.85);
@@ -380,17 +275,8 @@ h1{
   border-radius:14px;
   padding:12px;
 }
-
-.noteTitle{
-  font-weight:900;
-  margin-bottom:6px;
-}
-
-.noteText{
-  font-size:13px;
-  line-height:1.4;
-  color:var(--muted);
-}
+.noteTitle{ font-weight:900; margin-bottom:6px; }
+.noteText{ font-size:13px; line-height:1.4; color:var(--muted); }
 
 /* =========================
    LOGO DROPDOWN + TOOLTIP
@@ -405,10 +291,8 @@ h1{
 
 .logoBtn{
   position:relative;
-  width:40px;
-  height:40px;
-  min-width:40px;
-  min-height:40px;
+  width:40px; height:40px;
+  min-width:40px; min-height:40px;
   border-radius:999px;
   padding:0;
   border:1px solid rgba(255,255,255,.16);
@@ -419,29 +303,18 @@ h1{
   place-items:center;
   z-index:31;
   flex-shrink:0;
-
   transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
   touch-action:manipulation;
 }
 
-.logoBtn img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
+.logoBtn img{ width:100%; height:100%; object-fit:cover; display:block; }
 .logoBtn:hover{
   transform:scale(1.06);
   background:rgba(255,255,255,.12);
   box-shadow:0 0 0 4px rgba(255,255,255,.08);
 }
+.logoBtn:active{ transform:scale(0.96); }
 
-.logoBtn:active{
-  transform:scale(0.96);
-}
-
-/* Tooltip */
 .logoBtn::after{
   content: attr(data-tip);
   position:absolute;
@@ -459,13 +332,11 @@ h1{
   transition: opacity .15s ease, transform .15s ease;
   z-index:99999;
 }
-
 .logoBtn:hover::after{
   opacity:1;
   transform:translateX(-50%) translateY(2px);
 }
 
-/* Dropdown */
 .dropdown{
   position:absolute;
   right:0;
@@ -479,7 +350,6 @@ h1{
   display:none;
   z-index:9999;
 }
-
 .dropdown.open{ display:block; }
 
 .ddItem{
@@ -494,7 +364,6 @@ h1{
   font-weight:800;
   touch-action:manipulation;
 }
-
 .ddItem:hover{ background:rgba(255,255,255,.08); }
 
 /* =========================
@@ -509,7 +378,6 @@ h1{
   background:rgba(0,0,0,.72);
   z-index:2000;
 }
-
 .modal.open{ display:flex; }
 
 .modal__panel{
@@ -520,7 +388,6 @@ h1{
   backdrop-filter:blur(10px);
   overflow:hidden;
 }
-
 .modal__head{
   display:flex;
   align-items:flex-start;
@@ -529,23 +396,18 @@ h1{
   padding:14px 14px 10px;
   border-bottom:1px solid rgba(255,255,255,.10);
 }
-
 .modal__title{ font-weight:900; }
 .modal__sub{ color:rgba(255,255,255,.7); font-size:12px; margin-top:2px; }
-
 .modal__close{
   border:0;
   background:rgba(255,255,255,.10);
   color:#fff;
-  width:34px;
-  height:34px;
+  width:34px; height:34px;
   border-radius:999px;
   cursor:pointer;
   touch-action:manipulation;
 }
-
 .modal__body{ padding:12px 14px 14px; }
-
 .detailList{
   margin:0;
   padding-left:18px;
@@ -553,20 +415,14 @@ h1{
   font-size:13px;
   line-height:1.5;
 }
-
-.modal__empty{
-  color:rgba(255,255,255,.7);
-  font-size:13px;
-}
+.modal__empty{ color:rgba(255,255,255,.7); font-size:13px; }
 
 /* =========================
    ANIME / FANTASY SLOW DISC
 ========================= */
 .music-disc{
-  width:40px;
-  height:40px;
-  min-width:40px;
-  min-height:40px;
+  width:40px; height:40px;
+  min-width:40px; min-height:40px;
   border-radius:50%;
   cursor:pointer;
   position:relative;
@@ -591,30 +447,29 @@ h1{
 
   border:1px solid rgba(255,255,255,.18);
 }
-
 .music-disc::after{
   content:"";
   position:absolute;
-  left:50%;
-  top:50%;
-  width:10px;
-  height:10px;
+  left:50%; top:50%;
+  width:10px; height:10px;
   transform:translate(-50%,-50%);
   border-radius:50%;
   background: radial-gradient(circle at 35% 35%, #fff, rgba(255,255,255,.2));
 }
+@keyframes spinFantasy{ from{ transform:rotate(0deg);} to{ transform:rotate(360deg);} }
 
-@keyframes spinFantasy{
-  from{ transform:rotate(0deg); }
-  to{ transform:rotate(360deg); }
+/* pulse ditambah via animasi */
+@keyframes discPulse{
+  0%   { box-shadow: 0 0 10px rgba(160,190,255,.25), 0 0 18px rgba(255,190,240,.15), 0 6px 18px rgba(0,0,0,.35); }
+  50%  { box-shadow: 0 0 14px rgba(160,190,255,.45), 0 0 26px rgba(255,190,240,.28), 0 6px 18px rgba(0,0,0,.35); }
+  100% { box-shadow: 0 0 10px rgba(160,190,255,.25), 0 0 18px rgba(255,190,240,.15), 0 6px 18px rgba(0,0,0,.35); }
 }
-
 .music-disc.playing{
-  animation: spinFantasy 7.5s linear infinite;
+  animation: spinFantasy 7.5s linear infinite, discPulse 2.4s ease-in-out infinite;
 }
 
 /* =========================
-   WELCOME OVERLAY (ANIME / FANTASY)
+   WELCOME OVERLAY
 ========================= */
 .welcome-overlay{
   position:fixed;
@@ -628,10 +483,7 @@ h1{
   z-index:99999;
   backdrop-filter: blur(6px);
 }
-
-.welcome-overlay.show{
-  display:flex;
-}
+.welcome-overlay.show{ display:flex; }
 
 .welcome-card{
   position:relative;
@@ -639,14 +491,10 @@ h1{
   padding:26px 22px;
   border-radius:20px;
   text-align:center;
-
-  background:
-    linear-gradient(180deg, rgba(30,40,70,.95), rgba(15,20,40,.95));
+  background: linear-gradient(180deg, rgba(30,40,70,.95), rgba(15,20,40,.95));
   border:1px solid rgba(255,255,255,.18);
-
-  box-shadow:
-    0 0 30px rgba(160,190,255,.35),
-    0 0 60px rgba(255,190,240,.25);
+  box-shadow: 0 0 30px rgba(160,190,255,.35), 0 0 60px rgba(255,190,240,.25);
+  animation: fadeUp .35s ease both;
 }
 
 .welcome-glow{
@@ -654,9 +502,7 @@ h1{
   inset:-2px;
   border-radius:22px;
   pointer-events:none;
-  box-shadow:
-    0 0 40px rgba(160,190,255,.35),
-    0 0 80px rgba(255,190,240,.25);
+  box-shadow: 0 0 40px rgba(160,190,255,.35), 0 0 80px rgba(255,190,240,.25);
   opacity:.6;
 }
 
@@ -682,114 +528,30 @@ h1{
   padding:12px 18px;
   border-radius:999px;
   border:1px solid rgba(255,255,255,.25);
-  background:
-    linear-gradient(135deg, rgba(180,160,255,.9), rgba(255,180,240,.9));
+  background: linear-gradient(135deg, rgba(180,160,255,.9), rgba(255,180,240,.9));
   color:#111;
   font-weight:900;
   cursor:pointer;
   box-shadow:0 6px 18px rgba(0,0,0,.35);
   touch-action:manipulation;
 }
+.welcome-btn:active{ transform:scale(.96); }
 
-/* =========================
-   WELCOME IMAGE (TOP)
-========================= */
+/* Welcome image */
 .welcome-image{
   width:100%;
   height:140px;
   border-radius:16px;
   overflow:hidden;
   margin-bottom:14px;
-
   background: rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.12);
-
-  box-shadow:
-    0 0 18px rgba(160,190,255,.35),
-    0 0 36px rgba(255,190,240,.20);
+  box-shadow: 0 0 18px rgba(160,190,255,.35), 0 0 36px rgba(255,190,240,.20);
 }
+.welcome-image img{ width:100%; height:100%; object-fit:cover; display:block; }
+@media (max-width:420px){ .welcome-image{ height:120px; } }
 
-.welcome-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-/* Responsive HP kecil */
-@media (max-width:420px){
-  .welcome-image{
-    height:120px;
-  }
-}
-
-
-.welcome-btn:active{
-  transform:scale(.96);
-}
-
-
-/* =========================
-   LIVEN UP: ANIMATIONS
-========================= */
-
-/* Fade-up global */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Stagger untuk card */
-.card{
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeUp .45s ease forwards;
-  animation-delay: var(--d, 0ms);
-  will-change: transform, opacity;
-}
-
-/* Hover / Tap feedback (HP juga enak) */
-.card{
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-}
-
-.card:hover{
-  transform: translateY(-4px) scale(1.02);
-  border-color: rgba(255,255,255,.18);
-  box-shadow:
-    0 10px 26px rgba(0,0,0,.35),
-    0 0 22px rgba(160,190,255,.14);
-}
-
-.card:active{
-  transform: translateY(-1px) scale(0.99);
-}
-
-/* Reduce motion (aksesibilitas) */
-@media (prefers-reduced-motion: reduce){
-  .card{ animation: none; opacity: 1; transform: none; }
-}
-
-/* =========================
-   MUSIC DISC: PULSE WHEN PLAYING
-========================= */
-@keyframes discPulse {
-  0%   { box-shadow: 0 0 10px rgba(160,190,255,.25), 0 0 18px rgba(255,190,240,.15), 0 6px 18px rgba(0,0,0,.35); }
-  50%  { box-shadow: 0 0 14px rgba(160,190,255,.45), 0 0 26px rgba(255,190,240,.28), 0 6px 18px rgba(0,0,0,.35); }
-  100% { box-shadow: 0 0 10px rgba(160,190,255,.25), 0 0 18px rgba(255,190,240,.15), 0 6px 18px rgba(0,0,0,.35); }
-}
-
-.music-disc.playing{
-  animation: spinFantasy 7.5s linear infinite, discPulse 2.4s ease-in-out infinite;
-}
-
-/* =========================
-   WELCOME: tampil lebih hidup
-========================= */
-.welcome-card{
-  animation: fadeUp .35s ease both;
-}
-
+/* sparkles tipis */
 .welcome-overlay::before{
   content:"";
   position:fixed;
@@ -803,12 +565,104 @@ h1{
   opacity:.6;
   animation: sparkleFloat 5s ease-in-out infinite;
 }
-
 @keyframes sparkleFloat{
   0%{ transform: translateY(0); opacity:.45; }
   50%{ transform: translateY(-8px); opacity:.7; }
   100%{ transform: translateY(0); opacity:.45; }
 }
+
+/* =========================
+   LIVEN UP: ANIMATIONS
+========================= */
+@keyframes fadeUp{
+  from{ opacity:0; transform:translateY(10px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+.card{
+  opacity:0;
+  transform:translateY(10px);
+  animation: fadeUp .45s ease forwards;
+  animation-delay: var(--d, 0ms);
+  will-change: transform, opacity;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.card:hover{
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(255,255,255,.18);
+  box-shadow: 0 10px 26px rgba(0,0,0,.35), 0 0 22px rgba(160,190,255,.14);
+}
+.card:active{ transform: translateY(-1px) scale(0.99); }
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .card{ animation: fadeUp .01s linear forwards; }
+}
+
+/* =========================
+   UI UPGRADE: RESUME PANEL
+========================= */
+.resumeWrap{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.resumeChip{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:16px;
+  text-decoration:none;
+  color:rgba(255,255,255,.92);
+
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.25),
+    0 0 18px rgba(160,190,255,.10);
+
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+  touch-action:manipulation;
+  user-select:none;
+}
+
+.resumeChip:hover{
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,.22);
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.30),
+    0 0 24px rgba(160,190,255,.18);
+}
+
+.resumeChip:active{
+  transform: translateY(0) scale(.99);
+}
+
+.resumeChip.isPrimary{
+  background: linear-gradient(135deg, rgba(180,160,255,.22), rgba(255,180,240,.18));
+  border-color: rgba(255,255,255,.22);
+}
+
+.resumeIco{
+  width:36px;
+  height:36px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+  flex:0 0 36px;
+}
+
+.resumeTxt{ display:flex; flex-direction:column; line-height:1.05; }
+.resumeTxt b{ font-size:13px; letter-spacing:.2px; }
+.resumeTxt small{ font-size:11px; color: rgba(255,255,255,.70); margin-top:3px; }
+
+.resumeGo{ margin-left:6px; font-size:22px; opacity:.75; }
 
 /* =========================
    FIX NABRAK TOPBAR (MOBILE)
@@ -819,28 +673,26 @@ h1{
     row-gap:10px;
   }
 
-  /* teks judul ambil 1 baris penuh */
-  .topbar__text{
-    width:100%;
-  }
+  .topbar__text{ width:100%; }
 
-  /* tombol lanjutkan pindah ke baris bawah */
   .topbar__actions{
     width:100%;
     justify-content:flex-start;
     flex-wrap:wrap;
   }
 
-  /* tombol resume jangan kepanjangan */
-  #resumeProduct,
-  #resumePay{
-    flex:1 1 100%;
+  /* resume jadi 1 kolom rapi */
+  .resumeWrap{
+    width:100%;
+    gap:8px;
+    flex-direction:column;
+    align-items:stretch;
+  }
+  .resumeChip{
+    width:100%;
+    justify-content:space-between;
   }
 
-  /* logo & piringan tetap di kanan */
-  .menu,
-  .music-disc{
-    margin-left:auto;
-  }
+  /* logo & piringan tetap kanan */
+  .menu, .music-disc{ margin-left:auto; }
 }
-
