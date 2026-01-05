@@ -567,20 +567,125 @@ h1,.siteName{ margin:0; font-size:24px; letter-spacing:.2px; }
 .noteText{ color: rgba(255,255,255,.80); line-height:1.55; }
 
 /* welcome overlay */
+/* =========================
+   WELCOME OVERLAY (ANIMATED)
+========================= */
 .welcome-overlay{
   position:fixed;
   inset:0;
+  z-index:99999;
+  padding:18px;
+
+  display:flex;                 /* penting: jangan display none biar bisa anim */
+  align-items:center;
+  justify-content:center;
+
   background:
     radial-gradient(circle at top, rgba(180,160,255,.25), transparent 60%),
     rgba(0,0,0,.78);
-  display:none;
+  backdrop-filter: blur(6px);
+
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+
+  transition:
+    opacity .35s ease,
+    visibility 0s linear .35s;
+}
+
+.welcome-overlay.show{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+
+  transition:
+    opacity .35s ease,
+    visibility 0s linear 0s;
+}
+
+/* state saat closing (anim keluar) */
+.welcome-overlay.closing{
+  opacity:0 !important;
+  visibility:visible !important;   /* tetap terlihat selama anim */
+  pointer-events:none;
+
+  transition:
+    opacity .35s ease,
+    visibility 0s linear .35s;
+}
+
+/* card anim in/out */
+.welcome-card{
+  position:relative;
+  width:min(92vw, 360px);
+  padding:26px 22px;
+  border-radius:20px;
+  text-align:center;
+  background: linear-gradient(180deg, rgba(30,40,70,.95), rgba(15,20,40,.95));
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow: 0 0 30px rgba(160,190,255,.35), 0 0 60px rgba(255,190,240,.25);
+
+  transform: translateY(18px) scale(.98);
+  opacity:0;
+
+  transition:
+    transform .45s cubic-bezier(.2,.9,.2,1),
+    opacity .35s ease;
+}
+
+.welcome-overlay.show .welcome-card{
+  transform: translateY(0) scale(1);
+  opacity:1;
+}
+
+/* anim keluar: card turun sedikit + fade */
+.welcome-overlay.closing .welcome-card{
+  transform: translateY(26px) scale(.985);
+  opacity:0;
+}
+
+/* glow tetap */
+.welcome-glow{
+  position:absolute;
+  inset:-2px;
+  border-radius:22px;
+  pointer-events:none;
+  box-shadow: 0 0 40px rgba(160,190,255,.35), 0 0 80px rgba(255,190,240,.25);
+  opacity:.55;
+}
+
+.welcome-title{ margin:0 0 12px; font-size:20px; font-weight:900; color:#fff; }
+.welcome-text{ font-size:14px; line-height:1.6; color:rgba(255,255,255,.85); margin-bottom:18px; }
+
+.welcome-btn{
+  display:inline-flex;
   align-items:center;
   justify-content:center;
-  z-index:99999;
-  backdrop-filter: blur(6px);
-  padding:18px;
+  padding:12px 18px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.25);
+  background: linear-gradient(135deg, rgba(180,160,255,.9), rgba(255,180,240,.9));
+  color:#111;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,.35);
 }
-.welcome-overlay.show{ display:flex; }
+
+.welcome-btn:active{
+  transform: translateY(1px);
+}
+
+.welcome-image{
+  width:100%;
+  height:140px;
+  border-radius:16px;
+  overflow:hidden;
+  margin-bottom:14px;
+  background: rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+}
+.welcome-image img{ width:100%; height:100%; object-fit:cover; display:block; }
 
 .welcome-card{
   position:relative;
