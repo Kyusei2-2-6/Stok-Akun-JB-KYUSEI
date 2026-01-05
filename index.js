@@ -1,41 +1,52 @@
 /* =========================
-   Kyusei - index.js (REWRITE)
-   - tetap pakai SOURCE/path yang sama
+   Kyusei - index.js (FULL REWRITE, CLEAN)
+   - NO change to source/path (repo aman)
    - SOLD selalu di belakang
-   - Resume (produk & pembayaran)
+   - Resume produk & pembayaran
    - Dropdown filter game
    - Music disc play/pause + resume lintas halaman
-   - Welcome overlay + anim close (butuh CSS .closing)
+   - Welcome overlay: animasi cantik saat klik "Masuk"
 ========================= */
 
 (function () {
   "use strict";
 
-  // ---------- SAFE SET TITLE ----------
+  // --------------------------
+  // SAFE DOM GETTERS
+  // --------------------------
+  function $(id) { return document.getElementById(id); }
+
+  // --------------------------
+  // SET TITLE / BRAND
+  // --------------------------
   document.title = SITE_NAME;
-  var siteNameEl = document.getElementById("siteName");
+  var siteNameEl = $("siteName");
   if (siteNameEl) siteNameEl.textContent = SITE_NAME;
 
-  // ---------- DOM ----------
-  var grid = document.getElementById("grid");
+  // --------------------------
+  // DOM NODES
+  // --------------------------
+  var grid = $("grid");
 
-  // resume
-  var resumeProduct = document.getElementById("resumeProduct");
-  var resumePay = document.getElementById("resumePay");
+  // resume chips
+  var resumeProduct = $("resumeProduct");
+  var resumePay = $("resumePay");
 
   // dropdown
-  var logoBtn = document.getElementById("logoBtn");
-  var dropdown = document.getElementById("dropdown");
+  var logoBtn = $("logoBtn");
+  var dropdown = $("dropdown");
 
   // audio
-  var bgm = document.getElementById("bgm");
-  var disc = document.getElementById("musicDisc");
+  var bgm = $("bgm");
+  var disc = $("musicDisc");
 
-  // welcome
-  var overlay = document.getElementById("welcomeOverlay");
-  var welcomeBtn = document.getElementById("welcomeBtn");
+  // welcome overlay
+  var overlay = $("welcomeOverlay");
+  var welcomeBtn = $("welcomeBtn");
 
-  // ---------- HELPERS ----------
+  // --------------------------
+  // RESUME LINKS (ANTI RESET)
+  // --------------------------
   function setResumeLink(el, key) {
     if (!el) return;
     var url = localStorage.getItem(key);
@@ -44,12 +55,21 @@
     el.href = url;
   }
 
+  setResumeLink(resumeProduct, "lastProductUrl");
+  setResumeLink(resumePay, "lastPayUrl");
+
+  // --------------------------
+  // SORT SOLD LAST
+  // --------------------------
   function sortSoldLast(list) {
     return list.slice().sort(function (a, b) {
       return (a.sold === true) - (b.sold === true);
     });
   }
 
+  // --------------------------
+  // STAGGER ANIMATION DELAY
+  // --------------------------
   function applyStagger() {
     var cards = document.querySelectorAll(".card");
     for (var i = 0; i < cards.length; i++) {
@@ -57,17 +77,9 @@
     }
   }
 
-  function saveLastProduct(url) {
-    try {
-      localStorage.setItem("lastProductUrl", url);
-    } catch (e) {}
-  }
-
-  // ---------- RESUME INIT ----------
-  setResumeLink(resumeProduct, "lastProductUrl");
-  setResumeLink(resumePay, "lastPayUrl");
-
-  // ---------- RENDER GRID ----------
+  // --------------------------
+  // RENDER GRID
+  // --------------------------
   function render(products) {
     if (!grid) return;
 
@@ -81,11 +93,12 @@
       a.className = "card";
       a.href = "product.html?code=" + encodeURIComponent(p.code);
 
-      a.addEventListener("click", (function (url) {
-        return function () {
-          saveLastProduct(url);
-        };
-      })(a.href));
+      // simpan produk terakhir saat diklik
+      (function (url) {
+        a.addEventListener("click", function () {
+          try { localStorage.setItem("lastProductUrl", url); } catch (e) {}
+        });
+      })(a.href);
 
       var img = document.createElement("img");
       img.src = cover;
@@ -98,6 +111,7 @@
       nm.className = "name";
       nm.textContent = p.name || "-";
 
+      // SOLD inline
       if (p.sold === true) {
         var soldTxt = document.createElement("span");
         soldTxt.className = "soldInline";
@@ -122,7 +136,9 @@
     applyStagger();
   }
 
-  // ---------- FILTER ----------
+  // --------------------------
+  // FILTER
+  // --------------------------
   var currentGame = "all";
 
   function applyFilter() {
@@ -140,9 +156,12 @@
     render(sortSoldLast(list));
   }
 
+  // pertama render
   applyFilter();
 
-  // ---------- DROPDOWN MENU ----------
+  // --------------------------
+  // DROPDOWN MENU
+  // --------------------------
   function openMenu() {
     if (!dropdown || !logoBtn) return;
     dropdown.classList.add("open");
@@ -180,14 +199,16 @@
     });
   }
 
-  // ---------- MUSIC DISC ----------
+  // --------------------------
+  // MUSIC DISC (PLAY/PAUSE) + RESUME
+  // --------------------------
   function initMusic() {
     if (!bgm || !disc) return;
 
     bgm.volume = 0.2;
     bgm.load();
 
-    // resume dari status sebelumnya
+    // resume kalau sebelumnya nyala
     if (localStorage.getItem("bgm_playing") === "1") {
       bgm.play().then(function () {
         disc.classList.add("playing");
@@ -197,12 +218,12 @@
     }
 
     bgm.addEventListener("play", function () {
-      localStorage.setItem("bgm_playing", "1");
+      try { localStorage.setItem("bgm_playing", "1"); } catch (e) {}
       disc.classList.add("playing");
     });
 
     bgm.addEventListener("pause", function () {
-      localStorage.setItem("bgm_playing", "0");
+      try { localStorage.setItem("bgm_playing", "0"); } catch (e) {}
       disc.classList.remove("playing");
     });
 
@@ -217,63 +238,98 @@
     });
   }
 
-  // ---------- WELCOME OVERLAY + ANIM CLOSE ----------
+  // --------------------------
+  // WELCOME OVERLAY (ANIMATED EXIT) + AUTO MUSIC
+  // --------------------------
   function initWelcome() {
     if (!overlay || !welcomeBtn) return;
 
+    var card = overlay.querySelector(".welcome-card");
+
     function showWelcome() {
       overlay.classList.add("show");
-      overlay.classList.remove("closing");
       overlay.setAttribute("aria-hidden", "false");
+      // reset tombol kalau sebelumnya sempat disable
+      welcomeBtn.disabled = false;
     }
 
-    function hideWelcomeInstant() {
+    function hideWelcome() {
       overlay.classList.remove("show");
-      overlay.classList.remove("closing");
       overlay.setAttribute("aria-hidden", "true");
     }
 
-    async function closeWelcome() {
-      if (overlay.classList.contains("closing")) return;
+    // tampilkan kalau belum pernah klik (per tab session)
+    if (!sessionStorage.getItem("welcome_seen")) {
+      showWelcome();
+    } else {
+      hideWelcome();
+    }
 
-      // start anim close (butuh CSS .welcome-overlay.closing)
-      overlay.classList.add("closing");
+    async function startMusicAfterGesture() {
+      if (!bgm) return;
+      try {
+        bgm.volume = 0.2;
+        await bgm.play();
+        localStorage.setItem("bgm_playing", "1");
+      } catch (e) {
+        console.log("Music blocked:", e);
+      }
+    }
+
+    function closeWelcomeAnimated() {
+      // cegah spam klik
+      if (welcomeBtn.disabled) return;
+      welcomeBtn.disabled = true;
+
+      // set state
       overlay.setAttribute("aria-hidden", "true");
       sessionStorage.setItem("welcome_seen", "1");
 
-      // start music after user gesture
-      if (bgm) {
-        try {
-          bgm.volume = 0.2;
-          await bgm.play();
-          localStorage.setItem("bgm_playing", "1");
-        } catch (e) {
-          console.log("Music blocked:", e);
-        }
+      // ANIMASI (Web Animations API)
+      // fallback: kalau card ga ketemu, tetap fade overlay
+      var dur = 420;
+
+      if (card && card.animate) {
+        card.animate(
+          [
+            { opacity: 1, transform: "translateY(0) scale(1)" },
+            { opacity: 0, transform: "translateY(-40px) scale(.96)" }
+          ],
+          { duration: dur, easing: "cubic-bezier(.22,.61,.36,1)", fill: "forwards" }
+        );
       }
 
-      // tunggu anim selesai
+      if (overlay.animate) {
+        overlay.animate(
+          [{ opacity: 1 }, { opacity: 0 }],
+          { duration: dur, easing: "ease", fill: "forwards" }
+        );
+      }
+
+      // setelah anim selesai: hide + start music
       setTimeout(function () {
-        hideWelcomeInstant();
-      }, 380);
+        hideWelcome();
+        startMusicAfterGesture();
+      }, dur);
     }
 
-    if (!sessionStorage.getItem("welcome_seen")) showWelcome();
-    else hideWelcomeInstant();
-
-    welcomeBtn.addEventListener("click", closeWelcome);
+    welcomeBtn.addEventListener("click", closeWelcomeAnimated);
 
     overlay.addEventListener("click", function (e) {
-      if (e.target === overlay) closeWelcome();
+      if (e.target === overlay) closeWelcomeAnimated();
     });
 
     // HP kadang balik dari BFCache
     window.addEventListener("pageshow", function () {
-      if (!sessionStorage.getItem("welcome_seen")) showWelcome();
+      if (!sessionStorage.getItem("welcome_seen")) {
+        showWelcome();
+      }
     });
   }
 
-  // ---------- BOOT ----------
+  // --------------------------
+  // BOOT
+  // --------------------------
   document.addEventListener("DOMContentLoaded", function () {
     initMusic();
     initWelcome();
