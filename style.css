@@ -803,5 +803,55 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
     gap: 10px;
   }
 }
+/* =========================
+   MOBILE TOPBAR GRID (FOR HTML: .topbar__text + .topbar__actions)
+   + SWAP: musicDisc <-> menu (logo)
+========================= */
+@media (max-width: 720px){
+
+  /* jadikan header grid 2 baris */
+  .topbar__inner{
+    display:grid !important;
+    grid-template-columns: 1fr auto auto;
+    grid-template-areas:
+      "text disc menu"          /* <-- INI SUDAH SWAP (disc dulu, logo terakhir) */
+      "resume resume resume";
+    gap:10px;
+    align-items:center;
+  }
+
+  /* taruh title */
+  .topbar__text{ grid-area:text; }
+
+  /* trik: biar anak2 .topbar__actions bisa ikut grid */
+  .topbar__actions{ display:contents !important; }
+
+  /* resume full row */
+  .resumeWrap{
+    grid-area:resume;
+    width:100%;
+  }
+  .resumeChip{ width:100%; }
+
+  /* logo/menu di kanan atas */
+  .menu{
+    grid-area:menu;
+    justify-self:end;
+  }
+
+  /* music disc di sebelah logo (kiri logo) */
+  #musicDisc{
+    grid-area:disc;
+    justify-self:end;
+  }
+
+  /* pastikan disc gak absolute di mobile */
+  #musicDisc.music-disc{
+    position:relative !important;
+    right:auto !important;
+    top:auto !important;
+    transform:none !important;
+  }
+}
 
 }
