@@ -17,10 +17,10 @@
   <!-- ===== WELCOME OVERLAY ===== -->
   <div id="welcomeOverlay" class="welcome-overlay" aria-hidden="true">
     <div class="welcome-card">
-      <div class="welcome-glow"></div>
+      <div class="welcome-glow" aria-hidden="true"></div>
 
       <div class="welcome-image">
-        <img src="Welcome.png" alt="Welcome Kyusei">
+        <img src="Welcome.png" alt="Welcome Kyusei" />
       </div>
 
       <h2 class="welcome-title">✨ Selamat Datang ✨</h2>
@@ -38,41 +38,50 @@
   </div>
   <!-- ===== /WELCOME OVERLAY ===== -->
 
+  <!-- ===== TOPBAR ===== -->
   <header class="topbar">
     <div class="wrap">
       <div class="topbar__inner">
-        <div class="topbar__text">
-          <h1 id="siteName">Kyusei</h1>
-          <p class="sub">Klik produk untuk lihat detail & foto</p>
+
+        <!-- LEFT: TITLE -->
+        <div class="topbar__left">
+          <h1 id="siteName" class="siteName">Kyusei</h1>
+          <p class="sub">Klik produk untuk lihat detail &amp; foto</p>
         </div>
 
-        <div class="topbar__actions">
+        <!-- RIGHT: ACTIONS -->
+        <div class="topbar__right">
           <!-- RESUME PANEL -->
           <div class="resumeWrap" id="resumeWrap">
             <a id="resumeProduct" class="resumeChip" style="display:none" href="#">
-              <span class="resumeIco">🧾</span>
+              <span class="resumeIco" aria-hidden="true">🧾</span>
               <span class="resumeTxt">
                 <b>Lanjutkan</b><small>produk terakhir</small>
               </span>
-              <span class="resumeGo">›</span>
+              <span class="resumeGo" aria-hidden="true">›</span>
             </a>
 
             <a id="resumePay" class="resumeChip isPrimary" style="display:none" href="#">
-              <span class="resumeIco">💳</span>
+              <span class="resumeIco" aria-hidden="true">💳</span>
               <span class="resumeTxt">
                 <b>Lanjutkan</b><small>pembayaran terakhir</small>
               </span>
-              <span class="resumeGo">›</span>
+              <span class="resumeGo" aria-hidden="true">›</span>
             </a>
           </div>
           <!-- /RESUME PANEL -->
 
-          <!-- Piringan Musik -->
-          <div id="musicDisc" class="music-disc" title="Play / Pause Music"></div>
-
-          <!-- LOGO + DROPDOWN -->
+          <!-- GAME FILTER (LOGO + DROPDOWN) -->
           <div class="menu">
-            <button class="logoBtn" id="logoBtn" data-tip="Pilih Game" aria-haspopup="true" aria-expanded="false" type="button">
+            <button
+              class="logoBtn"
+              id="logoBtn"
+              type="button"
+              data-tip="Pilih Game"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="dropdown"
+            >
               <img src="./LOGO.jpg" alt="Logo Kyusei" />
             </button>
 
@@ -84,22 +93,34 @@
               <button class="ddItem" data-game="ff" type="button">Free Fire</button>
             </div>
           </div>
-          <!-- /LOGO + DROPDOWN -->
+          <!-- /GAME FILTER -->
+
+          <!-- MUSIC DISC (POSISI TARGET: POJOK KANAN TOPBAR VIA CSS) -->
+          <div
+            id="musicDisc"
+            class="music-disc"
+            title="Play / Pause Music"
+            role="button"
+            aria-label="Play / Pause Music"
+          ></div>
+          <!-- /MUSIC DISC -->
         </div>
+        <!-- /RIGHT: ACTIONS -->
+
       </div>
     </div>
   </header>
+  <!-- ===== /TOPBAR ===== -->
 
+  <!-- ===== CONTENT ===== -->
   <main class="wrap">
     <section id="grid" class="grid"></section>
   </main>
+  <!-- ===== /CONTENT ===== -->
 
+  <!-- ===== SCRIPTS ===== -->
   <script src="./data.js?v=999"></script>
   <script src="./index.js?v=999"></script>
+  <!-- ===== /SCRIPTS ===== -->
 </body>
 </html>
-
-
-
-
-
