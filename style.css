@@ -774,3 +774,72 @@ h1,.siteName{ margin:0; font-size:24px; letter-spacing:.2px; }
 
 }
 
+/* =========================
+   WELCOME CARD: NEON AURORA (MOVING UP)
+   - efek neon dinamis dari bawah ke atas
+   - ringan (pakai pseudo element + transform)
+========================= */
+
+.welcome-card{
+  position: relative;
+  overflow: hidden; /* biar neon gak keluar box */
+}
+
+/* layer neon bergerak */
+.welcome-card::before{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  pointer-events:none;
+  z-index:0;
+
+  /* neon aurora */
+  background:
+    radial-gradient(closest-side at 20% 80%, rgba(180,160,255,.35), transparent 60%),
+    radial-gradient(closest-side at 80% 60%, rgba(120,220,255,.25), transparent 62%),
+    radial-gradient(closest-side at 55% 95%, rgba(255,180,240,.22), transparent 60%),
+    conic-gradient(from 180deg,
+      rgba(180,160,255,.18),
+      rgba(120,220,255,.14),
+      rgba(255,180,240,.14),
+      rgba(180,160,255,.18)
+    );
+
+  filter: blur(18px);
+  opacity: .55;
+  transform: translateY(25%) rotate(-8deg);
+  animation: kyuseiAuroraUp 6.5s ease-in-out infinite;
+}
+
+/* glow pinggir biar neon lebih “hidup” */
+.welcome-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: inherit;
+  pointer-events:none;
+  z-index:0;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.10),
+    0 0 24px rgba(160,190,255,.22),
+    0 0 42px rgba(255,190,240,.16);
+}
+
+/* pastikan isi card di atas efek neon */
+.welcome-card > *{
+  position: relative;
+  z-index:1;
+}
+
+@keyframes kyuseiAuroraUp{
+  0%   { transform: translateY(28%) rotate(-10deg); opacity:.45; }
+  50%  { transform: translateY(-10%) rotate(6deg);  opacity:.65; }
+  100% { transform: translateY(28%) rotate(-10deg); opacity:.45; }
+}
+
+/* kalau user pilih reduce motion, matikan anim */
+@media (prefers-reduced-motion: reduce){
+  .welcome-card::before{ animation:none; }
+}
+
