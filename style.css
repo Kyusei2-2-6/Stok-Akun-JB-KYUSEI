@@ -1,17 +1,23 @@
 /* =========================
-   Kyusei - style.css (REWRITE - MATCH NEW HTML)
-   Target HTML:
-   header.topbar -> .wrap -> .topbar__inner -> .topbar__left + .topbar__right
-   main.wrap -> section#grid.grid
+   Kyusei - style.css (FULL, ALL PAGES)
+   - Body background: PURE CSS (no image)
+   - Topbar background: keep BG.png (DON'T CHANGE)
+   Works for:
+   - index.html (grid)
+   - product.html (hero, thumbs, lightbox, modal)
+   - pay.html (hero, buttons, note)
 ========================= */
 
 /* =========================
    ROOT & RESET
 ========================= */
 :root{
-  --bg:#0b1220;
-  --text:#e6e6e6;
-  --muted:rgba(230,230,230,.70);
+  --bg0:#070b14;
+  --bg1:#0a1020;
+  --bg2:#0b1220;
+
+  --text:#eaeaf0;
+  --muted:rgba(234,234,240,.70);
 
   --card:rgba(255,255,255,.06);
   --border:rgba(255,255,255,.12);
@@ -19,24 +25,16 @@
   --r:16px;
   --r2:18px;
 
-  /* SOLD tokens */
-  --sold-dim: .60;
-  --sold-gray: 1;
-  --sold-blur: 0px;
-  --sold-badge-bg: rgba(0,0,0,.68);
-  --sold-badge-border: rgba(255,255,255,.18);
-
-  /* spacing */
   --pad:14px;
   --gap:12px;
 
-  /* topbar */
-  --topbar-pad-y: 14px;
-  --topbar-pad-y-desktop: 26px;
+  /* sold */
+  --sold-dim: .60;
+  --sold-gray: 1;
+  --sold-blur: 0px;
 
-  /* action sizes */
+  /* sizes */
   --action-size: 40px;
-  --disc-gap: 10px;
 }
 
 *{ box-sizing:border-box; }
@@ -50,22 +48,16 @@ body{
   overflow-x:hidden;
   -webkit-text-size-adjust:100%;
 
+  /* PURE CSS BACKGROUND (NO IMAGE) */
   background:
-    linear-gradient(180deg, rgba(11,18,32,.76) 0%, rgba(11,18,32,.88) 60%, rgba(11,18,32,.96) 100%),
-    url("./BGWEB.png");
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-  background-attachment:fixed;
-}
-
-/* Mobile: background fixed bikin berat & kadang glitch */
-@media (max-width: 720px){
-  body{ background-attachment:scroll; }
+    radial-gradient(900px 600px at 10% 0%, rgba(180,160,255,.24), transparent 60%),
+    radial-gradient(900px 650px at 90% 10%, rgba(120,220,255,.18), transparent 55%),
+    radial-gradient(900px 650px at 60% 95%, rgba(255,180,240,.16), transparent 55%),
+    linear-gradient(180deg, rgba(8,10,18,1) 0%, rgba(9,14,28,1) 45%, rgba(7,10,18,1) 100%);
 }
 
 /* =========================
-   LAYOUT
+   LAYOUT UTILITIES
 ========================= */
 .wrap{
   max-width:1050px;
@@ -73,24 +65,24 @@ body{
   padding:var(--pad);
 }
 
+.row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.gap{ gap:12px; }
+.grow{ flex:1 1 auto; min-width:0; }
+
 /* =========================
    TYPOGRAPHY
 ========================= */
-.siteName,
-h1{
-  margin:0;
-  font-size:24px;
-  letter-spacing:.2px;
-}
-
-.sub{
-  margin:4px 0 0;
-  font-size:13px;
-  color:var(--muted);
-}
+h1{ margin:0; font-size:24px; letter-spacing:.2px; }
+.h2{ margin:18px 0 10px; font-size:16px; letter-spacing:.2px; }
+.sub{ margin:4px 0 0; font-size:13px; color:var(--muted); }
 
 /* =========================
-   TOPBAR
+   TOPBAR (KEEP BG.png)
 ========================= */
 .topbar{
   position:sticky;
@@ -107,64 +99,59 @@ h1{
 }
 
 .topbar .wrap{
-  padding-top:var(--topbar-pad-y);
-  padding-bottom:var(--topbar-pad-y);
+  padding-top:14px;
+  padding-bottom:14px;
 }
 
 @media (min-width: 900px){
   .topbar .wrap{
-    padding-top:var(--topbar-pad-y-desktop);
-    padding-bottom:var(--topbar-pad-y-desktop);
+    padding-top:26px;
+    padding-bottom:26px;
   }
-  .siteName,
   h1{ font-size:28px; }
 }
 
+/* index.html header layout */
 .topbar__inner{
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
   gap:12px;
-
-  /* anchor buat disc absolute kalau kamu mau */
-  position:relative;
+  position:relative; /* anchor for disc */
 }
 
-.topbar__left{
-  min-width:0;
-}
-
-/* RIGHT group */
+.topbar__left{ min-width:0; }
 .topbar__right{
   display:flex;
   align-items:center;
   justify-content:flex-end;
-  gap:var(--disc-gap);
+  gap:10px;
   flex-wrap:nowrap;
   min-width:0;
-
-  /* ruang aman kalau disc kamu mau jadi absolute */
-  padding-right:0;
+  padding-right:64px; /* room for absolute disc */
 }
 
-/* ===== MOBILE: header jadi 2 baris rapi ===== */
+/* product.html uses different modifier */
+.topbar__inner--product{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  position:relative;
+  padding-right:64px; /* room for absolute disc */
+}
+
 @media (max-width: 720px){
   .topbar__inner{
     flex-direction:column;
     align-items:stretch;
     gap:10px;
   }
-
   .topbar__right{
     width:100%;
     justify-content:flex-start;
     flex-wrap:wrap;
-    gap:8px;
-  }
-
-  .sub{
-    display:block;
-    max-width:38ch;
+    padding-right:0; /* on mobile disc returns to flow */
   }
 }
 
@@ -213,17 +200,9 @@ h1{
 .resumeTxt small{ font-size:11px; color: rgba(255,255,255,.70); margin-top:3px; }
 .resumeGo{ margin-left:6px; font-size:22px; opacity:.75; }
 
-/* Mobile: chip jadi 1 baris, full width */
 @media (max-width: 720px){
-  .resumeWrap{
-    width:100%;
-    gap:8px;
-  }
-  .resumeChip{
-    width:100%;
-    justify-content:space-between;
-    padding:10px 12px;
-  }
+  .resumeWrap{ width:100%; gap:8px; }
+  .resumeChip{ width:100%; justify-content:space-between; }
 }
 
 /* =========================
@@ -238,7 +217,6 @@ h1{
 }
 
 .logoBtn{
-  position:relative;
   width:var(--action-size);
   height:var(--action-size);
   border-radius:999px;
@@ -251,13 +229,7 @@ h1{
   place-items:center;
   touch-action:manipulation;
 }
-
-.logoBtn img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
+.logoBtn img{ width:100%; height:100%; object-fit:cover; display:block; }
 
 .dropdown{
   position:absolute;
@@ -272,7 +244,6 @@ h1{
   display:none;
   z-index:9999;
 }
-
 .dropdown.open{ display:block; }
 
 .ddItem{
@@ -282,16 +253,16 @@ h1{
   border-radius:12px;
   border:0;
   background:transparent;
-  color:rgba(255,255,255,.9);
+  color:rgba(255,255,255,.92);
   cursor:pointer;
   font-weight:800;
 }
+.ddItem:hover{ background: rgba(255,255,255,.06); }
 
 /* =========================
-   MUSIC DISC
-   Mode default: ikut flow di kanan (flex)
-   Kalau mau pindah "titik panah" (pojok kanan header),
-   aktifkan mode absolute di bawah (lihat komentar).
+   MUSIC DISC (FORCE DOCK RIGHT)
+   - Desktop/tablet: absolute right (sesuai "titik panah")
+   - Mobile: balik ke flow supaya gak nutup chip
 ========================= */
 .music-disc{
   width:var(--action-size);
@@ -300,7 +271,11 @@ h1{
   min-height:var(--action-size);
   border-radius:50%;
   cursor:pointer;
-  position:relative;
+  position:absolute;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:9999;
   flex-shrink:0;
   touch-action:manipulation;
 
@@ -324,16 +299,14 @@ h1{
 .music-disc::after{
   content:"";
   position:absolute;
-  left:50%;
-  top:50%;
-  width:10px;
-  height:10px;
+  left:50%; top:50%;
+  width:10px; height:10px;
   transform:translate(-50%,-50%);
   border-radius:50%;
   background: radial-gradient(circle at 35% 35%, #fff, rgba(255,255,255,.2));
 }
 
-@keyframes spinFantasy{ from{ transform:rotate(0deg);} to{ transform:rotate(360deg);} }
+@keyframes spinFantasy{ from{ transform:translateY(-50%) rotate(0deg);} to{ transform:translateY(-50%) rotate(360deg);} }
 @keyframes discPulse{
   0%   { box-shadow: 0 0 10px rgba(160,190,255,.25), 0 0 18px rgba(255,190,240,.15), 0 6px 18px rgba(0,0,0,.35); }
   50%  { box-shadow: 0 0 14px rgba(160,190,255,.45), 0 0 26px rgba(255,190,240,.28), 0 6px 18px rgba(0,0,0,.35); }
@@ -343,39 +316,65 @@ h1{
   animation: spinFantasy 7.5s linear infinite, discPulse 2.4s ease-in-out infinite;
 }
 
-/* ====== MODE "TITIK PANAH" (AKTIFKAN JIKA MAU DISC MENEMPEL POJOK KANAN HEADER) ======
-   Cara pakai:
-   - Tambahkan class "discDock" ke <header class="topbar discDock"> di HTML
-   - Maka disc akan absolute di kanan (lebih presisi seperti screenshot)
-*/
-.topbar.discDock .music-disc{
-  position:absolute;
-  right:16px;
-  top:50%;
-  transform:translateY(-50%);
-  z-index:10;
-}
-
-/* kasih ruang agar elemen right tidak ketiban disc */
-.topbar.discDock .topbar__right{
-  padding-right:calc(var(--action-size) + 16px);
-}
-
-/* Mobile: jangan absolute biar ga nutup chip */
 @media (max-width: 720px){
-  .topbar.discDock .music-disc{
+  .music-disc{
     position:relative;
     right:auto;
     top:auto;
     transform:none;
   }
-  .topbar.discDock .topbar__right{
-    padding-right:0;
-  }
 }
 
 /* =========================
-   GRID
+   BUTTONS (pay.html & product.html)
+========================= */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:12px 14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color:rgba(255,255,255,.92);
+  text-decoration:none;
+  cursor:pointer;
+  user-select:none;
+  backdrop-filter: blur(10px);
+}
+
+.btn:hover{ background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+
+.btn.primary{
+  background: linear-gradient(135deg, rgba(180,160,255,.80), rgba(255,180,240,.78));
+  border-color: rgba(255,255,255,.20);
+  color:#101018;
+  font-weight:900;
+}
+
+.btn.small{
+  padding:9px 12px;
+  border-radius:12px;
+  font-size:13px;
+}
+
+/* icon buttons (lightbox) */
+.iconBtn{
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.35);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+}
+.iconBtn:hover{ background: rgba(0,0,0,.55); }
+
+/* =========================
+   GRID (index)
 ========================= */
 .grid{
   display:grid;
@@ -392,7 +391,7 @@ h1{
 }
 
 /* =========================
-   CARD
+   CARD (index)
 ========================= */
 .card{
   background:var(--card);
@@ -408,7 +407,6 @@ h1{
   transform:translateY(10px);
   animation: fadeUp .45s ease forwards;
   animation-delay: var(--d, 0ms);
-  will-change: transform, opacity;
 }
 
 .card img{
@@ -439,6 +437,13 @@ h1{
   color:var(--muted);
 }
 
+/* SOLD inline text (index.js appends this) */
+.soldInline{
+  font-weight:900;
+  opacity:.9;
+  color: rgba(255,220,230,.95);
+}
+
 @media (min-width: 900px){
   .card img{ aspect-ratio: 1 / 1; }
   .meta .name{ font-size:14px; }
@@ -456,23 +461,7 @@ h1{
   }
 }
 
-/* =========================
-   SOLD SYSTEM
-========================= */
-.soldBadge{
-  position:absolute;
-  top:10px;
-  left:10px;
-  background:var(--sold-badge-bg);
-  color:#fff;
-  font-weight:900;
-  font-size:12px;
-  padding:5px 9px;
-  border-radius:999px;
-  border:1px solid var(--sold-badge-border);
-  z-index:5;
-}
-
+/* SOLD system (index + product) */
 .card.sold img{
   filter: grayscale(var(--sold-gray)) blur(var(--sold-blur));
   opacity: var(--sold-dim);
@@ -483,8 +472,190 @@ h1{
   inset:0;
   background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.38));
   pointer-events:none;
-  z-index:2;
 }
+
+/* =========================
+   HERO (product.html & pay.html)
+========================= */
+.hero{
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+}
+
+.heroImg{
+  width:100%;
+  display:block;
+  max-height: 62vh;
+  object-fit:contain;
+  background: rgba(0,0,0,.25);
+}
+
+/* sold hero treatment */
+.hero.sold .heroImg{
+  filter: grayscale(var(--sold-gray)) blur(var(--sold-blur));
+  opacity: var(--sold-dim);
+}
+
+/* =========================
+   PRODUCT PAGE: actions + thumbs
+========================= */
+.productActions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.thumbs{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap:10px;
+}
+
+@media (max-width: 720px){
+  .thumbs{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.thumbs img{
+  width:100%;
+  aspect-ratio: 1 / 1;
+  object-fit:cover;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  cursor:pointer;
+}
+
+.thumbs img:hover{ border-color: rgba(255,255,255,.20); }
+
+.thumbs img.soldThumb{
+  filter: grayscale(var(--sold-gray)) blur(var(--sold-blur));
+  opacity: var(--sold-dim);
+}
+
+.productHint{ margin-top:10px; }
+
+/* =========================
+   LIGHTBOX
+========================= */
+.lightbox{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99999;
+  background: rgba(0,0,0,.82);
+  backdrop-filter: blur(6px);
+  padding:18px;
+}
+.lightbox.open{ display:flex; }
+
+.lbImg{
+  max-width:min(92vw, 980px);
+  max-height:78vh;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.30);
+}
+.lightbox.sold .lbImg{
+  filter: grayscale(var(--sold-gray)) blur(var(--sold-blur));
+  opacity: var(--sold-dim);
+}
+
+.lbClose{ position:absolute; top:18px; right:18px; }
+.lbPrev{ position:absolute; left:18px; }
+.lbNext{ position:absolute; right:18px; }
+.lbCaption{
+  position:absolute;
+  bottom:16px;
+  left:50%;
+  transform:translateX(-50%);
+  color:rgba(255,255,255,.88);
+  background: rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:13px;
+}
+
+/* =========================
+   MODAL (detail)
+========================= */
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+  z-index:99998;
+  background: rgba(0,0,0,.70);
+  backdrop-filter: blur(6px);
+  padding:16px;
+}
+.modal.open{ display:flex; }
+
+.modal__panel{
+  width:min(92vw, 520px);
+  max-height: 78vh;
+  overflow:hidden;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.14);
+  background: linear-gradient(180deg, rgba(18,22,40,.96), rgba(10,12,24,.96));
+  box-shadow: 0 18px 60px rgba(0,0,0,.50);
+}
+
+.modal__head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  padding:16px 16px 10px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.modal__title{ font-weight:900; letter-spacing:.2px; }
+.modal__sub{ margin-top:3px; font-size:12px; color:rgba(255,255,255,.70); }
+
+.modal__close{
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color:#fff;
+  width:40px; height:40px;
+  border-radius:999px;
+  cursor:pointer;
+}
+
+.modal__body{
+  padding:12px 16px 16px;
+  overflow:auto;
+}
+
+.detailList{
+  margin:0;
+  padding-left:18px;
+  color:rgba(255,255,255,.90);
+}
+.detailList li{ margin:8px 0; line-height:1.5; }
+
+.modal__empty{
+  color:rgba(255,255,255,.70);
+  padding:10px 0;
+}
+
+/* =========================
+   PAY PAGE: note box
+========================= */
+.note{
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.05);
+  padding:14px;
+}
+.noteTitle{ font-weight:900; margin-bottom:6px; }
+.noteText{ color: rgba(255,255,255,.80); line-height:1.55; }
 
 /* =========================
    WELCOME OVERLAY
@@ -494,18 +665,19 @@ h1{
   inset:0;
   background:
     radial-gradient(circle at top, rgba(180,160,255,.25), transparent 60%),
-    rgba(0,0,0,.75);
+    rgba(0,0,0,.78);
   display:none;
   align-items:center;
   justify-content:center;
   z-index:99999;
   backdrop-filter: blur(6px);
+  padding:18px;
 }
 .welcome-overlay.show{ display:flex; }
 
 .welcome-card{
   position:relative;
-  width:min(90vw, 360px);
+  width:min(92vw, 360px);
   padding:26px 22px;
   border-radius:20px;
   text-align:center;
@@ -514,29 +686,16 @@ h1{
   box-shadow: 0 0 30px rgba(160,190,255,.35), 0 0 60px rgba(255,190,240,.25);
   animation: fadeUp .35s ease both;
 }
-
 .welcome-glow{
   position:absolute;
   inset:-2px;
   border-radius:22px;
   pointer-events:none;
   box-shadow: 0 0 40px rgba(160,190,255,.35), 0 0 80px rgba(255,190,240,.25);
-  opacity:.6;
+  opacity:.55;
 }
-
-.welcome-title{
-  margin:0 0 12px;
-  font-size:20px;
-  font-weight:900;
-  color:#fff;
-}
-
-.welcome-text{
-  font-size:14px;
-  line-height:1.6;
-  color:rgba(255,255,255,.85);
-  margin-bottom:18px;
-}
+.welcome-title{ margin:0 0 12px; font-size:20px; font-weight:900; color:#fff; }
+.welcome-text{ font-size:14px; line-height:1.6; color:rgba(255,255,255,.85); margin-bottom:18px; }
 
 .welcome-btn{
   display:inline-flex;
@@ -561,12 +720,7 @@ h1{
   background: rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.12);
 }
-.welcome-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
+.welcome-image img{ width:100%; height:100%; object-fit:cover; display:block; }
 
 /* =========================
    ANIMATIONS
@@ -580,44 +734,3 @@ h1{
   .card{ animation: fadeUp .01s linear forwards; }
   .music-disc.playing{ animation:none; }
 }
-
-/* =========================
-   FORCE: Music Disc pindah ke pojok kanan header
-   (kompatibel HTML lama & baru)
-========================= */
-
-/* bikin topbar inner jadi anchor */
-.topbar__inner{
-  position: relative;
-}
-
-/* posisi disc nempel di kanan, sejajar tengah header */
-#musicDisc.music-disc{
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 9999;
-}
-
-/* kasih ruang ke area actions biar ga ketiban disc */
-.topbar__actions,
-.topbar__right{
-  padding-right: 64px; /* 40px disc + jarak */
-}
-
-/* MOBILE: biar aman, disc ikut flow (nggak nutup chip) */
-@media (max-width: 720px){
-  #musicDisc.music-disc{
-    position: relative;
-    right: auto;
-    top: auto;
-    transform: none;
-  }
-
-  .topbar__actions,
-  .topbar__right{
-    padding-right: 0;
-  }
-}
-
