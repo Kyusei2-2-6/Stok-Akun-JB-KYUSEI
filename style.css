@@ -1,7 +1,7 @@
 /* =========================
-   Kyusei - style.css (FULL REWRITE)
+   Kyusei - style.css (REWRITE - MATCH NEW HTML)
    Target HTML:
-   header.topbar -> .wrap -> .topbar__inner -> .topbar__text + .topbar__actions
+   header.topbar -> .wrap -> .topbar__inner -> .topbar__left + .topbar__right
    main.wrap -> section#grid.grid
 ========================= */
 
@@ -29,10 +29,19 @@
   /* spacing */
   --pad:14px;
   --gap:12px;
+
+  /* topbar */
+  --topbar-pad-y: 14px;
+  --topbar-pad-y-desktop: 26px;
+
+  /* action sizes */
+  --action-size: 40px;
+  --disc-gap: 10px;
 }
 
 *{ box-sizing:border-box; }
 html,body{ height:100%; }
+
 body{
   margin:0;
   min-height:100vh;
@@ -58,16 +67,30 @@ body{
 /* =========================
    LAYOUT
 ========================= */
-.wrap{ max-width:1050px; margin:0 auto; padding:var(--pad); }
+.wrap{
+  max-width:1050px;
+  margin:0 auto;
+  padding:var(--pad);
+}
 
 /* =========================
    TYPOGRAPHY
 ========================= */
-h1{ margin:0; font-size:24px; letter-spacing:.2px; }
-.sub{ margin:4px 0 0; font-size:13px; color:var(--muted); }
+.siteName,
+h1{
+  margin:0;
+  font-size:24px;
+  letter-spacing:.2px;
+}
+
+.sub{
+  margin:4px 0 0;
+  font-size:13px;
+  color:var(--muted);
+}
 
 /* =========================
-   TOPBAR (KUNCI PERUBAHAN)
+   TOPBAR
 ========================= */
 .topbar{
   position:sticky;
@@ -83,65 +106,70 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
   background-repeat:no-repeat;
 }
 
-/* Default (HP dulu): pendek */
 .topbar .wrap{
-  padding-top:14px;
-  padding-bottom:14px;
+  padding-top:var(--topbar-pad-y);
+  padding-bottom:var(--topbar-pad-y);
 }
 
-/* Desktop boleh lega */
 @media (min-width: 900px){
   .topbar .wrap{
-    padding-top:26px;
-    padding-bottom:26px;
+    padding-top:var(--topbar-pad-y-desktop);
+    padding-bottom:var(--topbar-pad-y-desktop);
   }
+  .siteName,
   h1{ font-size:28px; }
 }
 
-/* Layout topbar */
 .topbar__inner{
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
   gap:12px;
-}
-.topbar__text{ min-width:0; }
 
-/* Actions */
-.topbar__actions{
+  /* anchor buat disc absolute kalau kamu mau */
+  position:relative;
+}
+
+.topbar__left{
+  min-width:0;
+}
+
+/* RIGHT group */
+.topbar__right{
   display:flex;
   align-items:center;
   justify-content:flex-end;
-  gap:10px;
+  gap:var(--disc-gap);
   flex-wrap:nowrap;
-  min-width: 0;
+  min-width:0;
+
+  /* ruang aman kalau disc kamu mau jadi absolute */
+  padding-right:0;
 }
 
-/* ===== MOBILE FIX: BIKIN HEADER GA MAKAN LAYAR ===== */
+/* ===== MOBILE: header jadi 2 baris rapi ===== */
 @media (max-width: 720px){
   .topbar__inner{
-    flex-direction:column;     /* ini yang bikin beneran berubah */
+    flex-direction:column;
     align-items:stretch;
     gap:10px;
   }
 
-  .topbar__actions{
+  .topbar__right{
     width:100%;
     justify-content:flex-start;
     flex-wrap:wrap;
     gap:8px;
   }
 
-  /* subtext ringkas biar gak panjang */
   .sub{
     display:block;
-    max-width: 38ch;
+    max-width:38ch;
   }
 }
 
 /* =========================
-   RESUME PANEL (chip besar itu sumber “kok tinggi banget”)
-   - Mobile: jadi lebih kecil & rapih
+   RESUME PANEL
 ========================= */
 .resumeWrap{
   display:flex;
@@ -150,7 +178,6 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
   flex-wrap:wrap;
 }
 
-/* chip */
 .resumeChip{
   display:flex;
   align-items:center;
@@ -165,13 +192,11 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
   user-select:none;
 }
 
-/* Primary chip */
 .resumeChip.isPrimary{
   background: linear-gradient(135deg, rgba(180,160,255,.22), rgba(255,180,240,.18));
   border-color: rgba(255,255,255,.20);
 }
 
-/* icon */
 .resumeIco{
   width:36px;
   height:36px;
@@ -188,7 +213,7 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
 .resumeTxt small{ font-size:11px; color: rgba(255,255,255,.70); margin-top:3px; }
 .resumeGo{ margin-left:6px; font-size:22px; opacity:.75; }
 
-/* ===== MOBILE: chip jadi 1 baris, gak gede ===== */
+/* Mobile: chip jadi 1 baris, full width */
 @media (max-width: 720px){
   .resumeWrap{
     width:100%;
@@ -202,11 +227,77 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
 }
 
 /* =========================
-   MUSIC DISC + MENU
+   MENU (LOGO + DROPDOWN)
+========================= */
+.menu{
+  position:relative;
+  display:flex;
+  align-items:center;
+  z-index:2000;
+  flex-shrink:0;
+}
+
+.logoBtn{
+  position:relative;
+  width:var(--action-size);
+  height:var(--action-size);
+  border-radius:999px;
+  padding:0;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.06);
+  cursor:pointer;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  touch-action:manipulation;
+}
+
+.logoBtn img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.dropdown{
+  position:absolute;
+  right:0;
+  top:calc(100% + 10px);
+  min-width:220px;
+  padding:8px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(10,15,25,.92);
+  backdrop-filter:blur(10px);
+  display:none;
+  z-index:9999;
+}
+
+.dropdown.open{ display:block; }
+
+.ddItem{
+  width:100%;
+  text-align:left;
+  padding:10px 10px;
+  border-radius:12px;
+  border:0;
+  background:transparent;
+  color:rgba(255,255,255,.9);
+  cursor:pointer;
+  font-weight:800;
+}
+
+/* =========================
+   MUSIC DISC
+   Mode default: ikut flow di kanan (flex)
+   Kalau mau pindah "titik panah" (pojok kanan header),
+   aktifkan mode absolute di bawah (lihat komentar).
 ========================= */
 .music-disc{
-  width:40px; height:40px;
-  min-width:40px; min-height:40px;
+  width:var(--action-size);
+  height:var(--action-size);
+  min-width:var(--action-size);
+  min-height:var(--action-size);
   border-radius:50%;
   cursor:pointer;
   position:relative;
@@ -229,15 +320,19 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
     0 6px 18px rgba(0,0,0,.35);
   border:1px solid rgba(255,255,255,.18);
 }
+
 .music-disc::after{
   content:"";
   position:absolute;
-  left:50%; top:50%;
-  width:10px; height:10px;
+  left:50%;
+  top:50%;
+  width:10px;
+  height:10px;
   transform:translate(-50%,-50%);
   border-radius:50%;
   background: radial-gradient(circle at 35% 35%, #fff, rgba(255,255,255,.2));
 }
+
 @keyframes spinFantasy{ from{ transform:rotate(0deg);} to{ transform:rotate(360deg);} }
 @keyframes discPulse{
   0%   { box-shadow: 0 0 10px rgba(160,190,255,.25), 0 0 18px rgba(255,190,240,.15), 0 6px 18px rgba(0,0,0,.35); }
@@ -248,67 +343,47 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
   animation: spinFantasy 7.5s linear infinite, discPulse 2.4s ease-in-out infinite;
 }
 
-.menu{
-  position:relative;
-  display:flex;
-  align-items:center;
-  z-index:2000;
-  flex-shrink:0;
-}
-
-.logoBtn{
-  position:relative;
-  width:40px; height:40px;
-  border-radius:999px;
-  padding:0;
-  border:1px solid rgba(255,255,255,.16);
-  background:rgba(255,255,255,.06);
-  cursor:pointer;
-  overflow:hidden;
-  display:grid;
-  place-items:center;
-  touch-action:manipulation;
-}
-.logoBtn img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-.dropdown{
+/* ====== MODE "TITIK PANAH" (AKTIFKAN JIKA MAU DISC MENEMPEL POJOK KANAN HEADER) ======
+   Cara pakai:
+   - Tambahkan class "discDock" ke <header class="topbar discDock"> di HTML
+   - Maka disc akan absolute di kanan (lebih presisi seperti screenshot)
+*/
+.topbar.discDock .music-disc{
   position:absolute;
-  right:0;
-  top:calc(100% + 10px);
-  min-width:220px;
-  padding:8px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(10,15,25,.92);
-  backdrop-filter:blur(10px);
-  display:none;
-  z-index:9999;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:10;
 }
-.dropdown.open{ display:block; }
 
-.ddItem{
-  width:100%;
-  text-align:left;
-  padding:10px 10px;
-  border-radius:12px;
-  border:0;
-  background:transparent;
-  color:rgba(255,255,255,.9);
-  cursor:pointer;
-  font-weight:800;
+/* kasih ruang agar elemen right tidak ketiban disc */
+.topbar.discDock .topbar__right{
+  padding-right:calc(var(--action-size) + 16px);
+}
+
+/* Mobile: jangan absolute biar ga nutup chip */
+@media (max-width: 720px){
+  .topbar.discDock .music-disc{
+    position:relative;
+    right:auto;
+    top:auto;
+    transform:none;
+  }
+  .topbar.discDock .topbar__right{
+    padding-right:0;
+  }
 }
 
 /* =========================
-   GRID (INI YANG KAMU LIAT DI HP)
+   GRID
 ========================= */
 .grid{
   display:grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));  /* FIX */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--gap);
   margin-top: 12px;
 }
 
-/* Tablet / Desktop */
 @media (min-width: 721px){
   .grid{ grid-template-columns: repeat(3, minmax(0,1fr)); gap:14px; }
 }
@@ -338,13 +413,14 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
 
 .card img{
   width:100%;
-  aspect-ratio: 4 / 3;   /* FIX: biar gak kebesaran di HP */
+  aspect-ratio: 4 / 3;
   object-fit:cover;
   display:block;
   background:#111;
 }
 
 .meta{ padding:10px; }
+
 .meta .name{
   margin:0 0 6px;
   font-weight:900;
@@ -355,6 +431,7 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
   -webkit-box-orient: vertical;
   overflow:hidden;
 }
+
 .meta .price{
   margin:0;
   font-size:12px;
@@ -362,14 +439,12 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
   color:var(--muted);
 }
 
-/* Desktop: gambar boleh 1:1 */
 @media (min-width: 900px){
   .card img{ aspect-ratio: 1 / 1; }
   .meta .name{ font-size:14px; }
   .meta .price{ font-size:13px; }
 }
 
-/* hover desktop only (biar HP gak berat) */
 @media (hover:hover){
   .card{
     transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
@@ -412,7 +487,7 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
 }
 
 /* =========================
-   WELCOME OVERLAY (tetap)
+   WELCOME OVERLAY
 ========================= */
 .welcome-overlay{
   position:fixed;
@@ -439,6 +514,7 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
   box-shadow: 0 0 30px rgba(160,190,255,.35), 0 0 60px rgba(255,190,240,.25);
   animation: fadeUp .35s ease both;
 }
+
 .welcome-glow{
   position:absolute;
   inset:-2px;
@@ -447,8 +523,20 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
   box-shadow: 0 0 40px rgba(160,190,255,.35), 0 0 80px rgba(255,190,240,.25);
   opacity:.6;
 }
-.welcome-title{ margin:0 0 12px; font-size:20px; font-weight:900; color:#fff; }
-.welcome-text{ font-size:14px; line-height:1.6; color:rgba(255,255,255,.85); margin-bottom:18px; }
+
+.welcome-title{
+  margin:0 0 12px;
+  font-size:20px;
+  font-weight:900;
+  color:#fff;
+}
+
+.welcome-text{
+  font-size:14px;
+  line-height:1.6;
+  color:rgba(255,255,255,.85);
+  margin-bottom:18px;
+}
 
 .welcome-btn{
   display:inline-flex;
@@ -473,7 +561,12 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
   background: rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.12);
 }
-.welcome-image img{ width:100%; height:100%; object-fit:cover; display:block; }
+.welcome-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
 
 /* =========================
    ANIMATIONS
@@ -486,4 +579,4 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
 @media (prefers-reduced-motion: reduce){
   .card{ animation: fadeUp .01s linear forwards; }
   .music-disc.playing{ animation:none; }
-     }
+}
