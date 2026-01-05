@@ -1,6 +1,8 @@
 /* =========================
-   Kyusei - style.css (REWRITE)
-   Mobile-first + tetap kompatibel dengan class lama
+   Kyusei - style.css (FULL REWRITE)
+   Target HTML:
+   header.topbar -> .wrap -> .topbar__inner -> .topbar__text + .topbar__actions
+   main.wrap -> section#grid.grid
 ========================= */
 
 /* =========================
@@ -11,15 +13,11 @@
   --text:#e6e6e6;
   --muted:rgba(230,230,230,.70);
 
-  --card:rgba(255,255,255,.05);
-  --card2:rgba(255,255,255,.07);
+  --card:rgba(255,255,255,.06);
   --border:rgba(255,255,255,.12);
 
   --r:16px;
   --r2:18px;
-
-  --shadow: 0 10px 26px rgba(0,0,0,.35);
-  --glow: 0 0 22px rgba(160,190,255,.12);
 
   /* SOLD tokens */
   --sold-dim: .60;
@@ -29,8 +27,8 @@
   --sold-badge-border: rgba(255,255,255,.18);
 
   /* spacing */
-  --pad: 14px;
-  --gap: 12px;
+  --pad:14px;
+  --gap:12px;
 }
 
 *{ box-sizing:border-box; }
@@ -40,76 +38,43 @@ body{
   min-height:100vh;
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   color:var(--text);
+  overflow-x:hidden;
+  -webkit-text-size-adjust:100%;
+
   background:
-    linear-gradient(180deg, rgba(11,18,32,.78) 0%, rgba(11,18,32,.88) 60%, rgba(11,18,32,.96) 100%),
+    linear-gradient(180deg, rgba(11,18,32,.76) 0%, rgba(11,18,32,.88) 60%, rgba(11,18,32,.96) 100%),
     url("./BGWEB.png");
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
-  /* default: desktop boleh fixed */
   background-attachment:fixed;
-  overflow-x:hidden;
-  -webkit-text-size-adjust:100%;
 }
 
-/* Mobile: matikan fixed background biar gak lag */
+/* Mobile: background fixed bikin berat & kadang glitch */
 @media (max-width: 720px){
   body{ background-attachment:scroll; }
 }
 
 /* =========================
-   LAYOUT UTIL
+   LAYOUT
 ========================= */
 .wrap{ max-width:1050px; margin:0 auto; padding:var(--pad); }
-.row{ display:flex; align-items:center; }
-.grow{ flex:1; min-width:0; }
-.gap{ gap:10px; }
 
 /* =========================
    TYPOGRAPHY
 ========================= */
-h1{ margin:0; font-size:22px; letter-spacing:.2px; }
-.sub{ margin-top:4px; font-size:13px; color:var(--muted); }
-.h2{ margin:14px 0 10px; font-size:16px; }
-
-/* desktop typography */
-@media (min-width: 900px){
-  h1{ font-size:26px; }
-  .sub{ font-size:13px; margin-top:6px; }
-}
+h1{ margin:0; font-size:24px; letter-spacing:.2px; }
+.sub{ margin:4px 0 0; font-size:13px; color:var(--muted); }
 
 /* =========================
-   BUTTON
-========================= */
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:10px 12px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,.16);
-  background:rgba(255,255,255,.06);
-  color:var(--text);
-  font-weight:800;
-  text-decoration:none;
-  cursor:pointer;
-  touch-action:manipulation;
-  user-select:none;
-}
-.btn.primary{ background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.22); }
-.btn.small{ padding:8px 10px; border-radius:10px; font-weight:700; }
-.btn:active{ transform:scale(.98); }
-
-/* =========================
-   TOPBAR / HEADER
-   - Mobile-first: pendek, gak makan layar
+   TOPBAR (KUNCI PERUBAHAN)
 ========================= */
 .topbar{
   position:sticky;
   top:0;
-  z-index:100;
+  z-index:1000;
   border-bottom:1px solid rgba(255,255,255,.08);
-  /* background topbar tetap ada tapi ringkas */
+
   background-image:
     linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.82)),
     url("./BG.png");
@@ -118,356 +83,182 @@ h1{ margin:0; font-size:22px; letter-spacing:.2px; }
   background-repeat:no-repeat;
 }
 
-/* Mobile: padding pendek */
+/* Default (HP dulu): pendek */
 .topbar .wrap{
   padding-top:14px;
   padding-bottom:14px;
 }
 
-/* Desktop: boleh lebih lega */
+/* Desktop boleh lega */
 @media (min-width: 900px){
   .topbar .wrap{
     padding-top:26px;
     padding-bottom:26px;
   }
+  h1{ font-size:28px; }
 }
 
-.topbar h1, .topbar .sub{ text-shadow:0 2px 18px rgba(0,0,0,.65); }
-
-/* =========================
-   TOPBAR LAYOUT
-========================= */
+/* Layout topbar */
 .topbar__inner{
   display:flex;
-  align-items:flex-end;
+  align-items:flex-start;
   justify-content:space-between;
   gap:12px;
 }
 .topbar__text{ min-width:0; }
 
+/* Actions */
 .topbar__actions{
   display:flex;
   align-items:center;
   justify-content:flex-end;
   gap:10px;
   flex-wrap:nowrap;
-  margin-top:10px;
-  position:relative;
-  z-index:120;
+  min-width: 0;
 }
 
-/* PRODUCT PAGE: sejajar */
-.topbar__inner--product{ align-items:center; }
-
+/* ===== MOBILE FIX: BIKIN HEADER GA MAKAN LAYAR ===== */
 @media (max-width: 720px){
   .topbar__inner{
-    flex-direction:column;
-    align-items:flex-start;
+    flex-direction:column;     /* ini yang bikin beneran berubah */
+    align-items:stretch;
     gap:10px;
   }
+
   .topbar__actions{
     width:100%;
     justify-content:flex-start;
     flex-wrap:wrap;
-    margin-top:0;
     gap:8px;
+  }
+
+  /* subtext ringkas biar gak panjang */
+  .sub{
+    display:block;
+    max-width: 38ch;
   }
 }
 
-@media (max-width:480px){
-  .topbar{ background-position:center top; }
-}
-
 /* =========================
-   GRID & CARD
-   - Mobile: fix 2 kolom stabil
+   RESUME PANEL (chip besar itu sumber “kok tinggi banget”)
+   - Mobile: jadi lebih kecil & rapih
 ========================= */
-.grid{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--gap);
-  margin-top: 10px;
-}
-
-/* Tablet */
-@media (min-width: 721px){
-  .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); gap:14px; }
-}
-
-/* Desktop */
-@media (min-width: 1024px){
-  .grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
-}
-
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--r);
-  overflow:hidden;
-  cursor:pointer;
-  text-decoration:none;
-  color:inherit;
-  position:relative;
-
-  /* entry anim */
-  opacity:0;
-  transform:translateY(10px);
-  animation: fadeUp .45s ease forwards;
-  animation-delay: var(--d, 0ms);
-  will-change: transform, opacity;
-
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-}
-
-.card:hover{
-  transform: translateY(-3px) scale(1.015);
-  border-color: rgba(255,255,255,.18);
-  box-shadow: var(--shadow), var(--glow);
-}
-.card:active{ transform: translateY(-1px) scale(0.99); }
-
-.card img{
-  width:100%;
-  /* Mobile: lebih pendek biar produk kelihatan banyak */
-  aspect-ratio: 4 / 3;
-  object-fit:cover;
-  display:block;
-  background:#111;
-}
-
-/* Desktop: boleh lebih kotak */
-@media (min-width: 900px){
-  .card img{ aspect-ratio: 1 / 1; }
-}
-
-.meta{ padding:10px; }
-.meta .name{
-  margin:0 0 6px;
-  font-weight:900;
-  font-size:13px;
-  line-height:1.2;
-  display:-webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow:hidden;
-}
-.meta .price{
-  margin:0;
-  font-size:12px;
-  font-weight:800;
-  color:var(--muted);
-}
-
-/* Desktop text */
-@media (min-width: 900px){
-  .meta{ padding:10px 11px; }
-  .meta .name{ font-size:14px; }
-  .meta .price{ font-size:13px; font-weight:700; }
-}
-
-/* =========================
-   SOLD (UNIFIED)
-========================= */
-.soldBadge{
-  position:absolute;
-  top:10px;
-  left:10px;
-  background:var(--sold-badge-bg);
-  color:#fff;
-  font-weight:900;
-  font-size:12px;
-  padding:5px 9px;
-  border-radius:999px;
-  border:1px solid var(--sold-badge-border);
-  z-index:4;
-  letter-spacing:.2px;
-}
-
-.soldInline{
-  background: rgba(140, 0, 0, .35);
-  border: 1px solid rgba(255, 120, 120, .22);
-  padding:2px 6px;
-  border-radius:999px;
-}
-
-.media{
-  position:relative;
-  overflow:hidden;
-}
-
-/* efek sold ke IMG apapun yg di dalam container sold */
-.card.sold img,
-.hero.sold .heroImg,
-.thumbs .soldThumb,
-.lightbox.sold .lbImg{
-  filter: grayscale(var(--sold-gray)) blur(var(--sold-blur));
-  opacity: var(--sold-dim);
-}
-
-.card.sold::after,
-.hero.sold::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.38));
-  pointer-events:none;
-  z-index:2;
-}
-
-.card.sold .soldBadge,
-.hero.sold .soldBadge{
-  z-index:5;
-}
-
-/* =========================
-   HERO / DETAIL
-========================= */
-.hero{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:var(--r2);
-  overflow:hidden;
-  position:relative;
-}
-
-/* Mobile: jangan setinggi itu */
-.heroImg{
-  width:100%;
-  height:min(42vh, 360px);
-  object-fit:contain;
-  background:#050a14;
-  display:block;
-}
-
-/* Desktop: boleh lebih tinggi */
-@media (min-width: 900px){
-  .heroImg{ height:min(55vh,520px); }
-}
-
-.hero .soldBadge{
-  top:12px;
-  left:12px;
-}
-
-/* =========================
-   PRODUCT PAGE EXTRAS
-========================= */
-.productActions{
+.resumeWrap{
   display:flex;
   gap:10px;
-  margin-top:12px;
+  align-items:center;
   flex-wrap:wrap;
-  position:relative;
-  z-index:120;
-}
-.productHint{ margin-top:12px; }
-#detailBtn{ position:relative; z-index:121; pointer-events:auto; }
-
-/* =========================
-   THUMBNAILS
-========================= */
-.thumbs{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
-  gap:10px;
-}
-.thumbs img{
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:cover;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.10);
-  background:#111;
-  cursor:pointer;
-  touch-action:manipulation;
-}
-.thumbs img.soldThumb{
-  filter: grayscale(var(--sold-gray));
-  opacity: var(--sold-dim);
 }
 
-/* =========================
-   LIGHTBOX
-========================= */
-.lightbox{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  background:rgba(0,0,0,.82);
-  z-index:999;
-}
-.lightbox.open{ display:flex; }
-
-.lbImg{
-  width:min(92vw,900px);
-  height:min(75vh,680px);
-  object-fit:contain;
-  background:#000;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.12);
-}
-
-.iconBtn{
-  position:fixed;
-  top:50%;
-  transform:translateY(-50%);
-  width:42px; height:42px;
-  border-radius:999px;
-  border:0;
-  background:rgba(255,255,255,.12);
-  color:#fff;
-  font-size:22px;
-  cursor:pointer;
+/* chip */
+.resumeChip{
   display:flex;
   align-items:center;
-  justify-content:center;
-  backdrop-filter:blur(6px);
-  touch-action:manipulation;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:16px;
+  text-decoration:none;
+  color:rgba(255,255,255,.92);
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(10px);
   user-select:none;
 }
-.iconBtn:active{ transform:translateY(-50%) scale(.96); }
 
-.lbPrev{ left:12px; }
-.lbNext{ right:12px; }
-.lbClose{ top:16px; right:16px; transform:none; }
-.lbCaption{
-  position:fixed;
-  bottom:14px;
-  left:0; right:0;
-  text-align:center;
-  font-size:13px;
-  color:rgba(255,255,255,.85);
+/* Primary chip */
+.resumeChip.isPrimary{
+  background: linear-gradient(135deg, rgba(180,160,255,.22), rgba(255,180,240,.18));
+  border-color: rgba(255,255,255,.20);
+}
+
+/* icon */
+.resumeIco{
+  width:36px;
+  height:36px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+  flex:0 0 36px;
+}
+
+.resumeTxt{ display:flex; flex-direction:column; line-height:1.05; }
+.resumeTxt b{ font-size:13px; letter-spacing:.2px; }
+.resumeTxt small{ font-size:11px; color: rgba(255,255,255,.70); margin-top:3px; }
+.resumeGo{ margin-left:6px; font-size:22px; opacity:.75; }
+
+/* ===== MOBILE: chip jadi 1 baris, gak gede ===== */
+@media (max-width: 720px){
+  .resumeWrap{
+    width:100%;
+    gap:8px;
+  }
+  .resumeChip{
+    width:100%;
+    justify-content:space-between;
+    padding:10px 12px;
+  }
 }
 
 /* =========================
-   NOTE
+   MUSIC DISC + MENU
 ========================= */
-.note{
-  border:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.04);
-  border-radius:14px;
-  padding:12px;
-}
-.noteTitle{ font-weight:900; margin-bottom:6px; }
-.noteText{ font-size:13px; line-height:1.4; color:var(--muted); }
+.music-disc{
+  width:40px; height:40px;
+  min-width:40px; min-height:40px;
+  border-radius:50%;
+  cursor:pointer;
+  position:relative;
+  flex-shrink:0;
+  touch-action:manipulation;
 
-/* =========================
-   LOGO DROPDOWN + TOOLTIP
-========================= */
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.95) 0 10%, rgba(255,255,255,.15) 11% 18%, transparent 19%),
+    conic-gradient(from 220deg,
+      rgba(180,160,255,.9),
+      rgba(120,220,255,.85),
+      rgba(255,180,240,.85),
+      rgba(180,160,255,.9)
+    ),
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.20), transparent 55%),
+    radial-gradient(circle at 70% 75%, rgba(255,255,255,.14), transparent 60%);
+  box-shadow:
+    0 0 10px rgba(160,190,255,.35),
+    0 0 18px rgba(255,190,240,.22),
+    0 6px 18px rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.18);
+}
+.music-disc::after{
+  content:"";
+  position:absolute;
+  left:50%; top:50%;
+  width:10px; height:10px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background: radial-gradient(circle at 35% 35%, #fff, rgba(255,255,255,.2));
+}
+@keyframes spinFantasy{ from{ transform:rotate(0deg);} to{ transform:rotate(360deg);} }
+@keyframes discPulse{
+  0%   { box-shadow: 0 0 10px rgba(160,190,255,.25), 0 0 18px rgba(255,190,240,.15), 0 6px 18px rgba(0,0,0,.35); }
+  50%  { box-shadow: 0 0 14px rgba(160,190,255,.45), 0 0 26px rgba(255,190,240,.28), 0 6px 18px rgba(0,0,0,.35); }
+  100% { box-shadow: 0 0 10px rgba(160,190,255,.25), 0 0 18px rgba(255,190,240,.15), 0 6px 18px rgba(0,0,0,.35); }
+}
+.music-disc.playing{
+  animation: spinFantasy 7.5s linear infinite, discPulse 2.4s ease-in-out infinite;
+}
+
 .menu{
   position:relative;
   display:flex;
   align-items:center;
-  z-index:200;
+  z-index:2000;
   flex-shrink:0;
 }
 
 .logoBtn{
   position:relative;
   width:40px; height:40px;
-  min-width:40px; min-height:40px;
   border-radius:999px;
   padding:0;
   border:1px solid rgba(255,255,255,.16);
@@ -476,42 +267,9 @@ h1{ margin:0; font-size:22px; letter-spacing:.2px; }
   overflow:hidden;
   display:grid;
   place-items:center;
-  z-index:201;
-  flex-shrink:0;
-  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
   touch-action:manipulation;
-  user-select:none;
 }
 .logoBtn img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-.logoBtn:hover{
-  transform:scale(1.06);
-  background:rgba(255,255,255,.12);
-  box-shadow:0 0 0 4px rgba(255,255,255,.08);
-}
-.logoBtn:active{ transform:scale(0.96); }
-
-.logoBtn::after{
-  content: attr(data-tip);
-  position:absolute;
-  left:50%;
-  bottom:-38px;
-  transform:translateX(-50%);
-  background:rgba(0,0,0,.75);
-  color:#fff;
-  font-size:11px;
-  padding:6px 10px;
-  border-radius:999px;
-  white-space:nowrap;
-  opacity:0;
-  pointer-events:none;
-  transition: opacity .15s ease, transform .15s ease;
-  z-index:99999;
-}
-.logoBtn:hover::after{
-  opacity:1;
-  transform:translateX(-50%) translateY(2px);
-}
 
 .dropdown{
   position:absolute;
@@ -538,114 +296,123 @@ h1{ margin:0; font-size:22px; letter-spacing:.2px; }
   color:rgba(255,255,255,.9);
   cursor:pointer;
   font-weight:800;
-  touch-action:manipulation;
 }
-.ddItem:hover{ background:rgba(255,255,255,.08); }
 
 /* =========================
-   DETAIL MODAL
+   GRID (INI YANG KAMU LIAT DI HP)
 ========================= */
-.modal{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  background:rgba(0,0,0,.72);
-  z-index:2000;
+.grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));  /* FIX */
+  gap: var(--gap);
+  margin-top: 12px;
 }
-.modal.open{ display:flex; }
 
-.modal__panel{
-  width:min(92vw, 560px);
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(10,15,25,.92);
-  backdrop-filter:blur(10px);
+/* Tablet / Desktop */
+@media (min-width: 721px){
+  .grid{ grid-template-columns: repeat(3, minmax(0,1fr)); gap:14px; }
+}
+@media (min-width: 1024px){
+  .grid{ grid-template-columns: repeat(4, minmax(0,1fr)); }
+}
+
+/* =========================
+   CARD
+========================= */
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  overflow:hidden;
+  cursor:pointer;
+  text-decoration:none;
+  color:inherit;
+  position:relative;
+
+  opacity:0;
+  transform:translateY(10px);
+  animation: fadeUp .45s ease forwards;
+  animation-delay: var(--d, 0ms);
+  will-change: transform, opacity;
+}
+
+.card img{
+  width:100%;
+  aspect-ratio: 4 / 3;   /* FIX: biar gak kebesaran di HP */
+  object-fit:cover;
+  display:block;
+  background:#111;
+}
+
+.meta{ padding:10px; }
+.meta .name{
+  margin:0 0 6px;
+  font-weight:900;
+  font-size:13px;
+  line-height:1.2;
+  display:-webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow:hidden;
 }
-.modal__head{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:12px;
-  padding:14px 14px 10px;
-  border-bottom:1px solid rgba(255,255,255,.10);
-}
-.modal__title{ font-weight:900; }
-.modal__sub{ color:rgba(255,255,255,.7); font-size:12px; margin-top:2px; }
-.modal__close{
-  border:0;
-  background:rgba(255,255,255,.10);
-  color:#fff;
-  width:34px; height:34px;
-  border-radius:999px;
-  cursor:pointer;
-  touch-action:manipulation;
-}
-.modal__close:active{ transform:scale(.96); }
-.modal__body{ padding:12px 14px 14px; }
-.detailList{
+.meta .price{
   margin:0;
-  padding-left:18px;
-  color:rgba(255,255,255,.88);
-  font-size:13px;
-  line-height:1.5;
+  font-size:12px;
+  font-weight:800;
+  color:var(--muted);
 }
-.modal__empty{ color:rgba(255,255,255,.7); font-size:13px; }
+
+/* Desktop: gambar boleh 1:1 */
+@media (min-width: 900px){
+  .card img{ aspect-ratio: 1 / 1; }
+  .meta .name{ font-size:14px; }
+  .meta .price{ font-size:13px; }
+}
+
+/* hover desktop only (biar HP gak berat) */
+@media (hover:hover){
+  .card{
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .card:hover{
+    transform: translateY(-3px) scale(1.015);
+    border-color: rgba(255,255,255,.18);
+    box-shadow: 0 10px 26px rgba(0,0,0,.35), 0 0 22px rgba(160,190,255,.12);
+  }
+}
 
 /* =========================
-   ANIME / FANTASY SLOW DISC
+   SOLD SYSTEM
 ========================= */
-.music-disc{
-  width:40px; height:40px;
-  min-width:40px; min-height:40px;
-  border-radius:50%;
-  cursor:pointer;
-  position:relative;
-  flex-shrink:0;
-  touch-action:manipulation;
-  user-select:none;
-
-  background:
-    radial-gradient(circle at 50% 50%, rgba(255,255,255,.95) 0 10%, rgba(255,255,255,.15) 11% 18%, transparent 19%),
-    conic-gradient(from 220deg,
-      rgba(180,160,255,.9),
-      rgba(120,220,255,.85),
-      rgba(255,180,240,.85),
-      rgba(180,160,255,.9)
-    ),
-    radial-gradient(circle at 30% 30%, rgba(255,255,255,.20), transparent 55%),
-    radial-gradient(circle at 70% 75%, rgba(255,255,255,.14), transparent 60%);
-
-  box-shadow:
-    0 0 10px rgba(160,190,255,.35),
-    0 0 18px rgba(255,190,240,.22),
-    0 6px 18px rgba(0,0,0,.35);
-
-  border:1px solid rgba(255,255,255,.18);
+.soldBadge{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:var(--sold-badge-bg);
+  color:#fff;
+  font-weight:900;
+  font-size:12px;
+  padding:5px 9px;
+  border-radius:999px;
+  border:1px solid var(--sold-badge-border);
+  z-index:5;
 }
-.music-disc::after{
+
+.card.sold img{
+  filter: grayscale(var(--sold-gray)) blur(var(--sold-blur));
+  opacity: var(--sold-dim);
+}
+.card.sold::after{
   content:"";
   position:absolute;
-  left:50%; top:50%;
-  width:10px; height:10px;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  background: radial-gradient(circle at 35% 35%, #fff, rgba(255,255,255,.2));
-}
-@keyframes spinFantasy{ from{ transform:rotate(0deg);} to{ transform:rotate(360deg);} }
-@keyframes discPulse{
-  0%   { box-shadow: 0 0 10px rgba(160,190,255,.25), 0 0 18px rgba(255,190,240,.15), 0 6px 18px rgba(0,0,0,.35); }
-  50%  { box-shadow: 0 0 14px rgba(160,190,255,.45), 0 0 26px rgba(255,190,240,.28), 0 6px 18px rgba(0,0,0,.35); }
-  100% { box-shadow: 0 0 10px rgba(160,190,255,.25), 0 0 18px rgba(255,190,240,.15), 0 6px 18px rgba(0,0,0,.35); }
-}
-.music-disc.playing{
-  animation: spinFantasy 7.5s linear infinite, discPulse 2.4s ease-in-out infinite;
+  inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.38));
+  pointer-events:none;
+  z-index:2;
 }
 
 /* =========================
-   WELCOME OVERLAY
+   WELCOME OVERLAY (tetap)
 ========================= */
 .welcome-overlay{
   position:fixed;
@@ -680,19 +447,9 @@ h1{ margin:0; font-size:22px; letter-spacing:.2px; }
   box-shadow: 0 0 40px rgba(160,190,255,.35), 0 0 80px rgba(255,190,240,.25);
   opacity:.6;
 }
-.welcome-title{
-  margin:0 0 12px;
-  font-size:20px;
-  font-weight:900;
-  letter-spacing:.5px;
-  color:#fff;
-}
-.welcome-text{
-  font-size:14px;
-  line-height:1.6;
-  color:rgba(255,255,255,.85);
-  margin-bottom:18px;
-}
+.welcome-title{ margin:0 0 12px; font-size:20px; font-weight:900; color:#fff; }
+.welcome-text{ font-size:14px; line-height:1.6; color:rgba(255,255,255,.85); margin-bottom:18px; }
+
 .welcome-btn{
   display:inline-flex;
   align-items:center;
@@ -705,10 +462,7 @@ h1{ margin:0; font-size:22px; letter-spacing:.2px; }
   font-weight:900;
   cursor:pointer;
   box-shadow:0 6px 18px rgba(0,0,0,.35);
-  touch-action:manipulation;
-  user-select:none;
 }
-.welcome-btn:active{ transform:scale(.96); }
 
 .welcome-image{
   width:100%;
@@ -718,99 +472,8 @@ h1{ margin:0; font-size:22px; letter-spacing:.2px; }
   margin-bottom:14px;
   background: rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.12);
-  box-shadow: 0 0 18px rgba(160,190,255,.35), 0 0 36px rgba(255,190,240,.20);
 }
 .welcome-image img{ width:100%; height:100%; object-fit:cover; display:block; }
-@media (max-width:420px){ .welcome-image{ height:120px; } }
-
-.welcome-overlay::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  background:
-    radial-gradient(circle at 20% 25%, rgba(255,255,255,.18) 0 2px, transparent 3px),
-    radial-gradient(circle at 70% 20%, rgba(255,255,255,.12) 0 2px, transparent 3px),
-    radial-gradient(circle at 60% 70%, rgba(255,255,255,.10) 0 2px, transparent 3px),
-    radial-gradient(circle at 30% 80%, rgba(255,255,255,.14) 0 2px, transparent 3px);
-  opacity:.6;
-  animation: sparkleFloat 5s ease-in-out infinite;
-}
-@keyframes sparkleFloat{
-  0%{ transform: translateY(0); opacity:.45; }
-  50%{ transform: translateY(-8px); opacity:.7; }
-  100%{ transform: translateY(0); opacity:.45; }
-}
-
-/* =========================
-   RESUME PANEL
-========================= */
-.resumeWrap{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
-
-.resumeChip{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 12px;
-  border-radius:16px;
-  text-decoration:none;
-  color:rgba(255,255,255,.92);
-
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.14);
-  backdrop-filter: blur(10px);
-
-  box-shadow:
-    0 10px 24px rgba(0,0,0,.25),
-    0 0 18px rgba(160,190,255,.10);
-
-  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
-  touch-action:manipulation;
-  user-select:none;
-}
-.resumeChip:hover{
-  transform: translateY(-2px);
-  border-color: rgba(255,255,255,.22);
-  box-shadow:
-    0 14px 30px rgba(0,0,0,.30),
-    0 0 24px rgba(160,190,255,.18);
-}
-.resumeChip:active{ transform: translateY(0) scale(.99); }
-
-.resumeChip.isPrimary{
-  background: linear-gradient(135deg, rgba(180,160,255,.22), rgba(255,180,240,.18));
-  border-color: rgba(255,255,255,.22);
-}
-
-.resumeIco{
-  width:36px;
-  height:36px;
-  border-radius:999px;
-  display:grid;
-  place-items:center;
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.14);
-  flex:0 0 36px;
-}
-.resumeTxt{ display:flex; flex-direction:column; line-height:1.05; }
-.resumeTxt b{ font-size:13px; letter-spacing:.2px; }
-.resumeTxt small{ font-size:11px; color: rgba(255,255,255,.70); margin-top:3px; }
-.resumeGo{ margin-left:6px; font-size:22px; opacity:.75; }
-
-/* Mobile: resume stack jadi 1 kolom biar gak nabrak */
-@media (max-width: 720px){
-  .resumeWrap{
-    width:100%;
-    gap:8px;
-    flex-direction:column;
-    align-items:stretch;
-  }
-  .resumeChip{
-    width:100%;
-    justify-content:space-between;
-  }
-  .menu, .music-disc{ margin-left:auto; }
-}
 
 /* =========================
    ANIMATIONS
@@ -823,11 +486,4 @@ h1{ margin:0; font-size:22px; letter-spacing:.2px; }
 @media (prefers-reduced-motion: reduce){
   .card{ animation: fadeUp .01s linear forwards; }
   .music-disc.playing{ animation:none; }
-  .welcome-overlay::before{ animation:none; }
-}
-
-/* =========================
-   PAY HEADER tiny fix (compat)
-========================= */
-.topbar .wrap.row{ gap:12px; }
-.topbar .wrap.row .music-disc{ margin-left:auto; }
+     }
