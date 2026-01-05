@@ -580,3 +580,44 @@ h1{
   .card{ animation: fadeUp .01s linear forwards; }
   .music-disc.playing{ animation:none; }
 }
+
+/* =========================
+   FORCE: Music Disc pindah ke pojok kanan header
+   (kompatibel HTML lama & baru)
+========================= */
+
+/* bikin topbar inner jadi anchor */
+.topbar__inner{
+  position: relative;
+}
+
+/* posisi disc nempel di kanan, sejajar tengah header */
+#musicDisc.music-disc{
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999;
+}
+
+/* kasih ruang ke area actions biar ga ketiban disc */
+.topbar__actions,
+.topbar__right{
+  padding-right: 64px; /* 40px disc + jarak */
+}
+
+/* MOBILE: biar aman, disc ikut flow (nggak nutup chip) */
+@media (max-width: 720px){
+  #musicDisc.music-disc{
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+  }
+
+  .topbar__actions,
+  .topbar__right{
+    padding-right: 0;
+  }
+}
+
