@@ -8,6 +8,13 @@
   --card:rgba(255,255,255,.04);
   --border:rgba(255,255,255,.10);
   --r:16px;
+
+  /* SOLD tokens */
+  --sold-dim: .60;
+  --sold-gray: 1;
+  --sold-blur: 0px;
+  --sold-badge-bg: rgba(0,0,0,.68);
+  --sold-badge-border: rgba(255,255,255,.18);
 }
 
 *{ box-sizing:border-box; }
@@ -135,7 +142,21 @@ h1{ margin:0; font-size:20px; }
   text-decoration:none;
   color:inherit;
   position:relative;
+
+  opacity:0;
+  transform:translateY(10px);
+  animation: fadeUp .45s ease forwards;
+  animation-delay: var(--d, 0ms);
+  will-change: transform, opacity;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
+
+.card:hover{
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(255,255,255,.18);
+  box-shadow: 0 10px 26px rgba(0,0,0,.35), 0 0 22px rgba(160,190,255,.14);
+}
+.card:active{ transform: translateY(-1px) scale(0.99); }
 
 .card img{
   width:100%;
@@ -149,20 +170,65 @@ h1{ margin:0; font-size:20px; }
 .meta .name{ margin:0 0 6px; font-weight:900; font-size:14px; }
 .meta .price{ margin:0; font-size:13px; font-weight:700; color:var(--muted); }
 
-/* SOLD */
+/* =========================
+   SOLD (UNIFIED)
+   - Supaya konsisten di card + hero + thumbs
+========================= */
+
+/* badge base */
 .soldBadge{
   position:absolute;
   top:10px; left:10px;
-  background:#111;
+  background:var(--sold-badge-bg);
   color:#fff;
-  font-weight:700;
+  font-weight:900;
   font-size:12px;
-  padding:4px 8px;
-  border-radius:6px;
+  padding:5px 9px;
+  border-radius:999px;
+  border:1px solid var(--sold-badge-border);
+  z-index:3;
+  letter-spacing:.2px;
+}
+
+/* inline sold tag (text) */
+.soldInline{
+  background: rgba(140, 0, 0, .35);
+  border: 1px solid rgba(255, 120, 120, .22);
+  padding:2px 6px;
+  border-radius:999px;
+}
+
+/* helper: elemen yang dianggap "media" (foto/video) */
+.media{
+  position:relative;
+  overflow:hidden;
+}
+
+/* efek sold ke IMG apapun yg di dalam container sold */
+.card.sold img,
+.hero.sold .heroImg,
+.thumbs .soldThumb,
+.lightbox.sold .lbImg{
+  filter: grayscale(var(--sold-gray)) blur(var(--sold-blur));
+  opacity: var(--sold-dim);
+}
+
+/* overlay gelap biar keliatan "sold" meski gambar terang */
+.card.sold::after,
+.hero.sold::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.35));
+  pointer-events:none;
   z-index:2;
 }
-.card.sold img{ filter:grayscale(1); opacity:0.85; }
-.soldInline{ background:#2a0000; padding:2px 6px; border-radius:6px; }
+
+/* pastiin badge tetap di atas overlay */
+.card.sold .soldBadge,
+.hero.sold .soldBadge{
+  z-index:4;
+}
 
 /* =========================
    HERO / DETAIL
@@ -172,13 +238,21 @@ h1{ margin:0; font-size:20px; }
   border:1px solid var(--border);
   border-radius:18px;
   overflow:hidden;
+  position:relative; /* penting buat overlay sold */
 }
+
 .heroImg{
   width:100%;
   height:min(55vh,520px);
   object-fit:contain;
   background:#050a14;
   display:block;
+}
+
+/* Kalau di halaman detail kamu pakai badge SOLD juga */
+.hero .soldBadge{
+  top:12px;
+  left:12px;
 }
 
 /* =========================
@@ -203,6 +277,7 @@ h1{ margin:0; font-size:20px; }
   grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
   gap:10px;
 }
+
 .thumbs img{
   width:100%;
   aspect-ratio:1/1;
@@ -212,6 +287,12 @@ h1{ margin:0; font-size:20px; }
   background:#111;
   cursor:pointer;
   touch-action:manipulation;
+}
+
+/* kalau produk sold, kasih class soldThumb ke semua thumbnail img */
+.thumbs img.soldThumb{
+  filter: grayscale(var(--sold-gray));
+  opacity: var(--sold-dim);
 }
 
 /* =========================
@@ -228,6 +309,7 @@ h1{ margin:0; font-size:20px; }
 }
 .lightbox.open{ display:flex; }
 
+/* optional: kalau produk sold, tambahin class "sold" ke .lightbox */
 .lbImg{
   width:min(92vw,900px);
   height:min(75vh,680px);
@@ -457,8 +539,6 @@ h1{ margin:0; font-size:20px; }
   background: radial-gradient(circle at 35% 35%, #fff, rgba(255,255,255,.2));
 }
 @keyframes spinFantasy{ from{ transform:rotate(0deg);} to{ transform:rotate(360deg);} }
-
-/* pulse ditambah via animasi */
 @keyframes discPulse{
   0%   { box-shadow: 0 0 10px rgba(160,190,255,.25), 0 0 18px rgba(255,190,240,.15), 0 6px 18px rgba(0,0,0,.35); }
   50%  { box-shadow: 0 0 14px rgba(160,190,255,.45), 0 0 26px rgba(255,190,240,.28), 0 6px 18px rgba(0,0,0,.35); }
@@ -537,7 +617,6 @@ h1{ margin:0; font-size:20px; }
 }
 .welcome-btn:active{ transform:scale(.96); }
 
-/* Welcome image */
 .welcome-image{
   width:100%;
   height:140px;
@@ -551,7 +630,6 @@ h1{ margin:0; font-size:20px; }
 .welcome-image img{ width:100%; height:100%; object-fit:cover; display:block; }
 @media (max-width:420px){ .welcome-image{ height:120px; } }
 
-/* sparkles tipis */
 .welcome-overlay::before{
   content:"";
   position:fixed;
@@ -579,22 +657,6 @@ h1{ margin:0; font-size:20px; }
   to{ opacity:1; transform:translateY(0); }
 }
 
-.card{
-  opacity:0;
-  transform:translateY(10px);
-  animation: fadeUp .45s ease forwards;
-  animation-delay: var(--d, 0ms);
-  will-change: transform, opacity;
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-}
-.card:hover{
-  transform: translateY(-4px) scale(1.02);
-  border-color: rgba(255,255,255,.18);
-  box-shadow: 0 10px 26px rgba(0,0,0,.35), 0 0 22px rgba(160,190,255,.14);
-}
-.card:active{ transform: translateY(-1px) scale(0.99); }
-
-/* Reduce motion */
 @media (prefers-reduced-motion: reduce){
   .card{ animation: fadeUp .01s linear forwards; }
 }
@@ -602,11 +664,7 @@ h1{ margin:0; font-size:20px; }
 /* =========================
    UI UPGRADE: RESUME PANEL
 ========================= */
-.resumeWrap{
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
+.resumeWrap{ display:flex; gap:10px; align-items:center; }
 
 .resumeChip{
   display:flex;
@@ -638,9 +696,7 @@ h1{ margin:0; font-size:20px; }
     0 0 24px rgba(160,190,255,.18);
 }
 
-.resumeChip:active{
-  transform: translateY(0) scale(.99);
-}
+.resumeChip:active{ transform: translateY(0) scale(.99); }
 
 .resumeChip.isPrimary{
   background: linear-gradient(135deg, rgba(180,160,255,.22), rgba(255,180,240,.18));
@@ -661,27 +717,20 @@ h1{ margin:0; font-size:20px; }
 .resumeTxt{ display:flex; flex-direction:column; line-height:1.05; }
 .resumeTxt b{ font-size:13px; letter-spacing:.2px; }
 .resumeTxt small{ font-size:11px; color: rgba(255,255,255,.70); margin-top:3px; }
-
 .resumeGo{ margin-left:6px; font-size:22px; opacity:.75; }
 
 /* =========================
    FIX NABRAK TOPBAR (MOBILE)
 ========================= */
 @media (max-width:720px){
-  .topbar__inner{
-    flex-wrap:wrap;
-    row-gap:10px;
-  }
-
+  .topbar__inner{ flex-wrap:wrap; row-gap:10px; }
   .topbar__text{ width:100%; }
-
   .topbar__actions{
     width:100%;
     justify-content:flex-start;
     flex-wrap:wrap;
   }
 
-  /* resume jadi 1 kolom rapi */
   .resumeWrap{
     width:100%;
     gap:8px;
@@ -693,16 +742,9 @@ h1{ margin:0; font-size:20px; }
     justify-content:space-between;
   }
 
-  /* logo & piringan tetap kanan */
   .menu, .music-disc{ margin-left:auto; }
 }
 
 /* pay header biar piringan sejajar & ga nabrak */
-.topbar .wrap.row{
-  gap:12px;
-}
-
-.topbar .wrap.row .music-disc{
-  margin-left:auto;
-}
-
+.topbar .wrap.row{ gap:12px; }
+.topbar .wrap.row .music-disc{ margin-left:auto; }
