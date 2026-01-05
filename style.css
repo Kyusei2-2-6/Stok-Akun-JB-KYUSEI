@@ -734,3 +734,52 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
   .card{ animation: fadeUp .01s linear forwards; }
   .music-disc.playing{ animation:none; }
 }
+/* =========================
+   MOBILE TOPBAR FIX (anti "layout jadi sampah")
+   - bikin header jadi 2 baris rapi
+   - logo + music disc stay di kanan atas
+========================= */
+@media (max-width: 720px){
+
+  /* ubah topbar inner jadi grid */
+  .topbar__inner{
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    grid-template-areas:
+      "left menu disc"
+      "resume resume resume";
+    gap: 10px;
+    align-items: center;
+  }
+
+  .topbar__left{ grid-area: left; }
+
+  /* bikin isi .topbar__right "pecah" jadi item grid */
+  .topbar__right{ display: contents; }
+
+  .menu{
+    grid-area: menu;
+    justify-self: end;
+  }
+
+  #musicDisc.music-disc{
+    grid-area: disc;
+    justify-self: end;
+    align-self: center;
+
+    /* pastikan gak absolute di mobile */
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+  }
+
+  .resumeWrap{
+    grid-area: resume;
+    width: 100%;
+  }
+
+  .resumeChip{
+    width: 100%;
+  }
+}
