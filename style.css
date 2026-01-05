@@ -782,4 +782,26 @@ h1{ margin:0; font-size:24px; letter-spacing:.2px; }
   .resumeChip{
     width: 100%;
   }
+   /* =========================
+   SWAP LOGO & MUSIC DISC (MOBILE)
+========================= */
+@media (max-width: 720px){
+
+  /* paksa urutan di kanan atas */
+  .menu{
+    order: 2; /* logo pindah ke kanan */
+  }
+
+  #musicDisc{
+    order: 1; /* music disc pindah ke kiri */
+  }
+
+  /* pastikan tetap sejajar */
+  .topbar__right{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
 }
