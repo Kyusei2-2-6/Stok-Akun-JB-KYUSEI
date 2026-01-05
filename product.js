@@ -89,13 +89,16 @@ prodName.textContent = product.name;
 prodMeta.textContent = `${product.code} • ${rupiah(product.price)} • ${(product.photos?.length || 0)} foto`;
 
 /* =========================
-   SOLD LOGIC (tombol beli hilang)
+   SOLD LOGIC
 ========================= */
 const isSold = (product.sold === true);
-
 let payUrl = null;
 
+/* apply class SOLD biar CSS konsisten */
+const hero = document.querySelector(".hero");
+
 if (isSold) {
+  hero?.classList.add("sold");
   buyBtn?.remove();
   buyBtn2?.remove();
   prodMeta.textContent += " • SOLD ❌";
@@ -149,6 +152,9 @@ photos.forEach((src, index) => {
   img.src = resolveAssetUrl(src);
   img.alt = `${product.name} ${index + 1}`;
 
+  // sold thumbnails ikut efek (CSS: .thumbs img.soldThumb)
+  if (isSold) img.classList.add("soldThumb");
+
   img.addEventListener("click", () => {
     setHero(index);
     openLightbox(index);
@@ -166,6 +172,11 @@ const lbCaption = document.getElementById("lbCaption");
 const lbPrev = document.getElementById("lbPrev");
 const lbNext = document.getElementById("lbNext");
 const lbClose = document.getElementById("lbClose");
+
+/* sold: lightbox ikut treatment juga (CSS: .lightbox.sold .lbImg) */
+if (isSold) {
+  lightbox?.classList.add("sold");
+}
 
 function renderLightbox() {
   if (!photos.length) return;
