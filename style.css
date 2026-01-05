@@ -1,13 +1,25 @@
 /* =========================
+   Kyusei - style.css (REWRITE)
+   Mobile-first + tetap kompatibel dengan class lama
+========================= */
+
+/* =========================
    ROOT & RESET
 ========================= */
 :root{
   --bg:#0b1220;
   --text:#e6e6e6;
-  --muted:rgba(230,230,230,.7);
-  --card:rgba(255,255,255,.04);
-  --border:rgba(255,255,255,.10);
+  --muted:rgba(230,230,230,.70);
+
+  --card:rgba(255,255,255,.05);
+  --card2:rgba(255,255,255,.07);
+  --border:rgba(255,255,255,.12);
+
   --r:16px;
+  --r2:18px;
+
+  --shadow: 0 10px 26px rgba(0,0,0,.35);
+  --glow: 0 0 22px rgba(160,190,255,.12);
 
   /* SOLD tokens */
   --sold-dim: .60;
@@ -15,28 +27,40 @@
   --sold-blur: 0px;
   --sold-badge-bg: rgba(0,0,0,.68);
   --sold-badge-border: rgba(255,255,255,.18);
+
+  /* spacing */
+  --pad: 14px;
+  --gap: 12px;
 }
 
 *{ box-sizing:border-box; }
-
+html,body{ height:100%; }
 body{
   margin:0;
   min-height:100vh;
   font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   color:var(--text);
   background:
-    linear-gradient(180deg, rgba(11,18,32,.75) 0%, rgba(11,18,32,.85) 60%, rgba(11,18,32,.95) 100%),
+    linear-gradient(180deg, rgba(11,18,32,.78) 0%, rgba(11,18,32,.88) 60%, rgba(11,18,32,.96) 100%),
     url("./BGWEB.png");
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
+  /* default: desktop boleh fixed */
   background-attachment:fixed;
+  overflow-x:hidden;
+  -webkit-text-size-adjust:100%;
+}
+
+/* Mobile: matikan fixed background biar gak lag */
+@media (max-width: 720px){
+  body{ background-attachment:scroll; }
 }
 
 /* =========================
-   LAYOUT
+   LAYOUT UTIL
 ========================= */
-.wrap{ max-width:1050px; margin:0 auto; padding:16px; }
+.wrap{ max-width:1050px; margin:0 auto; padding:var(--pad); }
 .row{ display:flex; align-items:center; }
 .grow{ flex:1; min-width:0; }
 .gap{ gap:10px; }
@@ -44,9 +68,15 @@ body{
 /* =========================
    TYPOGRAPHY
 ========================= */
-h1{ margin:0; font-size:20px; }
-.sub{ margin-top:6px; font-size:13px; color:var(--muted); }
-.h2{ margin:16px 0 10px; font-size:16px; }
+h1{ margin:0; font-size:22px; letter-spacing:.2px; }
+.sub{ margin-top:4px; font-size:13px; color:var(--muted); }
+.h2{ margin:14px 0 10px; font-size:16px; }
+
+/* desktop typography */
+@media (min-width: 900px){
+  h1{ font-size:26px; }
+  .sub{ font-size:13px; margin-top:6px; }
+}
 
 /* =========================
    BUTTON
@@ -64,26 +94,44 @@ h1{ margin:0; font-size:20px; }
   text-decoration:none;
   cursor:pointer;
   touch-action:manipulation;
+  user-select:none;
 }
 .btn.primary{ background:rgba(255,255,255,.14); border-color:rgba(255,255,255,.22); }
 .btn.small{ padding:8px 10px; border-radius:10px; font-weight:700; }
+.btn:active{ transform:scale(.98); }
 
 /* =========================
    TOPBAR / HEADER
+   - Mobile-first: pendek, gak makan layar
 ========================= */
 .topbar{
   position:sticky;
   top:0;
-  z-index:10;
+  z-index:100;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  /* background topbar tetap ada tapi ringkas */
   background-image:
-    linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.80)),
+    linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.82)),
     url("./BG.png");
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
-  border-bottom:1px solid rgba(255,255,255,.08);
 }
-.topbar .wrap{ padding-top: clamp(14px, 4vw, 44px); padding-bottom: clamp(14px, 4vw, 44px); }
+
+/* Mobile: padding pendek */
+.topbar .wrap{
+  padding-top:14px;
+  padding-bottom:14px;
+}
+
+/* Desktop: boleh lebih lega */
+@media (min-width: 900px){
+  .topbar .wrap{
+    padding-top:26px;
+    padding-bottom:26px;
+  }
+}
+
 .topbar h1, .topbar .sub{ text-shadow:0 2px 18px rgba(0,0,0,.65); }
 
 /* =========================
@@ -95,6 +143,7 @@ h1{ margin:0; font-size:20px; }
   justify-content:space-between;
   gap:12px;
 }
+.topbar__text{ min-width:0; }
 
 .topbar__actions{
   display:flex;
@@ -104,19 +153,25 @@ h1{ margin:0; font-size:20px; }
   flex-wrap:nowrap;
   margin-top:10px;
   position:relative;
-  z-index:20;
+  z-index:120;
 }
 
 /* PRODUCT PAGE: sejajar */
 .topbar__inner--product{ align-items:center; }
 
-@media (max-width:720px){
+@media (max-width: 720px){
   .topbar__inner{
-    flex-direction:row;
-    align-items:center;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
   }
-  .topbar__text{ flex:1; min-width:0; }
-  .topbar__actions{ margin-top:0; gap:8px; }
+  .topbar__actions{
+    width:100%;
+    justify-content:flex-start;
+    flex-wrap:wrap;
+    margin-top:0;
+    gap:8px;
+  }
 }
 
 @media (max-width:480px){
@@ -125,12 +180,23 @@ h1{ margin:0; font-size:20px; }
 
 /* =========================
    GRID & CARD
+   - Mobile: fix 2 kolom stabil
 ========================= */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
-  gap:14px;
-  margin-top:8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap);
+  margin-top: 10px;
+}
+
+/* Tablet */
+@media (min-width: 721px){
+  .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); gap:14px; }
+}
+
+/* Desktop */
+@media (min-width: 1024px){
+  .grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 .card{
@@ -143,42 +209,69 @@ h1{ margin:0; font-size:20px; }
   color:inherit;
   position:relative;
 
+  /* entry anim */
   opacity:0;
   transform:translateY(10px);
   animation: fadeUp .45s ease forwards;
   animation-delay: var(--d, 0ms);
   will-change: transform, opacity;
+
   transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
 
 .card:hover{
-  transform: translateY(-4px) scale(1.02);
+  transform: translateY(-3px) scale(1.015);
   border-color: rgba(255,255,255,.18);
-  box-shadow: 0 10px 26px rgba(0,0,0,.35), 0 0 22px rgba(160,190,255,.14);
+  box-shadow: var(--shadow), var(--glow);
 }
 .card:active{ transform: translateY(-1px) scale(0.99); }
 
 .card img{
   width:100%;
-  aspect-ratio:1/1;
+  /* Mobile: lebih pendek biar produk kelihatan banyak */
+  aspect-ratio: 4 / 3;
   object-fit:cover;
   display:block;
   background:#111;
 }
 
+/* Desktop: boleh lebih kotak */
+@media (min-width: 900px){
+  .card img{ aspect-ratio: 1 / 1; }
+}
+
 .meta{ padding:10px; }
-.meta .name{ margin:0 0 6px; font-weight:900; font-size:14px; }
-.meta .price{ margin:0; font-size:13px; font-weight:700; color:var(--muted); }
+.meta .name{
+  margin:0 0 6px;
+  font-weight:900;
+  font-size:13px;
+  line-height:1.2;
+  display:-webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow:hidden;
+}
+.meta .price{
+  margin:0;
+  font-size:12px;
+  font-weight:800;
+  color:var(--muted);
+}
+
+/* Desktop text */
+@media (min-width: 900px){
+  .meta{ padding:10px 11px; }
+  .meta .name{ font-size:14px; }
+  .meta .price{ font-size:13px; font-weight:700; }
+}
 
 /* =========================
    SOLD (UNIFIED)
-   - Supaya konsisten di card + hero + thumbs
 ========================= */
-
-/* badge base */
 .soldBadge{
   position:absolute;
-  top:10px; left:10px;
+  top:10px;
+  left:10px;
   background:var(--sold-badge-bg);
   color:#fff;
   font-weight:900;
@@ -186,11 +279,10 @@ h1{ margin:0; font-size:20px; }
   padding:5px 9px;
   border-radius:999px;
   border:1px solid var(--sold-badge-border);
-  z-index:3;
+  z-index:4;
   letter-spacing:.2px;
 }
 
-/* inline sold tag (text) */
 .soldInline{
   background: rgba(140, 0, 0, .35);
   border: 1px solid rgba(255, 120, 120, .22);
@@ -198,7 +290,6 @@ h1{ margin:0; font-size:20px; }
   border-radius:999px;
 }
 
-/* helper: elemen yang dianggap "media" (foto/video) */
 .media{
   position:relative;
   overflow:hidden;
@@ -213,21 +304,19 @@ h1{ margin:0; font-size:20px; }
   opacity: var(--sold-dim);
 }
 
-/* overlay gelap biar keliatan "sold" meski gambar terang */
 .card.sold::after,
 .hero.sold::after{
   content:"";
   position:absolute;
   inset:0;
-  background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.35));
+  background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.38));
   pointer-events:none;
   z-index:2;
 }
 
-/* pastiin badge tetap di atas overlay */
 .card.sold .soldBadge,
 .hero.sold .soldBadge{
-  z-index:4;
+  z-index:5;
 }
 
 /* =========================
@@ -236,20 +325,25 @@ h1{ margin:0; font-size:20px; }
 .hero{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:18px;
+  border-radius:var(--r2);
   overflow:hidden;
-  position:relative; /* penting buat overlay sold */
+  position:relative;
 }
 
+/* Mobile: jangan setinggi itu */
 .heroImg{
   width:100%;
-  height:min(55vh,520px);
+  height:min(42vh, 360px);
   object-fit:contain;
   background:#050a14;
   display:block;
 }
 
-/* Kalau di halaman detail kamu pakai badge SOLD juga */
+/* Desktop: boleh lebih tinggi */
+@media (min-width: 900px){
+  .heroImg{ height:min(55vh,520px); }
+}
+
 .hero .soldBadge{
   top:12px;
   left:12px;
@@ -264,10 +358,10 @@ h1{ margin:0; font-size:20px; }
   margin-top:12px;
   flex-wrap:wrap;
   position:relative;
-  z-index:20;
+  z-index:120;
 }
 .productHint{ margin-top:12px; }
-#detailBtn{ position:relative; z-index:21; pointer-events:auto; }
+#detailBtn{ position:relative; z-index:121; pointer-events:auto; }
 
 /* =========================
    THUMBNAILS
@@ -277,7 +371,6 @@ h1{ margin:0; font-size:20px; }
   grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
   gap:10px;
 }
-
 .thumbs img{
   width:100%;
   aspect-ratio:1/1;
@@ -288,8 +381,6 @@ h1{ margin:0; font-size:20px; }
   cursor:pointer;
   touch-action:manipulation;
 }
-
-/* kalau produk sold, kasih class soldThumb ke semua thumbnail img */
 .thumbs img.soldThumb{
   filter: grayscale(var(--sold-gray));
   opacity: var(--sold-dim);
@@ -309,7 +400,6 @@ h1{ margin:0; font-size:20px; }
 }
 .lightbox.open{ display:flex; }
 
-/* optional: kalau produk sold, tambahin class "sold" ke .lightbox */
 .lbImg{
   width:min(92vw,900px);
   height:min(75vh,680px);
@@ -335,7 +425,10 @@ h1{ margin:0; font-size:20px; }
   justify-content:center;
   backdrop-filter:blur(6px);
   touch-action:manipulation;
+  user-select:none;
 }
+.iconBtn:active{ transform:translateY(-50%) scale(.96); }
+
 .lbPrev{ left:12px; }
 .lbNext{ right:12px; }
 .lbClose{ top:16px; right:16px; transform:none; }
@@ -367,7 +460,7 @@ h1{ margin:0; font-size:20px; }
   position:relative;
   display:flex;
   align-items:center;
-  z-index:30;
+  z-index:200;
   flex-shrink:0;
 }
 
@@ -383,13 +476,14 @@ h1{ margin:0; font-size:20px; }
   overflow:hidden;
   display:grid;
   place-items:center;
-  z-index:31;
+  z-index:201;
   flex-shrink:0;
   transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
   touch-action:manipulation;
+  user-select:none;
 }
-
 .logoBtn img{ width:100%; height:100%; object-fit:cover; display:block; }
+
 .logoBtn:hover{
   transform:scale(1.06);
   background:rgba(255,255,255,.12);
@@ -489,6 +583,7 @@ h1{ margin:0; font-size:20px; }
   cursor:pointer;
   touch-action:manipulation;
 }
+.modal__close:active{ transform:scale(.96); }
 .modal__body{ padding:12px 14px 14px; }
 .detailList{
   margin:0;
@@ -510,6 +605,7 @@ h1{ margin:0; font-size:20px; }
   position:relative;
   flex-shrink:0;
   touch-action:manipulation;
+  user-select:none;
 
   background:
     radial-gradient(circle at 50% 50%, rgba(255,255,255,.95) 0 10%, rgba(255,255,255,.15) 11% 18%, transparent 19%),
@@ -576,7 +672,6 @@ h1{ margin:0; font-size:20px; }
   box-shadow: 0 0 30px rgba(160,190,255,.35), 0 0 60px rgba(255,190,240,.25);
   animation: fadeUp .35s ease both;
 }
-
 .welcome-glow{
   position:absolute;
   inset:-2px;
@@ -585,7 +680,6 @@ h1{ margin:0; font-size:20px; }
   box-shadow: 0 0 40px rgba(160,190,255,.35), 0 0 80px rgba(255,190,240,.25);
   opacity:.6;
 }
-
 .welcome-title{
   margin:0 0 12px;
   font-size:20px;
@@ -593,14 +687,12 @@ h1{ margin:0; font-size:20px; }
   letter-spacing:.5px;
   color:#fff;
 }
-
 .welcome-text{
   font-size:14px;
   line-height:1.6;
   color:rgba(255,255,255,.85);
   margin-bottom:18px;
 }
-
 .welcome-btn{
   display:inline-flex;
   align-items:center;
@@ -614,6 +706,7 @@ h1{ margin:0; font-size:20px; }
   cursor:pointer;
   box-shadow:0 6px 18px rgba(0,0,0,.35);
   touch-action:manipulation;
+  user-select:none;
 }
 .welcome-btn:active{ transform:scale(.96); }
 
@@ -650,21 +743,9 @@ h1{ margin:0; font-size:20px; }
 }
 
 /* =========================
-   LIVEN UP: ANIMATIONS
+   RESUME PANEL
 ========================= */
-@keyframes fadeUp{
-  from{ opacity:0; transform:translateY(10px); }
-  to{ opacity:1; transform:translateY(0); }
-}
-
-@media (prefers-reduced-motion: reduce){
-  .card{ animation: fadeUp .01s linear forwards; }
-}
-
-/* =========================
-   UI UPGRADE: RESUME PANEL
-========================= */
-.resumeWrap{ display:flex; gap:10px; align-items:center; }
+.resumeWrap{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
 
 .resumeChip{
   display:flex;
@@ -687,7 +768,6 @@ h1{ margin:0; font-size:20px; }
   touch-action:manipulation;
   user-select:none;
 }
-
 .resumeChip:hover{
   transform: translateY(-2px);
   border-color: rgba(255,255,255,.22);
@@ -695,7 +775,6 @@ h1{ margin:0; font-size:20px; }
     0 14px 30px rgba(0,0,0,.30),
     0 0 24px rgba(160,190,255,.18);
 }
-
 .resumeChip:active{ transform: translateY(0) scale(.99); }
 
 .resumeChip.isPrimary{
@@ -713,24 +792,13 @@ h1{ margin:0; font-size:20px; }
   border: 1px solid rgba(255,255,255,.14);
   flex:0 0 36px;
 }
-
 .resumeTxt{ display:flex; flex-direction:column; line-height:1.05; }
 .resumeTxt b{ font-size:13px; letter-spacing:.2px; }
 .resumeTxt small{ font-size:11px; color: rgba(255,255,255,.70); margin-top:3px; }
 .resumeGo{ margin-left:6px; font-size:22px; opacity:.75; }
 
-/* =========================
-   FIX NABRAK TOPBAR (MOBILE)
-========================= */
-@media (max-width:720px){
-  .topbar__inner{ flex-wrap:wrap; row-gap:10px; }
-  .topbar__text{ width:100%; }
-  .topbar__actions{
-    width:100%;
-    justify-content:flex-start;
-    flex-wrap:wrap;
-  }
-
+/* Mobile: resume stack jadi 1 kolom biar gak nabrak */
+@media (max-width: 720px){
   .resumeWrap{
     width:100%;
     gap:8px;
@@ -741,10 +809,25 @@ h1{ margin:0; font-size:20px; }
     width:100%;
     justify-content:space-between;
   }
-
   .menu, .music-disc{ margin-left:auto; }
 }
 
-/* pay header biar piringan sejajar & ga nabrak */
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes fadeUp{
+  from{ opacity:0; transform:translateY(10px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .card{ animation: fadeUp .01s linear forwards; }
+  .music-disc.playing{ animation:none; }
+  .welcome-overlay::before{ animation:none; }
+}
+
+/* =========================
+   PAY HEADER tiny fix (compat)
+========================= */
 .topbar .wrap.row{ gap:12px; }
 .topbar .wrap.row .music-disc{ margin-left:auto; }
