@@ -69,6 +69,7 @@ var PRODUCTS = [
     name: "Durin, Diluc, Keqing, Furina",
     game: "genshin",
     price: 75000,
+    sold: true,
     photos: [
       "assets/product/GI/A004-8/A004.jpg",
       "assets/product/GI/A004-8/A005.jpg",
@@ -96,6 +97,7 @@ function rupiah(n){
   return "Rp" + String(Math.trunc(num))
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
 
 
 
