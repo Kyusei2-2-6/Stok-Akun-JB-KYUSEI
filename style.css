@@ -753,3 +753,16 @@ body.page-index .resumeWrap.resumeBottom.isHidden{
     0 6px 18px rgba(0,0,0,.35),
     0 0 22px rgba(160,190,255,.25);
 }
+
+/* ==== OVERRIDE SIZE (taruh paling bawah) ==== */
+.logoBtn{
+  width:52px;
+  height:52px;
+}
+
+.music-disc{
+  width:36px;
+  height:36px;
+  min-width:36px;
+  min-height:36px;
+}
