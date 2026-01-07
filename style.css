@@ -747,3 +747,9 @@ body.page-index .resumeWrap.resumeBottom.isHidden{
   opacity:.9;
   padding:4px 8px;
 }
+
+.logoBtn{
+  box-shadow:
+    0 6px 18px rgba(0,0,0,.35),
+    0 0 22px rgba(160,190,255,.25);
+}
