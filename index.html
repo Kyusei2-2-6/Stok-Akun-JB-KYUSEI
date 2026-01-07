@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Katalog</title>
+  <link rel="stylesheet" href="./style.css?v=9999" />
+</head>
+
+<body class="page-index">
+  <!-- ===== BACKGROUND MUSIC (GLOBAL) ===== -->
+  <audio id="bgm" loop preload="auto">
+    <source src="assets/bgm.mp3" type="audio/mpeg">
+  </audio>
+  <!-- ===== /BACKGROUND MUSIC ===== -->
+
+  <!-- ===== WELCOME OVERLAY ===== -->
+  <div id="welcomeOverlay" class="welcome-overlay" aria-hidden="true">
+    <div class="welcome-card">
+      <div class="welcome-glow" aria-hidden="true"></div>
+
+      <div class="welcome-image">
+        <img src="Welcome.png" alt="Welcome Kyusei" />
+      </div>
+
+      <h2 class="welcome-title">✨ Selamat Datang ✨</h2>
+
+      <p class="welcome-text">
+        Selamat datang di <b>Kyusei Store</b><br>
+        Tempat jual akun game pilihan ✨<br>
+        Silakan pilih game & akun favoritmu.
+      </p>
+
+      <button id="welcomeBtn" class="welcome-btn" type="button">
+        Masuk ✨
+      </button>
+    </div>
+  </div>
+  <!-- ===== /WELCOME OVERLAY ===== -->
+
+  <!-- ===== TOPBAR ===== -->
+  <header class="topbar">
+    <div class="wrap">
+      <div class="topbar__inner">
+
+        <!-- LEFT: TITLE -->
+        <div class="topbar__left">
+          <h1 id="siteName" class="siteName">Kyusei</h1>
+          <p class="sub">Klik produk untuk lihat detail &amp; foto</p>
+        </div>
+
+        <!-- RIGHT: ACTIONS -->
+        <div class="topbar__right">
+          <!-- GAME FILTER (LOGO + DROPDOWN) -->
+          <div class="menu">
+            <button
+              class="logoBtn"
+              id="logoBtn"
+              type="button"
+              data-tip="Pilih Game"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="dropdown"
+            >
+              <img src="./LOGO.jpg" alt="Logo Kyusei" />
+            </button>
+
+            <div class="dropdown" id="dropdown" aria-hidden="true">
+              <button class="ddItem" data-game="all" type="button">Semua</button>
+              <button class="ddItem" data-game="genshin" type="button">Genshin Impact</button>
+              <button class="ddItem" data-game="toram" type="button">Toram Online</button>
+              <button class="ddItem" data-game="ml" type="button">Mobile Legends</button>
+              <button class="ddItem" data-game="ff" type="button">Free Fire</button>
+            </div>
+          </div>
+          <!-- /GAME FILTER -->
+
+          <!-- MUSIC DISC (POSISI TARGET: POJOK KANAN TOPBAR VIA CSS) -->
+          <div
+            id="musicDisc"
+            class="music-disc"
+            title="Play / Pause Music"
+            role="button"
+            aria-label="Play / Pause Music"
+          ></div>
+          <!-- /MUSIC DISC -->
+        </div>
+        <!-- /RIGHT: ACTIONS -->
+
+      </div>
+    </div>
+  </header>
+  <!-- ===== /TOPBAR ===== -->
+
+  <!-- ===== CONTENT ===== -->
+  <main class="wrap">
+    <section id="grid" class="grid"></section>
+  </main>
+  <!-- ===== /CONTENT ===== -->
+
+  <!-- ===== RESUME BOTTOM BAR (HIDDEN BY DEFAULT) ===== -->
+  <div class="resumeWrap resumeBottom" id="resumeWrap" style="display:none" aria-label="Lanjutkan aktivitas terakhir">
+    <a id="resumeProduct" class="resumeChip" style="display:none" href="#">
+      <span class="resumeIco" aria-hidden="true">🧾</span>
+      <span class="resumeTxt">
+        <b>Lanjutkan</b><small>produk terakhir</small>
+      </span>
+      <span class="resumeGo" aria-hidden="true">›</span>
+    </a>
+
+    <a id="resumePay" class="resumeChip isPrimary" style="display:none" href="#">
+      <span class="resumeIco" aria-hidden="true">💳</span>
+      <span class="resumeTxt">
+        <b>Lanjutkan</b><small>pembayaran terakhir</small>
+      </span>
+      <span class="resumeGo" aria-hidden="true">›</span>
+    </a>
+  </div>
+  <!-- ===== /RESUME BOTTOM BAR ===== -->
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="./data.js?v=999"></script>
+  <script src="./index.js?v=999"></script>
+  <!-- ===== /SCRIPTS ===== -->
+</body>
+</html>
