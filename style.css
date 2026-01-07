@@ -745,4 +745,5 @@ body.page-index .resumeWrap.resumeBottom.isHidden{
 .brandBadge{
   font-size:10px;
   opacity:.9;
+  padding:4px 8px;
 }
