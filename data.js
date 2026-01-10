@@ -65,6 +65,28 @@ var PRODUCTS = [
   },
 
   {
+    code: "A009",
+    name: "STARTER NEFER",
+    game: "genshin",
+    price: 50000,
+    photos: [
+      "assets/product/TO/B009/B009.jpg",
+    ],
+    detail: [
+       "🌐 Server: Asia",
+      "🔰 AR: 5",
+      "⭐ Karakter 5★: Nefer",
+      "⚔️ Weapon 5★: ",
+      "👤 Username: Unset",
+      "🎂 Birthdate (BD): Unset",
+      "📝 Note Akun:",
+      "- Pity limit -",
+      "- Pity WP -"
+    ]
+  },
+
+  
+  {
     code: "A002",
     name: "Durin, Diluc, Keqing, Furina",
     game: "genshin",
@@ -97,6 +119,7 @@ function rupiah(n){
   return "Rp" + String(Math.trunc(num))
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
 
 
 
