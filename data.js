@@ -1,10 +1,29 @@
+/* =========================================================
+   Kyusei - Product Data (RAPIH VERSION)
+   - File asli tidak diubah
+   - Copy file ini sebagai data.rapih.js / data-v2.js
+   ========================================================= */
+
 var SITE_NAME = "Kyusei";
 
 /*
-  game: "genshin" | "toram" | "ml" | "ff"
-  detail: optional (array string)
+  TEMPLATE PRODUK BARU (copy ini kalau mau nambah produk)
+  -------------------------------------------------------
+  {
+    code: "X001",                         // wajib, unik
+    name: "Nama produk",                  // wajib
+    game: "genshin" | "toram" | "ml" | "ff", // wajib
+    price: 50000,                         // wajib (number)
+    sold: true,                           // opsional
+    photos: [ "path1", "path2" ],          // wajib (minimal 1)
+    detail: [ "baris 1", "baris 2" ]       // opsional tapi disarankan
+  }
 */
+
 var PRODUCTS = [
+  // ======================================================
+  // GENSHIN IMPACT
+  // ======================================================
   {
     code: "A001",
     name: "Flins,Navia",
@@ -28,65 +47,6 @@ var PRODUCTS = [
     ]
   },
 
-  {
-    code: "Inden",
-    name: "Sempak Gusion",
-    game: "ml",
-    price: 10000000000000,
-    sold: true,
-    photos: [
-      "assets/product/ML/Inden.png"
-    ],
-    detail: [
-      "Sempak kebanggaan pro pler"
-    ]
-  },
-
-  {
-    code: "B001",
-    name: "AKUN TORAM 2 CAP",
-    game: "toram",
-    price: 35000,
-    photos: [
-      "assets/product/TO/B001-9/B001.jpg",
-      "assets/product/TO/B001-9/B002.jpg",
-      "assets/product/TO/B001-9/B003.jpg",
-      "assets/product/TO/B001-9/B004.jpg",
-      "assets/product/TO/B001-9/B005.jpg",
-      "assets/product/TO/B001-9/B006.jpg",
-      "assets/product/TO/B001-9/B007.jpg",
-      "assets/product/TO/B001-9/B008.jpg",
-      "assets/product/TO/B001-9/B009.jpg"
-    ],
-    detail: [
-      "Akun 2 cap",
-      "Build DPS Dual-sword & BS Vit"
-    ]
-  },
-
-  {
-    code: "A003",
-    name: "STARTER NEFER",
-    game: "genshin",
-    price: 50000,
-    sold: true,
-    photos: [
-      "assets/product/GI/A009/A009.jpg",
-    ],
-    detail: [
-       "🌐 Server: Asia",
-      "🔰 AR: 5",
-      "⭐ Karakter 5★: Nefer",
-      "⚔️ Weapon 5★: ",
-      "👤 Username: Unset",
-      "🎂 Birthdate (BD): Unset",
-      "📝 Note Akun:",
-      "- Pity limit -",
-      "- Pity WP -"
-    ]
-  },
-
-  
   {
     code: "A002",
     name: "Durin, Diluc, Keqing, Furina",
@@ -112,27 +72,79 @@ var PRODUCTS = [
       "- Pity WP -",
       "- Low explore"
     ]
+  },
+
+  {
+    code: "A003",
+    name: "STARTER NEFER",
+    game: "genshin",
+    price: 50000,
+    sold: true,
+    photos: [
+      "assets/product/GI/A009/A009.jpg"
+    ],
+    detail: [
+      "🌐 Server: Asia",
+      "🔰 AR: 5",
+      "⭐ Karakter 5★: Nefer",
+      "⚔️ Weapon 5★: ",
+      "👤 Username: Unset",
+      "🎂 Birthdate (BD): Unset",
+      "📝 Note Akun:",
+      "- Pity limit -",
+      "- Pity WP -"
+    ]
+  },
+
+
+  // ======================================================
+  // MOBILE LEGENDS
+  // ======================================================
+  {
+    code: "Inden",
+    name: "Sempak Gusion",
+    game: "ml",
+    price: 10000000000000,
+    sold: true,
+    photos: [
+      "assets/product/ML/Inden.png"
+    ],
+    detail: [
+      "Sempak kebanggaan pro pler"
+    ]
+  },
+
+  // ======================================================
+  // TORAM ONLINE
+  // ======================================================
+  {
+    code: "B001",
+    name: "AKUN TORAM 2 CAP",
+    game: "toram",
+    price: 35000,
+    photos: [
+      "assets/product/TO/B001-9/B001.jpg",
+      "assets/product/TO/B001-9/B002.jpg",
+      "assets/product/TO/B001-9/B003.jpg",
+      "assets/product/TO/B001-9/B004.jpg",
+      "assets/product/TO/B001-9/B005.jpg",
+      "assets/product/TO/B001-9/B006.jpg",
+      "assets/product/TO/B001-9/B007.jpg",
+      "assets/product/TO/B001-9/B008.jpg",
+      "assets/product/TO/B001-9/B009.jpg"
+    ],
+    detail: [
+      "Akun 2 cap",
+      "Build DPS Dual-sword & BS Vit"
+    ]
   }
 ];
 
-function rupiah(n){
+// =========================================================
+// Helper
+// =========================================================
+function rupiah(n) {
   var num = Number(n || 0);
   return "Rp" + String(Math.trunc(num))
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
