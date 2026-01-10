@@ -69,6 +69,7 @@ var PRODUCTS = [
     name: "STARTER NEFER",
     game: "genshin",
     price: 50000,
+    sold: true,
     photos: [
       "assets/product/GI/A009/A009.jpg",
     ],
@@ -119,6 +120,7 @@ function rupiah(n){
   return "Rp" + String(Math.trunc(num))
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
 
 
 
