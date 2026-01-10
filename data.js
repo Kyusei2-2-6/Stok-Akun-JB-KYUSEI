@@ -65,12 +65,12 @@ var PRODUCTS = [
   },
 
   {
-    code: "A009",
+    code: "A003",
     name: "STARTER NEFER",
     game: "genshin",
     price: 50000,
     photos: [
-      "assets/product/TO/B009/B009.jpg",
+      "assets/product/GI/A009/A009.jpg",
     ],
     detail: [
        "🌐 Server: Asia",
@@ -119,6 +119,7 @@ function rupiah(n){
   return "Rp" + String(Math.trunc(num))
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
 
 
 
