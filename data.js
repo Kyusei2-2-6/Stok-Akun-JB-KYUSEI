@@ -102,7 +102,7 @@ var PRODUCTS = [
     game: "genshin",
     price: 50000,
     photos: [
-      "assets/product/GI/A010-11/A010.jpg"
+      "assets/product/GI/A010-11/A010.jpg",
       "assets/product/GI/A010-11/A011.jpg"
     ],
     detail: [
@@ -170,5 +170,6 @@ function rupiah(n) {
   return "Rp" + String(Math.trunc(num))
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
 
 
