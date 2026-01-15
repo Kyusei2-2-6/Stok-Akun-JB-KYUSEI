@@ -118,6 +118,27 @@ var PRODUCTS = [
     ]
   },
 
+   {
+    code: "A004",
+    name: "STARTER COLUMBINA",
+    game: "genshin",
+    price: 50000,
+    photos: [
+      "assets/product/GI/A010-11/A012.jpg",
+      "assets/product/GI/A010-11/A013.jpg"
+    ],
+    detail: [
+      "🌐 Server: Asia",
+      "🔰 AR: 5",
+      "⭐ Karakter 5★: Columbina",
+      "⚔️ Weapon 5★: ",
+      "👤 Username: Unset",
+      "🎂 Birthdate (BD): Unset",
+      "📝 Note Akun:",
+      "- Pity limit -",
+      "- Pity WP -"
+    ]
+  },
 
   // ======================================================
   // MOBILE LEGENDS
@@ -170,6 +191,7 @@ function rupiah(n) {
   return "Rp" + String(Math.trunc(num))
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
 
 
 
