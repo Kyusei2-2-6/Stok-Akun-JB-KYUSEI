@@ -1,33 +1,39 @@
 /* =========================
-   Kyusei - index.js (FINAL)
-   - SOLD selalu di belakang
-   - Resume produk & pembayaran (BOTTOM BAR)
-     * Bar otomatis muncul kalau salah satu tersedia
-     * Auto-hide: scroll turun sembunyi, scroll naik muncul
-   - Dropdown filter game
-   - Music disc play/pause + resume lintas halaman
-   - Welcome overlay: animasi exit saat klik "Masuk"
+   Kyusei - index.js (HARDENED)
 ========================= */
 
 (function () {
   "use strict";
 
-  // --------------------------
-  // SAFE DOM GETTERS
-  // --------------------------
   function $(id) { return document.getElementById(id); }
 
-  // --------------------------
-  // SET TITLE / BRAND
-  // --------------------------
+  var grid = $("grid");
+
+  function showFatal(msg) {
+    if (!grid) return;
+    grid.innerHTML = "";
+    var box = document.createElement("div");
+    box.style.padding = "16px";
+    box.style.borderRadius = "14px";
+    box.style.lineHeight = "1.5";
+    box.style.background = "rgba(0,0,0,.25)";
+    box.innerHTML =
+      "<b>Data katalog gagal dimuat.</b><br>" +
+      "<small>" + msg + "</small><br><br>" +
+      "<small>Biasanya karena <code>data.js</code> error (koma kurang) atau path foto salah.</small>";
+    grid.appendChild(box);
+  }
+
+  // ✅ Guard penting: kalau data.js gagal load
+  if (typeof SITE_NAME === "undefined") return showFatal("SITE_NAME tidak terbaca.");
+  if (typeof PRODUCTS === "undefined" || !Array.isArray(PRODUCTS)) {
+    return showFatal("PRODUCTS tidak terbaca / bukan array.");
+  }
+  if (typeof rupiah !== "function") return showFatal("Fungsi rupiah() tidak terbaca.");
+
   document.title = SITE_NAME;
   var siteNameEl = $("siteName");
   if (siteNameEl) siteNameEl.textContent = SITE_NAME;
-
-  // --------------------------
-  // DOM NODES
-  // --------------------------
-  var grid = $("grid");
 
   // resume (bottom bar)
   var resumeWrap = $("resumeWrap");
@@ -46,9 +52,6 @@
   var overlay = $("welcomeOverlay");
   var welcomeBtn = $("welcomeBtn");
 
-  // --------------------------
-  // RESUME LINKS (ANTI RESET)
-  // --------------------------
   function setResumeLink(el, key) {
     if (!el) return false;
     var url = null;
@@ -62,24 +65,14 @@
   var hasProduct = setResumeLink(resumeProduct, "lastProductUrl");
   var hasPay = setResumeLink(resumePay, "lastPayUrl");
 
-  // bar hanya muncul kalau ada minimal 1 resume
   function updateResumeBar() {
     if (!resumeWrap) return;
-    if (hasProduct || hasPay) {
-      resumeWrap.style.display = "flex";
-    } else {
-      resumeWrap.style.display = "none";
-    }
+    resumeWrap.style.display = (hasProduct || hasPay) ? "flex" : "none";
   }
-
   updateResumeBar();
 
-  // --------------------------
-  // AUTO HIDE RESUME BAR
-  // --------------------------
   function initResumeAutoHide() {
     if (!resumeWrap) return;
-    // kalau bar tidak tampil, skip
     if (resumeWrap.style.display === "none") return;
 
     var lastY = window.scrollY || 0;
@@ -87,12 +80,10 @@
 
     function update() {
       ticking = false;
-
       var y = window.scrollY || 0;
       var delta = Math.abs(y - lastY);
       if (delta < 8) return;
 
-      // dekat atas: selalu tampil
       if (y < 40) {
         resumeWrap.classList.remove("isHidden");
         lastY = y;
@@ -112,18 +103,12 @@
     }, { passive: true });
   }
 
-  // --------------------------
-  // SORT SOLD LAST
-  // --------------------------
   function sortSoldLast(list) {
     return list.slice().sort(function (a, b) {
       return (a.sold === true) - (b.sold === true);
     });
   }
 
-  // --------------------------
-  // STAGGER ANIMATION DELAY
-  // --------------------------
   function applyStagger() {
     var cards = document.querySelectorAll(".card");
     for (var i = 0; i < cards.length; i++) {
@@ -131,12 +116,8 @@
     }
   }
 
-  // --------------------------
-  // RENDER GRID
-  // --------------------------
   function render(products) {
     if (!grid) return;
-
     grid.innerHTML = "";
 
     for (var i = 0; i < products.length; i++) {
@@ -147,7 +128,6 @@
       a.className = "card";
       a.href = "product.html?code=" + encodeURIComponent(p.code);
 
-      // simpan produk terakhir saat diklik
       (function (url) {
         a.addEventListener("click", function () {
           try { localStorage.setItem("lastProductUrl", url); } catch (e) {}
@@ -165,7 +145,6 @@
       nm.className = "name";
       nm.textContent = p.name || "-";
 
-      // SOLD inline
       if (p.sold === true) {
         var soldTxt = document.createElement("span");
         soldTxt.className = "soldInline";
@@ -190,32 +169,22 @@
     applyStagger();
   }
 
-  // --------------------------
-  // FILTER
-  // --------------------------
   var currentGame = "all";
 
   function applyFilter() {
     var list = [];
-
-    if (currentGame === "all") {
-      list = PRODUCTS.slice();
-    } else {
+    if (currentGame === "all") list = PRODUCTS.slice();
+    else {
       for (var i = 0; i < PRODUCTS.length; i++) {
         var g = (PRODUCTS[i].game || "").toLowerCase();
         if (g === currentGame) list.push(PRODUCTS[i]);
       }
     }
-
     render(sortSoldLast(list));
   }
 
-  // pertama render
   applyFilter();
 
-  // --------------------------
-  // DROPDOWN MENU
-  // --------------------------
   function openMenu() {
     if (!dropdown || !logoBtn) return;
     dropdown.classList.add("open");
@@ -240,29 +209,23 @@
     dropdown.addEventListener("click", function (e) {
       var item = e.target.closest(".ddItem");
       if (!item) return;
-
       currentGame = (item.getAttribute("data-game") || "all").toLowerCase();
       applyFilter();
       closeMenu();
     });
 
     document.addEventListener("click", closeMenu);
-
     window.addEventListener("keydown", function (e) {
       if (e.key === "Escape") closeMenu();
     });
   }
 
-  // --------------------------
-  // MUSIC DISC (PLAY/PAUSE) + RESUME
-  // --------------------------
   function initMusic() {
     if (!bgm || !disc) return;
 
     bgm.volume = 0.2;
     bgm.load();
 
-    // resume kalau sebelumnya nyala
     if (localStorage.getItem("bgm_playing") === "1") {
       bgm.play().then(function () {
         disc.classList.add("playing");
@@ -292,9 +255,6 @@
     });
   }
 
-  // --------------------------
-  // WELCOME OVERLAY (ANIMATED EXIT) + AUTO MUSIC
-  // --------------------------
   function initWelcome() {
     if (!overlay || !welcomeBtn) return;
 
@@ -311,12 +271,8 @@
       overlay.setAttribute("aria-hidden", "true");
     }
 
-    // tampilkan kalau belum pernah klik (per tab session)
-    if (!sessionStorage.getItem("welcome_seen")) {
-      showWelcome();
-    } else {
-      hideWelcome();
-    }
+    if (!sessionStorage.getItem("welcome_seen")) showWelcome();
+    else hideWelcome();
 
     async function startMusicAfterGesture() {
       if (!bgm) return;
@@ -362,21 +318,15 @@
     }
 
     welcomeBtn.addEventListener("click", closeWelcomeAnimated);
-
     overlay.addEventListener("click", function (e) {
       if (e.target === overlay) closeWelcomeAnimated();
     });
 
     window.addEventListener("pageshow", function () {
-      if (!sessionStorage.getItem("welcome_seen")) {
-        showWelcome();
-      }
+      if (!sessionStorage.getItem("welcome_seen")) showWelcome();
     });
   }
 
-  // --------------------------
-  // BOOT
-  // --------------------------
   document.addEventListener("DOMContentLoaded", function () {
     initMusic();
     initWelcome();
