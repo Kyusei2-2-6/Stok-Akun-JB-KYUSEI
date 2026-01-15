@@ -119,7 +119,7 @@ var PRODUCTS = [
   },
 
    {
-    code: "A004",
+    code: "A005",
     name: "STARTER COLUMBINA",
     game: "genshin",
     price: 50000,
@@ -191,6 +191,7 @@ function rupiah(n) {
   return "Rp" + String(Math.trunc(num))
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+
 
 
 
