@@ -181,6 +181,24 @@ var PRODUCTS = [
       "Build DPS Dual-sword & BS Vit"
     ]
   }
+,
+  {
+    code: "A006",
+    name: "😂 produk pak cik",
+    game: "genshin",
+    price: 5000000,
+    sold: false,
+    photos: [
+      "assets/product/GI/A006/1.jpg",
+      "assets/product/GI/A006/2.jpg",
+      "assets/product/GI/A006/3.jpg",
+      "assets/product/GI/A006/4.jpg",
+      "assets/product/GI/A006/5.jpg"
+    ],
+    detail: [
+      ""
+    ]
+  }
 ];
 
 // =========================================================
