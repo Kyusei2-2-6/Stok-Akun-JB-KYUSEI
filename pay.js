@@ -99,7 +99,7 @@ localStorage.setItem("lastPayUrl", location.href);
 /* =========================
    QRIS IMAGE
 ========================= */
-var qrisPath = (p && p.qris) ? p.qris : ("qris/" + code + ".jpg");
+var qrisPath = (p && p.qris) ? p.qris : "qris/qris.jpg";
 
 var qrisImg = document.getElementById("qrisImg");
 if (qrisImg) {
@@ -125,4 +125,5 @@ var wa = "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(text);
 
 var paidBtn = document.getElementById("paidBtn");
 if (paidBtn) paidBtn.href = wa;
+
 
