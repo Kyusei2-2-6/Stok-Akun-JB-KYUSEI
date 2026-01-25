@@ -113,7 +113,7 @@ var PRODUCTS = [
     price: 0,
     sold: false,
     photos: [
-      "assets/products/ml/B001/1.jpg"
+      "assets/products/ml/B001/1.png"
     ],
     detail: [
       "Isi detail B001 di sini"
