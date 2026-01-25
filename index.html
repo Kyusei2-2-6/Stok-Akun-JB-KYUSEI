@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Kyusei</title>
+  <link rel="stylesheet" href="./style.css?v=5" />
+</head>
+
+<body>
+  <!-- =====================================================
+       GLOBAL AUDIO (ONLY ONCE) => MUSIC STAYS ON
+       ===================================================== -->
+  <audio id="bgm" loop preload="auto">
+    <source src="assets/music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Router will inject pages here -->
+  <div id="app"></div>
+
+  <!-- Data -->
+  <script src="./data.js?v=5"></script>
+
+  <!-- Global music controller -->
+  <script src="./music.js?v=5"></script>
+
+  <!-- Page controllers (run AFTER router injects HTML) -->
+  <script src="./home.js?v=5"></script>
+  <script src="./product.js?v=5"></script>
+  <script src="./pay.js?v=5"></script>
+
+  <!-- Router (hash) -->
+  <script src="./router.js?v=5"></script>
+</body>
+</html>
