@@ -111,7 +111,7 @@ var PRODUCTS = [
     name: "Mobile Legends B001",
     game: "ml",
     price: 0,
-    sold: true,
+    sold: false,
     photos: [
       "assets/products/ml/B001/1.png"
     ],
