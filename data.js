@@ -141,7 +141,10 @@ var PRODUCTS = [
       "assets/products/toram/C001/9.jpg"
     ],
     detail: [
-      "cap End game"
+      "1Cap",
+      "End game",
+      "build Dps DS",
+      "build BS VIT"
     ]
   }
 ];
