@@ -49,7 +49,7 @@ var PRODUCTS = [
     name: "Genshin A002",
     game: "genshin",
     price: 75000,
-    sold: false,
+    sold: true,
     photos: [
       "assets/products/genshin/A002/1.jpg",
       "assets/products/genshin/A002/2.jpg",
@@ -66,7 +66,7 @@ var PRODUCTS = [
     name: "Genshin A003",
     game: "genshin",
     price: 50000,
-    sold: false,
+    sold: true,
     photos: [
       "assets/products/genshin/A003/1.jpg"
     ],
@@ -110,7 +110,7 @@ var PRODUCTS = [
     code: "B001",
     name: "Mobile Legends B001",
     game: "ml",
-    price: 0,
+    price: 100000000,
     sold: true,
     photos: [
       "assets/products/ml/B001/1.png"
@@ -127,7 +127,7 @@ var PRODUCTS = [
     code: "C001",
     name: "Toram C001",
     game: "toram",
-    price: 0,
+    price: 50000,
     sold: false,
     photos: [
       "assets/products/toram/C001/1.jpg",
@@ -141,7 +141,7 @@ var PRODUCTS = [
       "assets/products/toram/C001/9.jpg"
     ],
     detail: [
-      "Isi detail C001 di sini"
+      "cap End game"
     ]
   }
 ];
