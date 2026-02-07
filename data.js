@@ -144,6 +144,19 @@ var PRODUCTS = [
       "Isi detail C001 di sini"
     ]
   }
+
+  {
+    code: "B002",
+    game: "Ml",
+    name: "Metalica",
+    price: 0,
+    sold: false,
+    photos: ["https://kyusei-edit-bot.maunyolongyaaaa.workers.dev/i/assets%2Fproducts%2FB002%2Fmain.jpg?w=900&q=75"],
+    detail: ["Ketua guild
+Anjayani
+Ope 
+Terkuat"],
+  },
 ];
 
 // =========================
