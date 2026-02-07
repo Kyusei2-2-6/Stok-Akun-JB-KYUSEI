@@ -49,7 +49,7 @@ var PRODUCTS = [
     name: "Genshin A002",
     game: "genshin",
     price: 75000,
-    sold: false,
+    sold: true,
     photos: [
       "assets/products/genshin/A002/1.jpg",
       "assets/products/genshin/A002/2.jpg",
@@ -66,7 +66,7 @@ var PRODUCTS = [
     name: "Genshin A003",
     game: "genshin",
     price: 50000,
-    sold: false,
+    sold: true,
     photos: [
       "assets/products/genshin/A003/1.jpg"
     ],
@@ -111,7 +111,7 @@ var PRODUCTS = [
     name: "Mobile Legends B001",
     game: "ml",
     price: 0,
-    sold: false,
+    sold: true,
     photos: [
       "assets/products/ml/B001/1.png"
     ],
