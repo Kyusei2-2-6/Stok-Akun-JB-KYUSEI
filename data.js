@@ -26,9 +26,6 @@ var SITE_NAME = "Kyusei";
  * }
  */
 var PRODUCTS = [
-  // =========================
-  // GENSHIN IMPACT
-  // =========================
   {
     code: "A001",
     name: "Genshin A001",
@@ -40,9 +37,7 @@ var PRODUCTS = [
       "assets/products/genshin/A001/2.webp",
       "assets/products/genshin/A001/3.webp"
     ],
-    detail: [
-      "Isi detail A001 di sini"
-    ]
+    detail: ["Isi detail A001 di sini"]
   },
   {
     code: "A002",
@@ -57,9 +52,7 @@ var PRODUCTS = [
       "assets/products/genshin/A002/4.webp",
       "assets/products/genshin/A002/5.webp"
     ],
-    detail: [
-      "Isi detail A002 di sini"
-    ]
+    detail: ["Isi detail A002 di sini"]
   },
   {
     code: "A003",
@@ -67,12 +60,8 @@ var PRODUCTS = [
     game: "genshin",
     price: 50000,
     sold: false,
-    photos: [
-      "assets/products/genshin/A003/1.webp"
-    ],
-    detail: [
-      "Isi detail A003 di sini"
-    ]
+    photos: ["assets/products/genshin/A003/1.webp"],
+    detail: ["Isi detail A003 di sini"]
   },
   {
     code: "A004",
@@ -84,9 +73,7 @@ var PRODUCTS = [
       "assets/products/genshin/A004/1.webp",
       "assets/products/genshin/A004/2.webp"
     ],
-    detail: [
-      "Isi detail A004 di sini"
-    ]
+    detail: ["Isi detail A004 di sini"]
   },
   {
     code: "A005",
@@ -98,31 +85,19 @@ var PRODUCTS = [
       "assets/products/genshin/A005/1.webp",
       "assets/products/genshin/A005/2.webp"
     ],
-    detail: [
-      "Isi detail A005 di sini"
-    ]
+    detail: ["Isi detail A005 di sini"]
   },
 
-  // =========================
-  // MOBILE LEGENDS
-  // =========================
   {
     code: "B001",
     name: "Mobile Legends B001",
     game: "ml",
     price: 0,
     sold: false,
-    photos: [
-      "assets/products/ml/B001/1.webp"
-    ],
-    detail: [
-      "Isi detail B001 di sini"
-    ]
+    photos: ["assets/products/ml/B001/1.webp"],
+    detail: ["Isi detail B001 di sini"]
   },
 
-  // =========================
-  // TORAM ONLINE
-  // =========================
   {
     code: "C001",
     name: "Toram C001",
@@ -140,24 +115,27 @@ var PRODUCTS = [
       "assets/products/toram/C001/8.webp",
       "assets/products/toram/C001/9.webp"
     ],
-    detail: [
-      "Isi detail C001 di sini"
-    ]
-  }
+    detail: ["Isi detail C001 di sini"]
+  }, // ✅ koma wajib
 
   {
     code: "B002",
-    game: "Ml",
+    game: "ml",
     name: "Metalica",
     price: 0,
     sold: false,
-    photos: ["https://kyusei-edit-bot.maunyolongyaaaa.workers.dev/i/assets%2Fproducts%2FB002%2Fmain.jpg?w=900&q=75"],
-    detail: ["Ketua guild
-Anjayani
-Ope 
-Terkuat"],
+    photos: [
+      "https://kyusei-edit-bot.maunyolongyaaaa.workers.dev/i/assets%2Fproducts%2FB002%2Fmain.jpg?w=900&q=75"
+    ],
+    detail: [
+      "Ketua guild",
+      "Anjayani",
+      "Ope",
+      "Terkuat"
+    ]
   },
 ];
+
 
 // =========================
 // Helper
