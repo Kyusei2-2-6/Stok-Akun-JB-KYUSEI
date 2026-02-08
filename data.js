@@ -18,7 +18,7 @@ var SITE_NAME = "Kyusei";
  */
 var PRODUCTS = [
   {
-    code: "A001",
+    code: "A001"
     name: "Genshin A001",
     game: "genshin",
     price: 50000,
@@ -107,7 +107,7 @@ var PRODUCTS = [
       "assets/products/toram/C001/9.webp"
     ],
     detail: ["Isi detail C001 di sini"]
-  }, // ÃÂ¢ÃÂÃÂ koma wajib
+  }, // ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ koma wajib
 
   {
     code: "B002",
@@ -134,15 +134,7 @@ var PRODUCTS = [
     photos: ["https://kyusei-edit-bot.maunyolongyaaaa.workers.dev/i/assets%2Fproducts%2FB003%2F1.jpg?w=900&q=75", "https://kyusei-edit-bot.maunyolongyaaaa.workers.dev/i/assets%2Fproducts%2FB003%2F2.jpg?w=900&q=75"],
     detail: ["Woilah", "Cik", "Anjayani"],
   },
-  {
-    code: "A006",
-    name: "Flins & navia",
-    game: "genshin",
-    price: 70000,
-    sold: false,
-    photos: ["https://kyusei-edit-bot.maunyolongyaaaa.workers.dev/i/assets%2Fproducts%2FA006%2F1.jpg?w=900&q=75", "https://kyusei-edit-bot.maunyolongyaaaa.workers.dev/i/assets%2Fproducts%2FA006%2F2.jpg?w=900&q=75", "https://kyusei-edit-bot.maunyolongyaaaa.workers.dev/i/assets%2Fproducts%2FA006%2F3.jpg?w=900&q=75"],
-    detail: ["🌐 Server: Asia", "🔰 AR: 45", "⭐ Karakter 5★: Mona,Diluc,Navia,Flins", "⚔️ Weapon 5★: A thousand floating dreams, Skyward", "👤 Username: Unset", "🎂 Birthdate (BD): Set (30/12)", "📝 Note Akun:", "-Pity limit 10 off", "-Pity Wp 13 off"],
-  }
+  
 ];
 
 
