@@ -93,7 +93,7 @@ var PRODUCTS = [
     code: "C001",
     name: "Toram C001",
     game: "toram",
-    price: 0,
+    price: 35000,
     sold: false,
     photos: [
       "assets/products/toram/C001/1.webp",
@@ -106,7 +106,11 @@ var PRODUCTS = [
       "assets/products/toram/C001/8.webp",
       "assets/products/toram/C001/9.webp"
     ],
-    detail: ["Isi detail C001 di sini"]
+    detail: [
+      "ACC 2 cap",
+      "Build Blacksmith VIT",
+      "Build dps Dual Sword"
+    ]
   }, // ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ koma wajib
 
   {
