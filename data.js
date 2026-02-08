@@ -14,16 +14,7 @@ var SITE_NAME = "Kyusei";
 
 /**
  * PRODUCT schema (dipakai oleh home/product/pay):
- * {
- *   code: "A001",
- *   name: "Nama Produk",
- *   game: "genshin" | "ml" | "toram",
- *   price: number,
- *   sold?: boolean,
- *   photos: string[],
- *   detail?: string[],
- *   qris?: string   // optional: path QRIS khusus produk, default = assets/qris/qris.webp
- * }
+ * 
  */
 var PRODUCTS = [
   {
@@ -116,7 +107,7 @@ var PRODUCTS = [
       "assets/products/toram/C001/9.webp"
     ],
     detail: ["Isi detail C001 di sini"]
-  }, // â koma wajib
+  }, // Ã¢ÂÂ koma wajib
 
   {
     code: "B002",
