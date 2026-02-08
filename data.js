@@ -18,7 +18,7 @@ var SITE_NAME = "Kyusei";
  */
 var PRODUCTS = [
   {
-    code: "A001",
+    code: "A001"
     name: "Genshin A001",
     game: "genshin",
     price: 50000,
@@ -124,15 +124,6 @@ var PRODUCTS = [
       "Ope",
       "Terkuat"
     ]
-  },
-  {
-    code: "B003",
-    name: "Muani",
-    game: "ml",
-    price: 0,
-    sold: false,
-    photos: ["https://kyusei-edit-bot.maunyolongyaaaa.workers.dev/i/assets%2Fproducts%2FB003%2F1.jpg?w=900&q=75", "https://kyusei-edit-bot.maunyolongyaaaa.workers.dev/i/assets%2Fproducts%2FB003%2F2.jpg?w=900&q=75"],
-    detail: ["Woilah", "Cik", "Anjayani"],
   },
   
 ];
