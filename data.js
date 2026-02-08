@@ -83,7 +83,7 @@ var PRODUCTS = [
     code: "B001",
     name: "Mobile Legends B001",
     game: "ml",
-    price: 0,
+    price: 10000000,
     sold: false,
     photos: ["assets/products/ml/B001/1.webp"],
     detail: ["Isi detail B001 di sini"]
@@ -113,7 +113,7 @@ var PRODUCTS = [
     code: "B002",
     game: "ml",
     name: "Metalica",
-    price: 0,
+    price: 10000000,
     sold: false,
     photos: [
       "https://kyusei-edit-bot.maunyolongyaaaa.workers.dev/i/assets%2Fproducts%2FB002%2Fmain.jpg?w=900&q=75"
