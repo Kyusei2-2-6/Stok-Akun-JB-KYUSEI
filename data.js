@@ -44,7 +44,7 @@ var PRODUCTS = [
     name: "Genshin A002",
     game: "genshin",
     price: 75000,
-    sold: false,
+    sold: true,
     photos: [
       "assets/products/genshin/A002/1.webp",
       "assets/products/genshin/A002/2.webp",
@@ -59,7 +59,7 @@ var PRODUCTS = [
     name: "Genshin A003",
     game: "genshin",
     price: 50000,
-    sold: false,
+    sold: true,
     photos: ["assets/products/genshin/A003/1.webp"],
     detail: ["Isi detail A003 di sini"]
   },
