@@ -28,7 +28,16 @@ var PRODUCTS = [
       "assets/products/genshin/A001/2.webp",
       "assets/products/genshin/A001/3.webp"
     ],
-    detail: ["Isi detail A001 di sini"]
+    detail: [
+      "🌐 Server: Asia ",
+      "🔰 AR: 45",
+      "⭐ Karakter 5★: Mona,Diluc,Navia,Flins",
+      "⚔️ Weapon 5★: A thousand floating dreams, Skyward",
+      " 👤 Username: Unset",
+      "🎂 Birthdate (BD): Set (30/12)",
+      "Pity limit 10 off",
+      "Pity Wp 13 off"
+    ]
   },
   {
     code: "A002",
