@@ -18,7 +18,7 @@ var SITE_NAME = "Kyusei";
  */
 var PRODUCTS = [
   {
-    code: "A001"
+    code: "A001",
     name: "Genshin A001",
     game: "genshin",
     price: 50000,
