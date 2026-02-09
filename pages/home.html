@@ -1,0 +1,70 @@
+<div id="welcomeOverlay" class="welcome-overlay" aria-hidden="true">
+  <div class="welcome-card">
+    <div class="welcome-glow" aria-hidden="true"></div>
+    <div class="welcome-image">
+      <img src="assets/ui/welcome.webp" alt="Welcome Kyusei" />
+    </div>
+    <h2 class="welcome-title">✨ Selamat Datang ✨</h2>
+    <p class="welcome-text">
+      Selamat datang di <b>Kyusei Store</b><br>
+      <span class="motto">Jual semurah mungkin.</span><br>
+      Silakan pilih game & akun favoritmu.
+    </p>
+    <div class="welcome-actions">
+      <button id="welcomeBtn" class="welcome-btn" type="button">Masuk ✨</button>
+</div>
+  </div>
+</div>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="topbar__inner">
+      <div class="topbar__left">
+        <h1 id="siteName" class="siteName">Kyusei</h1>
+        <span class="brandBadge">KYUSEI STORE</span>
+        <p class="sub">Klik produk untuk lihat detail &amp; foto • <span class="mottoInline">Jual semurah mungkin</span></p>
+      </div>
+
+      <div class="topbar__right">
+        <div class="menu">
+          <button class="logoBtn" id="logoBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown">
+            <img src="assets/ui/logo.webp" alt="Logo Kyusei" />
+          </button>
+
+          <div class="dropdown" id="dropdown" aria-hidden="true">
+            <div class="ddSection">🔥 Populer</div>
+            <button class="ddItem" data-game="all" type="button">Semua</button>
+            <button class="ddItem" data-game="popular" type="button">Populer</button>
+
+            <div class="ddSection">🎮 Game</div>
+            <button class="ddItem" data-game="genshin" type="button">Genshin Impact</button>
+            <button class="ddItem" data-game="hsr" type="button">Honkai: Star Rail</button>
+            <button class="ddItem" data-game="ml" type="button">Mobile Legends</button>
+            <button class="ddItem" data-game="ff" type="button">Free Fire</button>
+            <button class="ddItem" data-game="pubgm" type="button">PUBG Mobile</button>
+            <button class="ddItem" data-game="valorant" type="button">Valorant</button>
+            <button class="ddItem" data-game="roblox" type="button">Roblox</button>
+            <button class="ddItem" data-game="codm" type="button">COD Mobile</button>
+            <button class="ddItem" data-game="toram" type="button">Toram Online</button>
+</div>
+        </div>
+
+        <div id="musicDisc" class="music-disc" title="Play / Pause Music" role="button" aria-label="Play / Pause Music"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="grid" class="grid"></section>
+</main>
+
+<div class="resumeWrap resumeBottom" id="resumeWrap" style="display:none" aria-label="Lanjutkan aktivitas terakhir">
+  <a id="resumeProduct" class="resumeChip" style="display:none" href="#">
+    <span class="resumeIco" aria-hidden="true">🧾</span>
+    <span class="resumeTxt"><b>Lanjutkan</b><small>produk terakhir</small></span>
+    <span class="resumeGo" aria-hidden="true">›</span>
+  </a>
+
+  <!-- (Pembayaran dihapus: web ini hanya showcase) -->
+</div>
