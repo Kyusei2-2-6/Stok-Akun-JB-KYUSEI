@@ -40,7 +40,7 @@ var PRODUCTS = [
     "name": "Genshin A003",
     "game": "genshin",
     "price": 50000,
-    "sold": false,
+    "sold": true,
     "photos": [
       "assets/products/genshin/A003/1.jpg"
     ],
@@ -93,7 +93,7 @@ var PRODUCTS = [
     "code": "C001",
     "name": "Toram C001",
     "game": "toram",
-    "price": 0,
+    "price": 35000,
     "sold": false,
     "photos": [
       "assets/products/toram/C001/1.jpg",
