@@ -90,6 +90,21 @@ var PRODUCTS = [
     ]
   },
   {
+    "code": "B002",
+    "name": "P",
+    "game": "ml",
+    "price": 10000000,
+    "sold": false,
+    "photos": [
+      "https://kyusei-edit-bot.maunyolongyaaaa.workers.dev/i/assets%2Fproducts%2FB002%2F1.jpg?w=900&q=75"
+    ],
+    "detail": [
+      "Anjai",
+      "Wu",
+      "Gg"
+    ]
+  },
+  {
     "code": "C001",
     "name": "Toram C001",
     "game": "toram",
