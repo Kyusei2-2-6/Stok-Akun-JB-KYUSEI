@@ -87,22 +87,6 @@ var PRODUCTS = [
     ]
   },
   {
-    "code": "B002",
-    "name": "P",
-    "game": "ml",
-    "price": 1,
-    "sold": false,
-    "photos": [
-      "assets/products/ml/B002/1.jpg"
-    ],
-    "detail": [
-      "Anjai",
-      "Woilaj",
-      "Wkanaj",
-      "Jaja"
-    ]
-  },
-  {
     "code": "C001",
     "name": "Toram C001",
     "game": "toram",
