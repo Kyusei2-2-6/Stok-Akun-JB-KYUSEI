@@ -106,23 +106,6 @@ var PRODUCTS = [
     "detail": [
       "Isi detail C001 di sini"
     ]
-  },
-  {
-    "code": "B002",
-    "name": "P",
-    "game": "ml",
-    "price": 1,
-    "sold": false,
-    "photos": [
-      "assets/products/ml/B002/1.jpg"
-    ],
-    "detail": [
-      "Anjya",
-      "Woa",
-      "Owhs",
-      "Ajjs",
-      "Jahs"
-    ]
   }
 ];
 function rupiah(n) {
