@@ -106,6 +106,19 @@ var PRODUCTS = [
     "detail": [
       "Isi detail C001 di sini"
     ]
+  },
+  {
+    "code": "B002",
+    "name": "Nama : kimak",
+    "game": "ml",
+    "price": 10000,
+    "sold": false,
+    "photos": [
+      "assets/products/ml/B002/1.jpg"
+    ],
+    "detail": [
+      "harga segitu work it untuk di beli"
+    ]
   }
 ];
 function rupiah(n) {
