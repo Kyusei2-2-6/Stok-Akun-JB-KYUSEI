@@ -106,10 +106,18 @@ var PRODUCTS = [
     "detail": [
       "Isi detail C001 di sini"
     ]
+  },
+  {
+    "code": "B002",
+    "name": "P",
+    "game": "ml",
+    "price": 0,
+    "sold": false,
+    "photos": [
+      "assets/products/ml/B002/1.jpg"
+    ],
+    "detail": [
+      "Naya"
+    ]
   }
 ];
-
-function rupiah(n) {
-  var num = Number(n || 0);
-  return "Rp" + String(Math.trunc(num)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
