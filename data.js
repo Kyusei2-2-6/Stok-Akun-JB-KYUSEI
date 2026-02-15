@@ -12,7 +12,13 @@ var PRODUCTS = [
       "assets/products/genshin/A001/3.jpg"
     ],
     "detail": [
-      "🌐 Server: Asia \n🔰 AR: 45\n⭐ Karakter 5★: Mona,Diluc,Navia,Flins\n⚔️ Weapon 5★: A thousand floating dreams, Skyward\n 👤 Username: Unset\n🎂 Birthdate (BD): Set (30/12)"
+      "🌐 Server: Asia",
+      "🔰 AR: 45",
+      "⭐ Karakter 5★: Mona,Diluc,Navia,Flins",
+      "⚔️ Weapon 5★: A thousand floating dreams, Skyward",
+      "👤 Username: Unset",
+      "🎂 Birthdate (BD): Set (30/12)",
+      "📝 Note: -"
     ]
   },
   {
