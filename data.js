@@ -4,7 +4,7 @@ var PRODUCTS = [
     "code": "A001",
     "name": "Genshin A001",
     "game": "genshin",
-    "price": 50000,
+    "price": 70000,
     "sold": false,
     "photos": [
       "assets/products/genshin/A001/1.jpg",
@@ -12,7 +12,7 @@ var PRODUCTS = [
       "assets/products/genshin/A001/3.jpg"
     ],
     "detail": [
-      "Isi detail A001 di sini"
+      "🌐 Server: Asia \n🔰 AR: 45\n⭐ Karakter 5★: Mona,Diluc,Navia,Flins\n⚔️ Weapon 5★: A thousand floating dreams, Skyward\n 👤 Username: Unset\n🎂 Birthdate (BD): Set (30/12)"
     ]
   },
   {
