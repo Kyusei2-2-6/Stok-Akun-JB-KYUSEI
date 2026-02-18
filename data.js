@@ -1,27 +1,6 @@
 var SITE_NAME = "Kyusei";
 var PRODUCTS = [
   {
-    "code": "A001",
-    "name": "Genshin A001",
-    "game": "genshin",
-    "price": 70000,
-    "sold": false,
-    "photos": [
-      "assets/products/genshin/A001/1.jpg",
-      "assets/products/genshin/A001/2.jpg",
-      "assets/products/genshin/A001/3.jpg"
-    ],
-    "detail": [
-      "🌐 Server: Asia",
-      "🔰 AR: 45",
-      "⭐ Karakter 5★: Mona,Diluc,Navia,Flins",
-      "⚔️ Weapon 5★: A thousand floating dreams, Skyward",
-      "👤 Username: Unset",
-      "🎂 Birthdate (BD): Set (30/12)",
-      "📝 Note: -"
-    ]
-  },
-  {
     "code": "A002",
     "name": "Genshin A002",
     "game": "genshin",
