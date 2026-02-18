@@ -5,7 +5,7 @@ var PRODUCTS = [
     "name": "Genshin A002",
     "game": "genshin",
     "price": 75000,
-    "sold": false,
+    "sold": true,
     "photos": [
       "assets/products/genshin/A002/1.jpg",
       "assets/products/genshin/A002/2.jpg",
@@ -115,13 +115,13 @@ var PRODUCTS = [
       "assets/products/genshin/A001/1.jpg"
     ],
     "detail": [
-      "🌐 Server: Asia",
-      "🔰 AR: 45 (Hold)",
-      "⭐ Karakter 5★: Navia,Flins,Mona,Diluc",
-      "⚔️ Weapon 5★: A thousand floating dreams, Skyward Spine",
-      "👤 Username: Unset",
-      "🎂 Birthdate (BD): Set (30/12)",
-      "📝 Note: Baru Ce Gmail fresh"
+      "ð Server: Asia",
+      "ð° AR: 45 (Hold)",
+      "â­ Karakter 5â: Navia,Flins,Mona,Diluc",
+      "âï¸ Weapon 5â: A thousand floating dreams, Skyward Spine",
+      "ð¤ Username: Unset",
+      "ð Birthdate (BD): Set (30/12)",
+      "ð Note: Baru Ce Gmail fresh"
     ]
   }
 ];
