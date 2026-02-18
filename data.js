@@ -104,25 +104,6 @@ var PRODUCTS = [
     "detail": [
       "harga segitu work it untuk di beli"
     ]
-  },
-  {
-    "code": "A001",
-    "name": "Flins & Navia",
-    "game": "genshin",
-    "price": 50000,
-    "sold": false,
-    "photos": [
-      "assets/products/genshin/A001/1.jpg"
-    ],
-    "detail": [
-      "ð Server: Asia",
-      "ð° AR: 45 (Hold)",
-      "â­ Karakter 5â: Navia,Flins,Mona,Diluc",
-      "âï¸ Weapon 5â: A thousand floating dreams, Skyward Spine",
-      "ð¤ Username: Unset",
-      "ð Birthdate (BD): Set (30/12)",
-      "ð Note: Baru Ce Gmail fresh"
-    ]
   }
 ];
 function rupiah(n) {
