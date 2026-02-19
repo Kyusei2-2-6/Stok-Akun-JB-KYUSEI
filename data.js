@@ -95,13 +95,35 @@ var PRODUCTS = [
       "assets/products/genshin/A001/7.jpg"
     ],
     "detail": [
-      "ð Server: Asia",
-      "ð° AR: 45 (Hold)",
-      "â­ Karakter 5â: Navia,Flins,Mona,Diluc",
-      "âï¸ Weapon 5â: A thousand floating dreams, Skyward Spine",
-      "ð¤ Username: Unset",
-      "ð Birthdate (BD): Set (30/12)",
-      "ð Note: Baru Ce Gmail fresh"
+      "Ã°ÂÂÂ Server: Asia",
+      "Ã°ÂÂÂ° AR: 45 (Hold)",
+      "Ã¢Â­Â Karakter 5Ã¢ÂÂ: Navia,Flins,Mona,Diluc",
+      "Ã¢ÂÂÃ¯Â¸Â Weapon 5Ã¢ÂÂ: A thousand floating dreams, Skyward Spine",
+      "Ã°ÂÂÂ¤ Username: Unset",
+      "Ã°ÂÂÂ Birthdate (BD): Set (30/12)",
+      "Ã°ÂÂÂ Note: Baru Ce Gmail fresh"
+    ]
+  },
+  {
+    "code": "A003",
+    "name": "Starter Zibai",
+    "game": "genshin",
+    "price": 50000,
+    "sold": false,
+    "photos": [
+      "assets/products/genshin/A003/1.jpg",
+      "assets/products/genshin/A003/2.jpg",
+      "assets/products/genshin/A003/3.jpg",
+      "assets/products/genshin/A003/4.jpg"
+    ],
+    "detail": [
+      "🌐 Server: Asia",
+      "🔰 AR: 8",
+      "⭐ Karakter 5★: Zibai, Mizuki",
+      "⚔️ Weapon 5★: -",
+      "👤 Username: Unset",
+      "🎂 Birthdate (BD): Unset",
+      "📝 Note: Gmail belum ke set"
     ]
   }
 ];
