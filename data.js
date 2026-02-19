@@ -62,7 +62,7 @@ var PRODUCTS = [
     "code": "C001",
     "name": "2 CAP TORAM",
     "game": "toram",
-    "price": 0,
+    "price": 30000,
     "sold": false,
     "photos": [
       "assets/products/toram/C001/1.jpg",
@@ -95,13 +95,13 @@ var PRODUCTS = [
       "assets/products/genshin/A001/7.jpg"
     ],
     "detail": [
-      "Ã°ÂÂÂ Server: Asia",
-      "Ã°ÂÂÂ° AR: 45 (Hold)",
-      "Ã¢Â­Â Karakter 5Ã¢ÂÂ: Navia,Flins,Mona,Diluc",
-      "Ã¢ÂÂÃ¯Â¸Â Weapon 5Ã¢ÂÂ: A thousand floating dreams, Skyward Spine",
-      "Ã°ÂÂÂ¤ Username: Unset",
-      "Ã°ÂÂÂ Birthdate (BD): Set (30/12)",
-      "Ã°ÂÂÂ Note: Baru Ce Gmail fresh"
+      "ÃÂ°ÃÂÃÂÃÂ Server: Asia",
+      "ÃÂ°ÃÂÃÂÃÂ° AR: 45 (Hold)",
+      "ÃÂ¢ÃÂ­ÃÂ Karakter 5ÃÂ¢ÃÂÃÂ: Navia,Flins,Mona,Diluc",
+      "ÃÂ¢ÃÂÃÂÃÂ¯ÃÂ¸ÃÂ Weapon 5ÃÂ¢ÃÂÃÂ: A thousand floating dreams, Skyward Spine",
+      "ÃÂ°ÃÂÃÂÃÂ¤ Username: Unset",
+      "ÃÂ°ÃÂÃÂÃÂ Birthdate (BD): Set (30/12)",
+      "ÃÂ°ÃÂÃÂÃÂ Note: Baru Ce Gmail fresh"
     ]
   },
   {
@@ -117,13 +117,35 @@ var PRODUCTS = [
       "assets/products/genshin/A003/4.jpg"
     ],
     "detail": [
+      "ð Server: Asia",
+      "ð° AR: 8",
+      "â­ Karakter 5â: Zibai, Mizuki",
+      "âï¸ Weapon 5â: -",
+      "ð¤ Username: Unset",
+      "ð Birthdate (BD): Unset",
+      "ð Note: Gmail belum ke set"
+    ]
+  },
+  {
+    "code": "A006",
+    "name": "Starter colombina",
+    "game": "genshin",
+    "price": 50000,
+    "sold": false,
+    "photos": [
+      "assets/products/genshin/A006/1.jpg",
+      "assets/products/genshin/A006/2.jpg",
+      "assets/products/genshin/A006/3.jpg",
+      "assets/products/genshin/A006/4.jpg"
+    ],
+    "detail": [
       "🌐 Server: Asia",
-      "🔰 AR: 8",
-      "⭐ Karakter 5★: Zibai, Mizuki",
+      "🔰 AR: 6",
+      "⭐ Karakter 5★: Colombina,Qiqi",
       "⚔️ Weapon 5★: -",
-      "👤 Username: Unset",
-      "🎂 Birthdate (BD): Unset",
-      "📝 Note: Gmail belum ke set"
+      "👤 Username: unset",
+      "🎂 Birthdate (BD): unset",
+      "📝 Note: Baru ce Gmail fresh"
     ]
   }
 ];
