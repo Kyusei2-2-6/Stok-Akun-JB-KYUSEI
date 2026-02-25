@@ -84,7 +84,7 @@ var PRODUCTS = [
     "name": "Flins & navia",
     "game": "genshin",
     "price": 50000,
-    "sold": false,
+    "sold": true,
     "photos": [
       "assets/products/genshin/A001/1.jpg",
       "assets/products/genshin/A001/2.jpg",
@@ -95,13 +95,13 @@ var PRODUCTS = [
       "assets/products/genshin/A001/7.jpg"
     ],
     "detail": [
-      "ÃÂ°ÃÂÃÂÃÂ Server: Asia",
-      "ÃÂ°ÃÂÃÂÃÂ° AR: 45 (Hold)",
-      "ÃÂ¢ÃÂ­ÃÂ Karakter 5ÃÂ¢ÃÂÃÂ: Navia,Flins,Mona,Diluc",
-      "ÃÂ¢ÃÂÃÂÃÂ¯ÃÂ¸ÃÂ Weapon 5ÃÂ¢ÃÂÃÂ: A thousand floating dreams, Skyward Spine",
-      "ÃÂ°ÃÂÃÂÃÂ¤ Username: Unset",
-      "ÃÂ°ÃÂÃÂÃÂ Birthdate (BD): Set (30/12)",
-      "ÃÂ°ÃÂÃÂÃÂ Note: Baru Ce Gmail fresh"
+      "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ Server: Asia",
+      "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ° AR: 45 (Hold)",
+      "ÃÂÃÂ¢ÃÂÃÂ­ÃÂÃÂ Karakter 5ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ: Navia,Flins,Mona,Diluc",
+      "ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¯ÃÂÃÂ¸ÃÂÃÂ Weapon 5ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ: A thousand floating dreams, Skyward Spine",
+      "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ¤ Username: Unset",
+      "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ Birthdate (BD): Set (30/12)",
+      "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ Note: Baru Ce Gmail fresh"
     ]
   },
   {
@@ -117,13 +117,13 @@ var PRODUCTS = [
       "assets/products/genshin/A003/4.jpg"
     ],
     "detail": [
-      "ð Server: Asia",
-      "ð° AR: 8",
-      "â­ Karakter 5â: Zibai, Mizuki",
-      "âï¸ Weapon 5â: -",
-      "ð¤ Username: Unset",
-      "ð Birthdate (BD): Unset",
-      "ð Note: Gmail belum ke set"
+      "Ã°ÂÂÂ Server: Asia",
+      "Ã°ÂÂÂ° AR: 8",
+      "Ã¢Â­Â Karakter 5Ã¢ÂÂ: Zibai, Mizuki",
+      "Ã¢ÂÂÃ¯Â¸Â Weapon 5Ã¢ÂÂ: -",
+      "Ã°ÂÂÂ¤ Username: Unset",
+      "Ã°ÂÂÂ Birthdate (BD): Unset",
+      "Ã°ÂÂÂ Note: Gmail belum ke set"
     ]
   },
   {
@@ -139,13 +139,13 @@ var PRODUCTS = [
       "assets/products/genshin/A006/4.jpg"
     ],
     "detail": [
-      "🌐 Server: Asia",
-      "🔰 AR: 6",
-      "⭐ Karakter 5★: Colombina,Qiqi",
-      "⚔️ Weapon 5★: -",
-      "👤 Username: unset",
-      "🎂 Birthdate (BD): unset",
-      "📝 Note: Baru ce Gmail fresh"
+      "ð Server: Asia",
+      "ð° AR: 6",
+      "â­ Karakter 5â: Colombina,Qiqi",
+      "âï¸ Weapon 5â: -",
+      "ð¤ Username: unset",
+      "ð Birthdate (BD): unset",
+      "ð Note: Baru ce Gmail fresh"
     ]
   }
 ];
