@@ -155,13 +155,13 @@ var PRODUCTS = [
       "assets/products/genshin/A006/4.jpg"
     ],
     "detail": [
-      "🌐 Server: Asia",
-      "🔰 AR: 5",
-      "⭐ Karakter 5★: Colombina, Jean, Dehya",
-      "⚔️ Weapon 5★:-",
-      "👤 Username: unset",
-      "🎂 Birthdate (BD): unset",
-      "📝 Note: unknow"
+      "ÃÂ°ÃÂÃÂÃÂ Server: Asia",
+      "ÃÂ°ÃÂÃÂÃÂ° AR: 5",
+      "ÃÂ¢ÃÂ­ÃÂ Karakter 5ÃÂ¢ÃÂÃÂ: Colombina, Jean, Dehya",
+      "ÃÂ¢ÃÂÃÂÃÂ¯ÃÂ¸ÃÂ Weapon 5ÃÂ¢ÃÂÃÂ:-",
+      "ÃÂ°ÃÂÃÂÃÂ¤ Username: unset",
+      "ÃÂ°ÃÂÃÂÃÂ Birthdate (BD): unset",
+      "ÃÂ°ÃÂÃÂÃÂ Note: unknow"
     ]
   },
   {
@@ -177,13 +177,13 @@ var PRODUCTS = [
       "assets/products/genshin/A007/4.jpg"
     ],
     "detail": [
-      "Ã°ÂÂÂ Server: Asia",
-      "Ã°ÂÂÂ° AR: 5",
-      "Ã¢Â­Â Karakter 5Ã¢ÂÂ: Zibai, diluc",
-      "Ã¢ÂÂÃ¯Â¸Â Weapon 5Ã¢ÂÂ: -",
-      "Ã°ÂÂÂ¤ Username: unset",
-      "Ã°ÂÂÂ Birthdate (BD): unset",
-      "Ã°ÂÂÂ Note: unknown"
+      "🌐 Server: Asia",
+      "🔰 AR: 5",
+      "⭐ Karakter 5★: Zibai, diluc",
+      "⚔️ Weapon 5★: -",
+      "👤 Username: unset",
+      "🎂 Birthdate (BD): unset",
+      "📝 Note: unknown"
     ]
   },
   {
