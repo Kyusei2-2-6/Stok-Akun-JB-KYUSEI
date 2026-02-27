@@ -14,7 +14,7 @@ var PRODUCTS = [
       "assets/products/genshin/A002/5.jpg"
     ],
     "detail": [
-      "Isi detail A002 di sini"
+      "Sold wak"
     ]
   },
   {
