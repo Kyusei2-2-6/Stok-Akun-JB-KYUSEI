@@ -48,7 +48,9 @@ var PRODUCTS = [
       "assets/products/toram/C001/9.jpg"
     ],
     "detail": [
-      "Isi detail C001 di sini"
+      "2 Cap",
+      "Dps DS",
+      "BS VIT"
     ]
   },
   {
