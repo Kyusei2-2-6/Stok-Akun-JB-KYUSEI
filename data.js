@@ -27,7 +27,7 @@ var PRODUCTS = [
       "assets/products/ml/B001/1.png"
     ],
     "detail": [
-      "Isi detail B001 di sini"
+      "Gacor kang"
     ]
   },
   {
