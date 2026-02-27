@@ -80,7 +80,7 @@ var PRODUCTS = [
     "code": "A003",
     "name": "Starter Zibai",
     "game": "genshin",
-    "price": 50000,
+    "price": 60000,
     "sold": false,
     "photos": [
       "assets/products/genshin/A003/1.jpg",
