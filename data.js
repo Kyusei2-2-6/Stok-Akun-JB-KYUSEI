@@ -195,13 +195,13 @@ var PRODUCTS = [
       "assets/products/genshin/A008/4.jpg"
     ],
     "detail": [
-      "ð Server: Asia",
-      "ð° AR: 5",
-      "â­ Karakter 5â: Zibai, Mizuki",
-      "âï¸ Weapon 5â: -",
-      "ð¤ Username: unset",
-      "ð Birthdate (BD): unset",
-      "ð Note: email unset"
+      "🌐 Server: Asia",
+      "🔰 AR: 5",
+      "⭐ Karakter 5★: Zibai, Mizuki",
+      "⚔️ Weapon 5★: -",
+      "👤 Username: unset",
+      "🎂 Birthdate (BD): unset",
+      "📝 Note: email unset"
     ]
   },
   {
