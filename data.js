@@ -129,13 +129,13 @@ var PRODUCTS = [
       "assets/products/genshin/A005/4.jpg"
     ],
     "detail": [
-      "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ Server: Asia",
-      "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ° AR: 6",
-      "ÃÂÃÂ¢ÃÂÃÂ­ÃÂÃÂ Karakter 5ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ: Colombina, qiqi C1",
-      "ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¯ÃÂÃÂ¸ÃÂÃÂ Weapon 5ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ: -",
-      "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ¤ Username: unset",
-      "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ Birthdate (BD): unset",
-      "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ Note: Fresh"
+      "🌐 Server: Asia",
+      "🔰 AR: 6",
+      "⭐ Karakter 5★: Colombina, qiqi C1",
+      "⚔️ Weapon 5★: -",
+      "👤 Username: unset",
+      "🎂 Birthdate (BD): unset",
+      "📝 Note: Fresh"
     ]
   },
   {
