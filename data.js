@@ -229,26 +229,6 @@ var PRODUCTS = [
       "🎂 Birthdate (BD): unset",
       "📝 Note: email unset"
     ]
-  },
-  {
-    "code": "B002",
-    "name": "1",
-    "game": "genshin",
-    "price": 1,
-    "sold": false,
-    "photos": [
-      "assets/products/genshin/B002/1.jpg"
-    ],
-    "detail": [
-      "1",
-      "🌐 Server: Asia",
-      "🔰 AR: 8",
-      "⭐ Karakter 5★: Zibai, Mizuki",
-      "⚔️ Weapon 5★: -",
-      "👤 Username: Unset",
-      "🎂 Birthdate (BD): Unset",
-      "📝 Note: email unset"
-    ]
   }
 ];
 function rupiah(n) {
