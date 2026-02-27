@@ -80,7 +80,7 @@ var PRODUCTS = [
     "code": "A003",
     "name": "Starter Zibai",
     "game": "genshin",
-    "price": 60000,
+    "price": 50000,
     "sold": false,
     "photos": [
       "assets/products/genshin/A003/1.jpg",
@@ -227,6 +227,26 @@ var PRODUCTS = [
       "⚔️ Weapon 5★: -",
       "👤 Username: unset",
       "🎂 Birthdate (BD): unset",
+      "📝 Note: email unset"
+    ]
+  },
+  {
+    "code": "B002",
+    "name": "1",
+    "game": "genshin",
+    "price": 1,
+    "sold": false,
+    "photos": [
+      "assets/products/genshin/B002/1.jpg"
+    ],
+    "detail": [
+      "1",
+      "🌐 Server: Asia",
+      "🔰 AR: 8",
+      "⭐ Karakter 5★: Zibai, Mizuki",
+      "⚔️ Weapon 5★: -",
+      "👤 Username: Unset",
+      "🎂 Birthdate (BD): Unset",
       "📝 Note: email unset"
     ]
   }
