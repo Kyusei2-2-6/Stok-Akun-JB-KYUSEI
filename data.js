@@ -121,7 +121,7 @@ var PRODUCTS = [
     "name": "Starter Colombina",
     "game": "genshin",
     "price": 60000,
-    "sold": false,
+    "sold": true,
     "photos": [
       "assets/products/genshin/A005/1.jpg",
       "assets/products/genshin/A005/2.jpg",
