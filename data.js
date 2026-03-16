@@ -225,6 +225,33 @@ var PRODUCTS = [
       "🎂 Birthdate (BD): unset",
       "📝 Note: email unset"
     ]
+  },
+  {
+    "code": "A010",
+    "name": "Flins Sign (end game)",
+    "game": "genshin",
+    "price": 175000,
+    "sold": false,
+    "photos": [
+      "assets/products/genshin/A010/1.jpg",
+      "assets/products/genshin/A010/2.jpg",
+      "assets/products/genshin/A010/3.jpg",
+      "assets/products/genshin/A010/4.jpg",
+      "assets/products/genshin/A010/5.jpg",
+      "assets/products/genshin/A010/6.jpg",
+      "assets/products/genshin/A010/7.jpg"
+    ],
+    "detail": [
+      "🌐 Server:Asia",
+      "🔰 AR: 51",
+      "⭐ Karakter 5★: Diluc,Navia,Flins,mona",
+      "⚔️ Weapon 5★: (njir gw males nulis, liat aja di foto)",
+      "👤 Username: unset",
+      "🎂 Birthdate (BD): (30/12)",
+      "📝 Note:",
+      ">Unknown",
+      ">Map banyak yang gelap ladang masih banyak"
+    ]
   }
 ];
 function rupiah(n) {
