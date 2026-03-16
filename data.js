@@ -252,6 +252,28 @@ var PRODUCTS = [
       ">Unknown",
       ">Map banyak yang gelap ladang masih banyak"
     ]
+  },
+  {
+    "code": "A011",
+    "name": "Starter Klee",
+    "game": "genshin",
+    "price": 150000,
+    "sold": false,
+    "photos": [
+      "assets/products/genshin/A011/1.jpg",
+      "assets/products/genshin/A011/2.jpg",
+      "assets/products/genshin/A011/3.jpg",
+      "assets/products/genshin/A011/4.jpg"
+    ],
+    "detail": [
+      "🌐 Server:Asia",
+      "🔰 AR: 5",
+      "⭐ Karakter 5★: Klee,mizuki",
+      "⚔️ Weapon 5★: -",
+      "👤 Username: Unset",
+      "🎂 Birthdate (BD): Unset",
+      "📝 Note: Gmail belum ke set"
+    ]
   }
 ];
 function rupiah(n) {
