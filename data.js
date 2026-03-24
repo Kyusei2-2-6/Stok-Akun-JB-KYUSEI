@@ -98,7 +98,7 @@ var PRODUCTS = [
     "code": "A004",
     "name": "Starter Zibai",
     "game": "genshin",
-    "price": 60000,
+    "price": 50000,
     "sold": false,
     "photos": [
       "assets/products/genshin/A004/1.jpg",
@@ -164,7 +164,7 @@ var PRODUCTS = [
     "code": "A007",
     "name": "Starter Zibai",
     "game": "genshin",
-    "price": 60000,
+    "price": 50000,
     "sold": false,
     "photos": [
       "assets/products/genshin/A007/1.jpg",
@@ -186,7 +186,7 @@ var PRODUCTS = [
     "code": "A008",
     "name": "Starter Zibai",
     "game": "genshin",
-    "price": 60000,
+    "price": 50000,
     "sold": false,
     "photos": [
       "assets/products/genshin/A008/1.jpg",
