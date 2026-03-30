@@ -247,6 +247,35 @@ var PRODUCTS = [
       "🎂 Birthdate (BD): Unset",
       "📝 Note: Gmail belum ke set"
     ]
+  },
+  {
+    "code": "A010",
+    "name": "Akun End game Cakep",
+    "game": "genshin",
+    "price": 250000,
+    "sold": false,
+    "photos": [
+      "assets/products/genshin/A010/1.jpg",
+      "assets/products/genshin/A010/2.jpg",
+      "assets/products/genshin/A010/3.jpg",
+      "assets/products/genshin/A010/4.jpg",
+      "assets/products/genshin/A010/5.jpg",
+      "assets/products/genshin/A010/6.jpg",
+      "assets/products/genshin/A010/7.jpg",
+      "assets/products/genshin/A010/8.jpg"
+    ],
+    "detail": [
+      "🌐 Server:Asia",
+      "🔰 AR: 54",
+      "⭐ Karakter 5★: Diluc,Navia,Flins,mona,Skrk,es copi",
+      "⚔️ Weapon 5★: (njir gw males nulis, liat aja di foto)",
+      "👤 Username: unset",
+      "🎂 Birthdate (BD): (30/12)",
+      "📝 Note:",
+      ">Map banyak yang gelap ladang masih banyak",
+      ">Akun premium tentunya",
+      ">Akun ke dua (2nd)"
+    ]
   }
 ];
 function rupiah(n) {
