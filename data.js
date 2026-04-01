@@ -286,8 +286,7 @@ var PRODUCTS = [
     "photos": [
       "assets/products/genshin/B007/1.jpg",
       "assets/products/genshin/B007/2.jpg",
-      "assets/products/genshin/B007/3.jpg",
-      "assets/products/genshin/B007/4.jpg"
+      "assets/products/genshin/B007/3.jpg"
     ],
     "detail": [
       "Ladang primo masi banyak"
