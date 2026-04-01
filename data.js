@@ -276,6 +276,22 @@ var PRODUCTS = [
       ">Akun premium tentunya",
       ">Akun ke dua (2nd)"
     ]
+  },
+  {
+    "code": "B007",
+    "name": "Stater skirk",
+    "game": "genshin",
+    "price": 5000070000,
+    "sold": false,
+    "photos": [
+      "assets/products/genshin/B007/1.jpg",
+      "assets/products/genshin/B007/2.jpg",
+      "assets/products/genshin/B007/3.jpg",
+      "assets/products/genshin/B007/4.jpg"
+    ],
+    "detail": [
+      "Ladang primo masi banyak"
+    ]
   }
 ];
 function rupiah(n) {
