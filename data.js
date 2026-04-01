@@ -252,7 +252,7 @@ var PRODUCTS = [
     "code": "A010",
     "name": "Akun End game Cakep",
     "game": "genshin",
-    "price": 250000,
+    "price": 175000,
     "sold": false,
     "photos": [
       "assets/products/genshin/A010/1.jpg",
