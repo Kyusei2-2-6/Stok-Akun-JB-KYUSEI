@@ -296,7 +296,7 @@ var PRODUCTS = [
     "code": "A012",
     "name": "AKUN END GAME",
     "game": "genshin",
-    "price": 175,
+    "price": 175000,
     "sold": false,
     "photos": [
       "assets/products/genshin/A012/1.jpg",
