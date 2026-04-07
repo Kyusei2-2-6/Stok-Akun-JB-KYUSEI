@@ -291,6 +291,32 @@ var PRODUCTS = [
     "detail": [
       "Ladang primo masi banyak"
     ]
+  },
+  {
+    "code": "A012",
+    "name": "AKUN END GAME",
+    "game": "genshin",
+    "price": 175,
+    "sold": false,
+    "photos": [
+      "assets/products/genshin/A012/1.jpg",
+      "assets/products/genshin/A012/2.jpg",
+      "assets/products/genshin/A012/3.jpg",
+      "assets/products/genshin/A012/4.jpg",
+      "assets/products/genshin/A012/5.jpg",
+      "assets/products/genshin/A012/6.jpg",
+      "assets/products/genshin/A012/7.jpg",
+      "assets/products/genshin/A012/8.jpg"
+    ],
+    "detail": [
+      "🌐 Server:Asia",
+      "🔰 AR: 55",
+      "⭐ Karakter 5★: (sesuai foto)",
+      "⚔️ Weapon 5★: (sesuai foto)",
+      "👤 Username: Unset",
+      "🎂 Birthdate (BD): Unset",
+      "📝 Note: End game, ladang primo masih banyak, quest numpuk, Sudah terbuild"
+    ]
   }
 ];
 function rupiah(n) {
