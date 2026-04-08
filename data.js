@@ -317,6 +317,21 @@ var PRODUCTS = [
       "🎂 Birthdate (BD): Unset",
       "📝 Note: End game, ladang primo masih banyak, quest numpuk, Sudah terbuild"
     ]
+  },
+  {
+    "code": "B009",
+    "name": "Stater chasca",
+    "game": "genshin",
+    "price": 50000,
+    "sold": false,
+    "photos": [
+      "assets/products/genshin/B009/1.jpg",
+      "assets/products/genshin/B009/2.jpg",
+      "assets/products/genshin/B009/3.jpg"
+    ],
+    "detail": [
+      "region baru mondo"
+    ]
   }
 ];
 function rupiah(n) {
