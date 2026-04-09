@@ -323,7 +323,7 @@ var PRODUCTS = [
     "name": "Stater chasca",
     "game": "genshin",
     "price": 50000,
-    "sold": false,
+    "sold": true,
     "photos": [
       "assets/products/genshin/B009/1.jpg",
       "assets/products/genshin/B009/2.jpg",
