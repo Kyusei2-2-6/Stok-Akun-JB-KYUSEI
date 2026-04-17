@@ -282,7 +282,7 @@ var PRODUCTS = [
     "name": "Stater skirk",
     "game": "genshin",
     "price": 60000,
-    "sold": false,
+    "sold": true,
     "photos": [
       "assets/products/genshin/B007/1.jpg",
       "assets/products/genshin/B007/2.jpg",
