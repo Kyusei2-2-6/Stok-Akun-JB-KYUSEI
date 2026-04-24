@@ -1,53 +1,62 @@
-<header class="detailHeader">
-  <div class="wrap detailNav">
-    <a class="backBtn" href="#/home">‹ Kembali</a>
-    <span class="miniBrand">Kyusei Store</span>
+<header class="topbar">
+  <div class="wrap">
+    <div class="topbar__inner topbar__inner--product">
+      <a class="btn small" href="#/home">← Kembali</a>
+      <div class="topbar__text grow">
+        <h1 id="prodName">Produk</h1>
+        <p class="sub" id="prodMeta"></p>
+      </div>
+    </div>
   </div>
 </header>
 
-<main class="wrap detailMain">
-  <section class="detailHero">
-    <img id="heroImg" class="detailImage" alt="Foto produk" />
-    <span id="prodStatus" class="detailStatus ready">READY</span>
-    <span id="photoCount" class="photoCount">1 / 1</span>
-  </section>
+<main class="wrap">
+  <div class="hero">
+    <img id="heroImg" class="heroImg" alt="Foto produk">
+  </div>
 
-  <section class="detailCard">
-    <div class="detailTitleRow">
-      <div>
-        <h1 id="prodName">Produk</h1>
-        <p id="prodMeta">Kode • Game</p>
-      </div>
-      <b id="prodPrice" class="detailPrice">Rp0</b>
-    </div>
+  <div class="productActions">
+    <button id="openLightboxBtn" class="btn" type="button">Lihat Foto</button>
+    <button id="detailBtn" class="btn" type="button">Detail</button>
+    <button id="buyProductBtn" class="btn buyFull" type="button">Beli / QRIS</button>
+  </div>
 
-    <button id="buyBtn" class="buyNowBtn" type="button">Beli Sekarang</button>
+  <h2 class="h2">Foto lainnya</h2>
+  <div id="thumbs" class="thumbs"></div>
 
-    <div id="thumbs" class="thumbs"></div>
-
-    <h2>Detail Akun</h2>
-    <ul id="detailList" class="detailList"></ul>
-
-    <div class="contactBox">
-      <a id="waBtn" class="contactBtn wa" target="_blank" rel="noopener">☎ WhatsApp</a>
-      <a id="tgBtn" class="contactBtn tg" target="_blank" rel="noopener">✈ Telegram</a>
-      <a id="fbBtn" class="contactBtn fb" target="_blank" rel="noopener">f Facebook</a>
-    </div>
-  </section>
+  <p class="sub productHint">Tips: klik foto untuk popup, lalu geser kiri/kanan.</p>
 </main>
 
-<div class="buyModal" id="buyModal" aria-hidden="true">
-  <div class="buyPanel" role="dialog" aria-modal="true">
-    <button class="modalClose" id="closeBuyModal" type="button">×</button>
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="iconBtn lbClose" id="lbClose" aria-label="Tutup" type="button">✕</button>
+  <button class="iconBtn lbPrev" id="lbPrev" aria-label="Sebelumnya" type="button">‹</button>
+  <img id="lbImg" class="lbImg" alt="Preview">
+  <button class="iconBtn lbNext" id="lbNext" aria-label="Berikutnya" type="button">›</button>
+  <div class="lbCaption" id="lbCaption"></div>
+</div>
+
+<div class="modal" id="detailModal" aria-hidden="true">
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div class="modal__head">
+      <div><div class="modal__title" id="detailTitle">Detail Akun</div><div class="modal__sub" id="detailSub"></div></div>
+      <button class="modal__close" id="detailClose" aria-label="Tutup" type="button">✕</button>
+    </div>
+    <div class="modal__body"><ul class="detailList" id="detailList"></ul><div class="modal__empty" id="detailEmpty" style="display:none;">Detail belum diisi.</div></div>
+  </div>
+</div>
+
+<div id="qrModal" class="qrModal" aria-hidden="true">
+  <div class="qrPanel" role="dialog" aria-modal="true">
+    <button id="qrClose" class="qrClose" type="button" aria-label="Tutup">×</button>
     <h3>Pembayaran</h3>
-    <p class="modalProduct" id="modalProduct">-</p>
-    <img class="qrisImg" src="assets/ui/qris.png" alt="QRIS Kyusei">
-    <p class="modalPrice" id="modalPrice">-</p>
-    <p class="modalNote">Scan QR, bayar sesuai harga, lalu hubungi admin dan kirim bukti pembayaran.</p>
-    <div class="modalActions">
-      <a id="modalWA" class="chatBtn wa" target="_blank" rel="noopener">☎ WA</a>
-      <a id="modalTG" class="chatBtn tg" target="_blank" rel="noopener">✈ TG</a>
-      <a id="modalFB" class="chatBtn fb" target="_blank" rel="noopener">f FB</a>
+    <p id="qrProduct" class="qrProduct">Produk</p>
+    <img class="qrImg" src="assets/ui/qris.png" alt="QRIS Kyusei">
+    <p id="qrPrice" class="qrPrice">Rp0</p>
+    <p class="qrNote">Scan QR, lalu hubungi admin dan kirim bukti pembayaran.</p>
+    <div class="qrActions">
+      <button id="qrWA" class="qrContact wa" type="button"><img src="assets/ui/icon-wa.png" alt="">WA</button>
+      <button id="qrTG" class="qrContact tg" type="button"><img src="assets/ui/icon-telegram.png" alt="">TG</button>
+      <button id="qrFB" class="qrContact fb" type="button"><img src="assets/ui/icon-facebook.png" alt="">FB</button>
     </div>
   </div>
 </div>
