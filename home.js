@@ -1,136 +1,207 @@
-/* Kyusei Mobile Pro - home.js */
+/* Kyusei Store - Android rewrite, compatible with current data.js + bot updater */
 (function(){
-  "use strict";
+  'use strict';
+
   var READY_PER_PAGE = 4;
   var SOLD_PER_PAGE = 6;
-  var soldCover = "assets/ui/sold-cover.png";
-  var state = { game:"all", q:"", readyPage:1, soldPage:1 };
+  var SOLD_COVER = 'assets/ui/sold-cover.png';
+  var currentGame = 'all';
+  var query = '';
+  var readyPage = 1;
+  var soldPage = 1;
+
   function $(id){ return document.getElementById(id); }
-  function txt(id,v){ var e=$(id); if(e) e.textContent=String(v); }
-  function safeRupiah(n){ return typeof rupiah==="function" ? rupiah(n||0) : "Rp"+Number(n||0).toLocaleString("id-ID"); }
-  function gameName(g){ g=(g||"").toLowerCase(); if(g==="genshin") return "Genshin Impact"; if(g==="toram") return "Toram Online"; if(g==="ml") return "Mobile Legends"; return g || "Game"; }
-  function isSold(p){ return p && p.sold===true; }
-  function photo(p){ return (p && p.photos && p.photos.length) ? p.photos[0] : ""; }
-  function matches(p){
-    if(!p) return false;
-    var g=(p.game||"").toLowerCase();
-    if(state.game!=="all" && g!==state.game) return false;
-    var q=(state.q||"").trim().toLowerCase();
+  function safe(v){ return String(v == null ? '' : v); }
+  function lower(v){ return safe(v).toLowerCase(); }
+  function isSold(p){ return p && p.sold === true; }
+  function money(v){ return (typeof window.rupiah === 'function') ? window.rupiah(v) : ('Rp' + safe(v)); }
+  function gameLabel(g){
+    g = lower(g);
+    if(g === 'genshin') return 'Genshin Impact';
+    if(g === 'toram') return 'Toram Online';
+    if(g === 'ml') return 'Mobile Legends';
+    return 'Game Account';
+  }
+  function products(){ return Array.isArray(window.PRODUCTS) ? window.PRODUCTS.slice() : []; }
+  function matchGame(p){ return currentGame === 'all' || lower(p.game) === currentGame; }
+  function matchQuery(p){
+    var q = lower(query).trim();
     if(!q) return true;
-    return String(p.name||"").toLowerCase().indexOf(q)>-1 || String(p.code||"").toLowerCase().indexOf(q)>-1 || gameName(g).toLowerCase().indexOf(q)>-1;
+    var detail = Array.isArray(p.detail) ? p.detail.join(' ') : '';
+    var hay = [p.code,p.name,p.game,p.price,detail].join(' ').toLowerCase();
+    return hay.indexOf(q) !== -1;
   }
-  function sortByCode(list){
-    return list.slice().sort(function(a,b){ return String(a.code||"").localeCompare(String(b.code||""),"id",{numeric:true}); });
+  function sortedList(){
+    return products().filter(function(p){ return matchGame(p) && matchQuery(p); })
+      .sort(function(a,b){
+        var as = isSold(a) ? 1 : 0;
+        var bs = isSold(b) ? 1 : 0;
+        if(as !== bs) return as - bs;
+        return safe(a.code).localeCompare(safe(b.code),'id',{numeric:true});
+      });
   }
-  function card(p, sold){
-    var a=document.createElement("a");
-    a.className="proCard"+(sold?" isSold":" isReady");
-    a.href="#/product?code="+encodeURIComponent(p.code||"");
-    a.addEventListener("click",function(){ try{ localStorage.setItem("lastProductUrl",a.getAttribute("href")); }catch(e){} });
-    var image=sold ? soldCover : photo(p);
-    a.innerHTML =
-      '<div class="thumbWrap">'+
-        '<img class="thumb" src="'+escapeAttr(image)+'" alt="'+escapeAttr(p.name||"Produk")+'" loading="lazy">'+
-        '<span class="status '+(sold?'red':'green')+'">'+(sold?'SOLD':'READY')+'</span>'+ 
-      '</div>'+ 
-      '<div class="cardBody">'+
-        '<div class="nameRow"><h3>'+escapeHtml(p.name||'-')+'</h3><span>'+escapeHtml(p.code||'-')+'</span></div>'+ 
-        '<p class="price '+(sold?'soldPrice':'readyPrice')+'">'+safeRupiah(p.price)+'</p>'+ 
-        '<p class="game">⌁ '+escapeHtml(gameName(p.game))+'</p>'+ 
-      '</div>';
+  function coverFor(p){
+    if(isSold(p)) return SOLD_COVER;
+    return (p.photos && p.photos[0]) ? p.photos[0] : '';
+  }
+  function saveLast(href, code){
+    try{
+      localStorage.setItem('lastProductUrl', href);
+      localStorage.setItem('lastProductCode', safe(code));
+    }catch(e){}
+  }
+  function makeCard(p, index){
+    var href = '#/product?code=' + encodeURIComponent(p.code || '');
+    var a = document.createElement('a');
+    a.href = href;
+    a.className = 'productCard ' + (isSold(p) ? 'isSold' : 'isReady');
+    a.style.setProperty('--delay', (index * 35) + 'ms');
+    a.addEventListener('click', function(){ saveLast(href, p.code); });
+
+    var imgWrap = document.createElement('div');
+    imgWrap.className = 'imgWrap';
+    var img = document.createElement('img');
+    img.src = coverFor(p);
+    img.alt = p.name || 'Produk';
+    img.loading = 'lazy';
+    img.onerror = function(){
+      if(isSold(p) && p.photos && p.photos[0] && img.src.indexOf(p.photos[0]) === -1) img.src = p.photos[0];
+    };
+    var badge = document.createElement('span');
+    badge.className = 'badge ' + (isSold(p) ? 'soldBadge' : 'readyBadge');
+    badge.textContent = isSold(p) ? 'SOLD' : 'READY';
+    imgWrap.appendChild(img);
+    imgWrap.appendChild(badge);
+
+    var body = document.createElement('div');
+    body.className = 'cardBody';
+    var title = document.createElement('div');
+    title.className = 'nameRow';
+    var h3 = document.createElement('h3'); h3.textContent = p.name || '-';
+    var code = document.createElement('b'); code.textContent = p.code || '-';
+    title.appendChild(h3); title.appendChild(code);
+    var price = document.createElement('p'); price.className = 'price'; price.textContent = money(p.price);
+    var game = document.createElement('p'); game.className = 'game'; game.textContent = gameLabel(p.game);
+    body.appendChild(title); body.appendChild(price); body.appendChild(game);
+
+    a.appendChild(imgWrap); a.appendChild(body);
     return a;
   }
-  function escapeHtml(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];}); }
-  function escapeAttr(s){ return escapeHtml(s).replace(/'/g,"&#39;"); }
-  function renderGrid(id, list, page, per){
-    var el=$(id); if(!el) return;
-    el.innerHTML="";
-    if(!list.length){ el.innerHTML='<div class="emptyState">Produk tidak ditemukan.</div>'; return; }
-    var total=Math.max(1,Math.ceil(list.length/per));
-    page=Math.min(Math.max(1,page),total);
-    var start=(page-1)*per;
-    list.slice(start,start+per).forEach(function(p){ el.appendChild(card(p,isSold(p))); });
+  function emptyBox(text){
+    var d = document.createElement('div');
+    d.className = 'emptyBox';
+    d.innerHTML = '<b>' + text + '</b><small>Coba ganti filter atau pencarian.</small>';
+    return d;
   }
-  function renderPager(id,totalItems,page,per,type){
-    var el=$(id); if(!el) return;
-    var total=Math.max(1,Math.ceil(totalItems/per));
-    if(totalItems<=per){ el.innerHTML=""; return; }
-    page=Math.min(Math.max(1,page),total);
-    var html='<button class="pageBtn" data-type="'+type+'" data-page="'+(page-1)+'" '+(page<=1?'disabled':'')+'>‹</button>';
-    var nums=[];
-    for(var i=1;i<=total;i++) if(i===1||i===total||Math.abs(i-page)<=1) nums.push(i);
-    var prev=0;
-    nums.forEach(function(n){
-      if(prev && n-prev>1) html+='<span class="dots">…</span>';
-      html+='<button class="pageBtn '+(n===page?'active':'')+'" data-type="'+type+'" data-page="'+n+'">'+n+'</button>';
-      prev=n;
+  function renderSection(items, gridId, page, perPage, emptyText){
+    var grid = $(gridId);
+    if(!grid) return {page:1,totalPages:1};
+    grid.innerHTML = '';
+    var totalPages = Math.max(1, Math.ceil(items.length / perPage));
+    page = Math.min(Math.max(1,page), totalPages);
+    if(!items.length){ grid.appendChild(emptyBox(emptyText)); return {page:page,totalPages:totalPages}; }
+    items.slice((page-1)*perPage, page*perPage).forEach(function(p,i){ grid.appendChild(makeCard(p,i)); });
+    return {page:page,totalPages:totalPages};
+  }
+  function renderPagination(id, infoId, page, totalPages, totalItems, perPage, onGo){
+    var box = $(id), info = $(infoId);
+    if(info){ info.textContent = totalItems ? ('Hal. ' + page + '/' + totalPages) : '0 item'; }
+    if(!box) return;
+    box.innerHTML = '';
+    if(totalPages <= 1){ box.style.display = 'none'; return; }
+    box.style.display = 'flex';
+    function add(label,target,disabled,active){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pageBtn' + (active ? ' active' : '');
+      b.textContent = label;
+      b.disabled = !!disabled;
+      b.addEventListener('click', function(){
+        if(disabled) return;
+        onGo(target);
+        var main = document.querySelector('.storeMain');
+        if(main) window.scrollTo({top: main.offsetTop - 8, behavior:'smooth'});
+      });
+      box.appendChild(b);
+    }
+    add('‹', page-1, page<=1, false);
+    var pages = [];
+    for(var i=1;i<=totalPages;i++) if(i===1 || i===totalPages || Math.abs(i-page)<=1) pages.push(i);
+    var last = 0;
+    pages.forEach(function(p){
+      if(p-last>1){ var s=document.createElement('span'); s.className='pageDots'; s.textContent='…'; box.appendChild(s); }
+      add(String(p), p, false, p===page);
+      last = p;
     });
-    html+='<button class="pageBtn" data-type="'+type+'" data-page="'+(page+1)+'" '+(page>=total?'disabled':'')+'>›</button>';
-    html+='<small>Halaman '+page+' dari '+total+'</small>';
-    el.innerHTML=html;
+    add('›', page+1, page>=totalPages, false);
   }
   function render(){
-    if(typeof SITE_NAME!=="undefined"){ txt("siteName",SITE_NAME); document.title=SITE_NAME; }
-    if(typeof PRODUCTS==="undefined" || !Array.isArray(PRODUCTS)){ return; }
-    var all=PRODUCTS.slice();
-    var ready=sortByCode(all.filter(function(p){ return !isSold(p) && matches(p); }));
-    var sold=sortByCode(all.filter(function(p){ return isSold(p) && matches(p); }));
-    txt("statReady", all.filter(function(p){return !isSold(p);}).length);
-    txt("statSold", all.filter(isSold).length);
-    txt("statTotal", all.length);
-    txt("readyCount", ready.length);
-    txt("soldCount", sold.length);
-    var rTotal=Math.max(1,Math.ceil(ready.length/READY_PER_PAGE));
-    var sTotal=Math.max(1,Math.ceil(sold.length/SOLD_PER_PAGE));
-    state.readyPage=Math.min(state.readyPage,rTotal);
-    state.soldPage=Math.min(state.soldPage,sTotal);
-    renderGrid("readyGrid",ready,state.readyPage,READY_PER_PAGE);
-    renderGrid("soldGrid",sold,state.soldPage,SOLD_PER_PAGE);
-    renderPager("readyPager",ready.length,state.readyPage,READY_PER_PAGE,"ready");
-    renderPager("soldPager",sold.length,state.soldPage,SOLD_PER_PAGE,"sold");
+    var all = sortedList();
+    var ready = all.filter(function(p){ return !isSold(p); });
+    var sold = all.filter(isSold);
+    if($('statReady')) $('statReady').textContent = ready.length;
+    if($('statSold')) $('statSold').textContent = sold.length;
+    if($('statTotal')) $('statTotal').textContent = all.length;
+    var r = renderSection(ready,'readyGrid',readyPage,READY_PER_PAGE,'Belum ada produk ready');
+    readyPage = r.page;
+    renderPagination('readyPagination','readyPageInfo',readyPage,r.totalPages,ready.length,READY_PER_PAGE,function(p){ readyPage=p; render(); });
+    var s = renderSection(sold,'soldGrid',soldPage,SOLD_PER_PAGE,'Belum ada produk sold');
+    soldPage = s.page;
+    renderPagination('soldPagination','soldPageInfo',soldPage,s.totalPages,sold.length,SOLD_PER_PAGE,function(p){ soldPage=p; render(); });
+    setupResume();
   }
-  function initControls(){
-    var search=$("searchInput"), select=$("gameSelect");
-    if(search) search.addEventListener("input",function(){ state.q=search.value||""; state.readyPage=1; state.soldPage=1; render(); });
-    if(select) select.addEventListener("change",function(){ state.game=(select.value||"all").toLowerCase(); state.readyPage=1; state.soldPage=1; render(); });
-    document.addEventListener("click",function(e){
-      var btn=e.target.closest(".pageBtn");
-      if(btn){
-        var type=btn.getAttribute("data-type"); var page=parseInt(btn.getAttribute("data-page"),10)||1;
-        if(type==="ready") state.readyPage=page; else state.soldPage=page;
-        render();
-        var target=document.querySelector(type==="ready"?".readySection":".soldSection");
-        if(target) target.scrollIntoView({behavior:"smooth",block:"start"});
-        return;
-      }
-      var dd=e.target.closest(".ddItem");
-      if(dd){
-        state.game=(dd.getAttribute("data-game")||"all").toLowerCase();
-        if(select) select.value=state.game;
-        state.readyPage=1; state.soldPage=1; render();
-        var menu=$("dropdown"), logo=$("logoBtn");
-        if(menu) menu.classList.remove("open"); if(logo) logo.setAttribute("aria-expanded","false");
-      }
+  function initDropdown(){
+    var btn=$('logoBtn'), menu=$('dropdown');
+    if(!btn || !menu) return;
+    function close(){ menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); btn.setAttribute('aria-expanded','false'); }
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var open = !menu.classList.contains('open');
+      menu.classList.toggle('open', open);
+      menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
-    var logo=$("logoBtn"), menu=$("dropdown");
-    if(logo&&menu){
-      logo.addEventListener("click",function(e){ e.stopPropagation(); menu.classList.toggle("open"); logo.setAttribute("aria-expanded",menu.classList.contains("open")?"true":"false"); });
-      document.addEventListener("click",function(){ menu.classList.remove("open"); logo.setAttribute("aria-expanded","false"); });
-    }
+    menu.addEventListener('click', function(e){
+      var item = e.target.closest('.ddItem');
+      if(!item) return;
+      currentGame = lower(item.getAttribute('data-game') || 'all');
+      readyPage = 1; soldPage = 1;
+      render(); close();
+    });
+    document.addEventListener('click', close, {once:false});
+  }
+  function initSearch(){
+    var input=$('catalogSearch'), clear=$('clearSearch');
+    if(input) input.addEventListener('input', function(){ query=input.value || ''; readyPage=1; soldPage=1; render(); });
+    if(clear) clear.addEventListener('click', function(){ if(input) input.value=''; query=''; readyPage=1; soldPage=1; render(); if(input) input.focus(); });
+  }
+  function setupResume(){
+    var wrap=$('resumeWrap'), link=$('resumeProduct');
+    if(!wrap || !link) return;
+    var href='';
+    try{ href = localStorage.getItem('lastProductUrl') || ''; }catch(e){}
+    if(href){ link.href=href; wrap.style.display='block'; link.style.display='flex'; }
+    else { wrap.style.display='none'; link.style.display='none'; }
   }
   function initWelcome(){
-    var overlay=$("welcomeOverlay"), btn=$("welcomeBtn"); if(!overlay||!btn) return;
-    var card=overlay.querySelector(".welcome-card");
-    function hide(){ overlay.classList.remove("show"); overlay.setAttribute("aria-hidden","true"); }
-    function show(){ overlay.classList.add("show"); overlay.setAttribute("aria-hidden","false"); btn.disabled=false; }
-    if(!sessionStorage.getItem("welcome_seen")) show(); else hide();
-    function close(){ if(btn.disabled) return; btn.disabled=true; sessionStorage.setItem("welcome_seen","1"); if(card&&card.animate) card.animate([{opacity:1,transform:"translateY(0) scale(1)"},{opacity:0,transform:"translateY(-36px) scale(.96)"}],{duration:380,easing:"ease",fill:"forwards"}); setTimeout(hide,380); }
-    btn.addEventListener("click",close); overlay.addEventListener("click",function(e){ if(e.target===overlay) close(); });
+    var ov=$('welcomeOverlay'), btn=$('welcomeBtn');
+    if(!ov || !btn) return;
+    // Tidak mengubah konten welcome, hanya memastikan tombolnya bisa menutup.
+    try{
+      if(localStorage.getItem('kyuseiWelcomeDone') === '1') return;
+    }catch(e){}
+    ov.classList.add('show');
+    ov.setAttribute('aria-hidden','false');
+    btn.addEventListener('click', function(){
+      ov.classList.remove('show');
+      ov.setAttribute('aria-hidden','true');
+      try{ localStorage.setItem('kyuseiWelcomeDone','1'); }catch(e){}
+    });
   }
-  function initResume(){
-    var wrap=$("resumeWrap"), link=$("resumeProduct"); if(!wrap||!link) return;
-    wrap.style.display="none"; link.style.display="none";
-    try{ var url=localStorage.getItem("lastProductUrl"); if(url && url.indexOf("#/product?code=")===0){ link.href=url; link.style.display="flex"; wrap.style.display="flex"; } }catch(e){}
-  }
-  window.initHome=function(){ initWelcome(); initControls(); initResume(); render(); };
+  window.initHome = function(){
+    if($('siteName') && window.SITE_NAME) $('siteName').textContent = window.SITE_NAME;
+    document.title = (window.SITE_NAME || 'Kyusei') + ' Store';
+    currentGame='all'; query=''; readyPage=1; soldPage=1;
+    initWelcome(); initDropdown(); initSearch(); render();
+  };
 })();
