@@ -186,6 +186,39 @@
     if(fb) fb.onclick = function(){ window.open(FB_URL, "_blank"); };
   }
 
+
+
+  function initWelcome(){
+    var modal = $("kyWelcomeModal");
+    if(!modal) return;
+    var close = $("kyWelcomeClose");
+    var enter = $("kyWelcomeEnter");
+
+    function hide(){
+      modal.classList.remove("show");
+      modal.setAttribute("aria-hidden", "true");
+    }
+
+    function show(){
+      modal.classList.add("show");
+      modal.setAttribute("aria-hidden", "false");
+    }
+
+    // Muncul hanya saat pertama masuk tab ini. Refresh tidak muncul lagi.
+    try {
+      if(sessionStorage.getItem("kyuseiWelcomeSeen") !== "1"){
+        show();
+        sessionStorage.setItem("kyuseiWelcomeSeen", "1");
+      }
+    } catch(e) {
+      show();
+    }
+
+    if(close) close.onclick = hide;
+    if(enter) enter.onclick = hide;
+    modal.addEventListener("click", function(e){ if(e.target === modal) hide(); });
+  }
+
   function initControls(){
     var search = $("catalogSearch"), clear = $("clearSearch"), gameSel = $("gameFilter"), sortSel = $("sortSelect");
     if(search) search.addEventListener("input", function(){ query = search.value || ""; readyPage=1; soldPage=1; render(); });
@@ -201,5 +234,6 @@
     initControls();
     initModal();
     render();
+    initWelcome();
   };
 })();

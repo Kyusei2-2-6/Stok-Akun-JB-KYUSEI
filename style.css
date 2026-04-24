@@ -35,3 +35,129 @@ body{background:radial-gradient(420px 300px at 78% 0%,rgba(255,70,100,.18),trans
 
 @media (max-width:360px){.kyBrand h1{font-size:38px}.kyLogo{width:58px;height:58px}.kySub{font-size:15px;margin-right:68px}.kyCardImg{height:116px}.kyNameRow h3{font-size:17px}.kyPrice{font-size:20px}.kyMiniStats div{padding:7px 8px}.kyMiniStats b{font-size:21px}}
 @media (min-width:560px){.kyGrid{grid-template-columns:repeat(3,1fr)}.kyCardImg{height:142px}.kyHeader,.kyMain,.kyFooter{max-width:560px;margin-left:auto;margin-right:auto}}
+
+
+/* ===== KYUSEI FINAL FIX FROM BACKUP: backgrounds + welcome popup, Android-first ===== */
+body{
+  background:
+    radial-gradient(360px 260px at 80% 5%, rgba(255,70,100,.18), transparent 60%),
+    linear-gradient(rgba(4,7,13,.82), rgba(4,7,13,.92)),
+    url("assets/ui/top.png") center top / cover fixed,
+    #070b12 !important;
+}
+.kyHeader{
+  background:
+    linear-gradient(180deg, rgba(5,8,15,.10), rgba(5,8,15,.88)),
+    url("assets/ui/hero-bg.png") center 38% / cover no-repeat !important;
+}
+.kyHeader::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,70,100,.65),transparent);
+}
+.kyMain{
+  background:
+    linear-gradient(180deg, rgba(7,11,18,.86), rgba(7,11,18,.94)),
+    url("assets/ui/card-glow.svg") center 120px / 100% auto no-repeat;
+  border-radius:28px 28px 0 0;
+}
+.kyFooter{
+  background:
+    linear-gradient(135deg, rgba(8,12,20,.88), rgba(35,8,15,.82)),
+    url("assets/ui/sold-cover.png") center / cover no-repeat;
+  border:1px solid rgba(255,70,100,.14);
+  border-left:0;border-right:0;
+}
+.qrPanel{
+  background:
+    linear-gradient(180deg, rgba(15,23,42,.93), rgba(6,10,17,.98)),
+    url("assets/ui/top.png") center / cover no-repeat !important;
+}
+.qrImg{
+  background:#fff !important;
+  padding:8px !important;
+  object-fit:contain !important;
+}
+
+.kyWelcomeModal{
+  position:fixed !important;
+  inset:0 !important;
+  z-index:99999 !important;
+  display:none !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding:18px !important;
+  background:rgba(0,0,0,.72) !important;
+  backdrop-filter:blur(10px) !important;
+}
+.kyWelcomeModal.show{display:flex !important;}
+.kyWelcomeBox{
+  position:relative !important;
+  width:min(92vw,390px) !important;
+  max-height:86vh !important;
+  overflow:hidden !important;
+  border-radius:26px !important;
+  border:1px solid rgba(255,70,100,.44) !important;
+  background:#090d15 !important;
+  box-shadow:0 24px 70px rgba(0,0,0,.68),0 0 32px rgba(255,70,100,.18) !important;
+  animation:kyWelcomeIn .24s ease both !important;
+}
+@keyframes kyWelcomeIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.kyWelcomeArt{
+  height:220px !important;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.02), rgba(9,13,21,.92)),
+    url("assets/ui/welcome.png") center 36% / cover no-repeat !important;
+}
+.kyWelcomeContent{
+  margin-top:-42px !important;
+  position:relative !important;
+  padding:0 18px 18px !important;
+  text-align:center !important;
+}
+.kyWelcomeContent h2{
+  margin:0 !important;
+  font-size:25px !important;
+  line-height:1.06 !important;
+  letter-spacing:-.6px !important;
+  color:#fff !important;
+  text-shadow:0 3px 16px rgba(0,0,0,.55) !important;
+}
+.kyWelcomeContent p{
+  margin:10px auto 16px !important;
+  color:rgba(255,255,255,.72) !important;
+  font-size:14px !important;
+  line-height:1.35 !important;
+  max-width:300px !important;
+}
+.kyWelcomeEnter{
+  width:100% !important;
+  height:48px !important;
+  border:0 !important;
+  border-radius:16px !important;
+  background:linear-gradient(135deg,#ff4664,#a91f30) !important;
+  color:white !important;
+  font-weight:950 !important;
+  box-shadow:0 14px 30px rgba(255,70,100,.24) !important;
+}
+.kyWelcomeClose{
+  position:absolute !important;
+  right:12px !important;
+  top:12px !important;
+  width:38px !important;
+  height:38px !important;
+  border-radius:999px !important;
+  border:1px solid rgba(255,255,255,.22) !important;
+  background:rgba(6,10,17,.68) !important;
+  color:white !important;
+  font-size:26px !important;
+  line-height:1 !important;
+  z-index:2 !important;
+}
+@media (max-width:380px){
+  .kyWelcomeArt{height:195px !important;}
+  .kyWelcomeContent h2{font-size:22px !important;}
+  .kyWelcomeBox{border-radius:22px !important;}
+}
