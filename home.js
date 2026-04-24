@@ -102,6 +102,19 @@
     return div;
   }
 
+  function fillerCard(type, idx){
+    var div = document.createElement("article");
+    div.className = "kyFiller " + (type === "sold" ? "sold" : "ready");
+    div.style.setProperty("--delay", (idx * 35) + "ms");
+    var title = type === "sold" ? "Riwayat terjual" : "Slot ready berikutnya";
+    var desc = type === "sold" ? "Produk lain akan tampil di halaman selanjutnya." : "Stok baru akan muncul otomatis dari bot Telegram.";
+    var tag = type === "sold" ? "ARCHIVE" : "COMING";
+    div.innerHTML =
+      "<div class='kyFillerArt'><span>" + tag + "</span></div>" +
+      "<div class='kyFillerBody'><b>" + title + "</b><small>" + desc + "</small></div>";
+    return div;
+  }
+
   function renderGrid(items, gridId, page, perPage, emptyMsg){
     var grid = $(gridId);
     if(!grid) return {page:1,totalPages:1};
@@ -109,9 +122,16 @@
     page = Math.min(Math.max(1, page), totalPages);
     grid.innerHTML = "";
     if(!items.length){ grid.appendChild(emptyBox(emptyMsg)); return {page:page,totalPages:totalPages}; }
-    items.slice((page-1)*perPage, page*perPage).forEach(function(p,i){ grid.appendChild(makeCard(p,i)); });
+    var pageItems = items.slice((page-1)*perPage, page*perPage);
+    pageItems.forEach(function(p,i){ grid.appendChild(makeCard(p,i)); });
+
+    // Isi slot kosong di grid 2 kolom Android biar tidak ada area polos.
+    if(pageItems.length % 2 === 1){
+      grid.appendChild(fillerCard(gridId === "soldGrid" ? "sold" : "ready", pageItems.length));
+    }
     return {page:page,totalPages:totalPages};
   }
+
 
   function renderPager(boxId, infoId, page, totalPages, go){
     var box = $(boxId), info = $(infoId);
@@ -186,39 +206,6 @@
     if(fb) fb.onclick = function(){ window.open(FB_URL, "_blank"); };
   }
 
-
-
-  function initWelcome(){
-    var modal = $("kyWelcomeModal");
-    if(!modal) return;
-    var close = $("kyWelcomeClose");
-    var enter = $("kyWelcomeEnter");
-
-    function hide(){
-      modal.classList.remove("show");
-      modal.setAttribute("aria-hidden", "true");
-    }
-
-    function show(){
-      modal.classList.add("show");
-      modal.setAttribute("aria-hidden", "false");
-    }
-
-    // Muncul hanya saat pertama masuk tab ini. Refresh tidak muncul lagi.
-    try {
-      if(sessionStorage.getItem("kyuseiWelcomeSeen") !== "1"){
-        show();
-        sessionStorage.setItem("kyuseiWelcomeSeen", "1");
-      }
-    } catch(e) {
-      show();
-    }
-
-    if(close) close.onclick = hide;
-    if(enter) enter.onclick = hide;
-    modal.addEventListener("click", function(e){ if(e.target === modal) hide(); });
-  }
-
   function initControls(){
     var search = $("catalogSearch"), clear = $("clearSearch"), gameSel = $("gameFilter"), sortSel = $("sortSelect");
     if(search) search.addEventListener("input", function(){ query = search.value || ""; readyPage=1; soldPage=1; render(); });
@@ -234,6 +221,5 @@
     initControls();
     initModal();
     render();
-    initWelcome();
   };
 })();
