@@ -21,15 +21,33 @@
       <b id="prodPrice" class="detailPrice">Rp0</b>
     </div>
 
+    <button id="buyBtn" class="buyNowBtn" type="button">Beli Sekarang</button>
+
     <div id="thumbs" class="thumbs"></div>
 
     <h2>Detail Akun</h2>
     <ul id="detailList" class="detailList"></ul>
 
     <div class="contactBox">
-      <a id="waBtn" class="contactBtn wa" target="_blank" rel="noopener">WhatsApp Admin</a>
-      <a id="tgBtn" class="contactBtn tg" target="_blank" rel="noopener">Telegram</a>
-      <a id="fbBtn" class="contactBtn fb" target="_blank" rel="noopener">Facebook</a>
+      <a id="waBtn" class="contactBtn wa" target="_blank" rel="noopener">☎ WhatsApp</a>
+      <a id="tgBtn" class="contactBtn tg" target="_blank" rel="noopener">✈ Telegram</a>
+      <a id="fbBtn" class="contactBtn fb" target="_blank" rel="noopener">f Facebook</a>
     </div>
   </section>
 </main>
+
+<div class="buyModal" id="buyModal" aria-hidden="true">
+  <div class="buyPanel" role="dialog" aria-modal="true">
+    <button class="modalClose" id="closeBuyModal" type="button">×</button>
+    <h3>Pembayaran</h3>
+    <p class="modalProduct" id="modalProduct">-</p>
+    <img class="qrisImg" src="assets/ui/qris.png" alt="QRIS Kyusei">
+    <p class="modalPrice" id="modalPrice">-</p>
+    <p class="modalNote">Scan QR, bayar sesuai harga, lalu hubungi admin dan kirim bukti pembayaran.</p>
+    <div class="modalActions">
+      <a id="modalWA" class="chatBtn wa" target="_blank" rel="noopener">☎ WA</a>
+      <a id="modalTG" class="chatBtn tg" target="_blank" rel="noopener">✈ TG</a>
+      <a id="modalFB" class="chatBtn fb" target="_blank" rel="noopener">f FB</a>
+    </div>
+  </div>
+</div>
