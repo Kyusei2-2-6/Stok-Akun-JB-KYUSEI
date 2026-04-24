@@ -13,56 +13,52 @@
   </div>
 </div>
 
-<header class="topbar">
-  <div class="wrap">
-    <div class="topbar__inner">
-      <div class="topbar__left">
-        <h1 id="siteName" class="siteName">Kyusei</h1>
-        <span class="brandBadge">KYUSEI STORE</span>
-        <p class="sub">Klik produk untuk lihat detail &amp; foto</p>
-      </div>
-
-      <div class="topbar__right">
-        <div class="menu">
-          <button class="logoBtn" id="logoBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown">
-            <img src="assets/ui/logo.jpg" alt="Logo Kyusei" />
-          </button>
-
-          <div class="dropdown" id="dropdown" aria-hidden="true">
-            <button class="ddItem" data-game="all" type="button">Semua</button>
-            <button class="ddItem" data-game="genshin" type="button">Genshin Impact</button>
-            <button class="ddItem" data-game="toram" type="button">Toram Online</button>
-            <button class="ddItem" data-game="ml" type="button">Mobile Legends</button>
-          </div>
-        </div>
-      </div>
+<header class="heroTop">
+  <div class="heroShade"></div>
+  <div class="wrap heroInner">
+    <div class="heroText">
+      <h1 id="siteName">Kyusei</h1>
+      <span class="brandBadge">KYUSEI STORE</span>
+      <p>Klik produk untuk lihat detail &amp; foto</p>
+    </div>
+    <button id="logoBtn" class="logoBtn" type="button" aria-haspopup="true" aria-expanded="false">
+      <img src="assets/ui/logo.jpg" alt="Logo Kyusei" />
+    </button>
+    <div id="dropdown" class="dropdown" aria-hidden="true">
+      <button class="ddItem" data-game="all" type="button">Semua Produk</button>
+      <button class="ddItem" data-game="genshin" type="button">Genshin Impact</button>
+      <button class="ddItem" data-game="toram" type="button">Toram Online</button>
+      <button class="ddItem" data-game="ml" type="button">Mobile Legends</button>
     </div>
   </div>
 </header>
 
 <main class="wrap storeMain">
-  <section class="storePanel">
+  <section class="controlPanel">
     <div class="statsRow">
-      <div class="statBox readyStat"><span>Ready</span><b id="statReady">0</b><small>Produk tersedia</small></div>
-      <div class="statBox soldStat"><span>Sold</span><b id="statSold">0</b><small>Produk terjual</small></div>
-      <div class="statBox totalStat"><span>Total</span><b id="statTotal">0</b><small>Total produk</small></div>
+      <div class="statBox ready"><span>Ready</span><b id="statReady">0</b><small>Produk tersedia</small></div>
+      <div class="statBox sold"><span>Sold</span><b id="statSold">0</b><small>Produk terjual</small></div>
+      <div class="statBox total"><span>Total</span><b id="statTotal">0</b><small>Total produk</small></div>
     </div>
 
     <div class="toolsRow">
-      <label class="searchField" aria-label="Cari produk">
+      <label class="searchBox">
         <span>⌕</span>
         <input id="catalogSearch" type="search" placeholder="Cari nama / kode akun..." autocomplete="off" />
       </label>
-      <button id="clearSearch" class="clearSearch" type="button">Reset</button>
+      <button id="clearSearch" class="resetBtn" type="button">Reset</button>
+    </div>
+
+    <div class="socialStrip" aria-label="Kontak Kyusei Store">
+      <a class="socialBtn wa" href="https://wa.me/6283863831670" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="socialBtn fb" href="https://www.facebook.com/kyu.sei.924076" target="_blank" rel="noopener">Facebook</a>
+      <a class="socialBtn tg" href="https://t.me/DedySetyadi226" target="_blank" rel="noopener">Telegram</a>
     </div>
   </section>
 
   <section class="catalogSection readySection">
     <div class="sectionTitle">
-      <div>
-        <h2>Ready Stock</h2>
-        <p>Produk tersedia untuk dibeli</p>
-      </div>
+      <div><h2>Ready Stock</h2><p>Produk tersedia untuk dibeli</p></div>
       <small id="readyPageInfo">0 item</small>
     </div>
     <div id="readyGrid" class="productGrid"></div>
@@ -71,21 +67,10 @@
 
   <section class="catalogSection soldSection">
     <div class="sectionTitle">
-      <div>
-        <h2>Produk Terjual</h2>
-        <p>Akun yang sudah terjual</p>
-      </div>
+      <div><h2>Produk Terjual</h2><p>Akun yang sudah terjual</p></div>
       <small id="soldPageInfo">0 item</small>
     </div>
     <div id="soldGrid" class="productGrid"></div>
     <div id="soldPagination" class="pagination"></div>
   </section>
 </main>
-
-<div class="resumeWrap resumeBottom" id="resumeWrap" style="display:none" aria-label="Lanjutkan aktivitas terakhir">
-  <a id="resumeProduct" class="resumeChip" style="display:none" href="#">
-    <span class="resumeIco" aria-hidden="true">🧾</span>
-    <span class="resumeTxt"><b>Lanjutkan</b><small>produk terakhir</small></span>
-    <span class="resumeGo" aria-hidden="true">›</span>
-  </a>
-</div>
