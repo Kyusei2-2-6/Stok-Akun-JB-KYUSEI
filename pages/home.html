@@ -35,13 +35,51 @@
             <button class="ddItem" data-game="ml" type="button">Mobile Legends</button>
           </div>
         </div>
-</div>
+      </div>
     </div>
   </div>
 </header>
 
-<main class="wrap">
-  <section id="grid" class="grid"></section>
+<main class="wrap storeMain">
+  <section class="storePanel">
+    <div class="statsRow">
+      <div class="statBox readyStat"><span>Ready</span><b id="statReady">0</b><small>Produk tersedia</small></div>
+      <div class="statBox soldStat"><span>Sold</span><b id="statSold">0</b><small>Produk terjual</small></div>
+      <div class="statBox totalStat"><span>Total</span><b id="statTotal">0</b><small>Total produk</small></div>
+    </div>
+
+    <div class="toolsRow">
+      <label class="searchField" aria-label="Cari produk">
+        <span>⌕</span>
+        <input id="catalogSearch" type="search" placeholder="Cari nama / kode akun..." autocomplete="off" />
+      </label>
+      <button id="clearSearch" class="clearSearch" type="button">Reset</button>
+    </div>
+  </section>
+
+  <section class="catalogSection readySection">
+    <div class="sectionTitle">
+      <div>
+        <h2>Ready Stock</h2>
+        <p>Produk tersedia untuk dibeli</p>
+      </div>
+      <small id="readyPageInfo">0 item</small>
+    </div>
+    <div id="readyGrid" class="productGrid"></div>
+    <div id="readyPagination" class="pagination"></div>
+  </section>
+
+  <section class="catalogSection soldSection">
+    <div class="sectionTitle">
+      <div>
+        <h2>Produk Terjual</h2>
+        <p>Akun yang sudah terjual</p>
+      </div>
+      <small id="soldPageInfo">0 item</small>
+    </div>
+    <div id="soldGrid" class="productGrid"></div>
+    <div id="soldPagination" class="pagination"></div>
+  </section>
 </main>
 
 <div class="resumeWrap resumeBottom" id="resumeWrap" style="display:none" aria-label="Lanjutkan aktivitas terakhir">
