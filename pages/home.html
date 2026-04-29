@@ -1,7 +1,7 @@
 <header class="kyHeader">
   <div class="kyHeaderBg" aria-hidden="true"></div>
-  <div class="kyTopLine">
-    <div class="kyBrand">
+  <div class="kyHeadTop">
+    <div class="kyTitleBox">
       <h1 id="siteName">Kyusei</h1>
       <span>KYUSEI STORE</span>
     </div>
@@ -9,21 +9,21 @@
   </div>
   <p class="kySub">Klik produk untuk lihat detail & foto</p>
 
-  <div class="kyMiniStats" aria-label="Ringkasan stok">
+  <div class="kyStats" aria-label="Ringkasan stok">
     <div><b id="statReady">0</b><small>Ready</small></div>
     <div><b id="statSold">0</b><small>Sold</small></div>
     <div><b id="statTotal">0</b><small>Total</small></div>
   </div>
 
-  <div class="kySearchLine">
+  <div class="kySearchRow">
     <label class="kySearch">
-      <span>⌕</span>
+      <span aria-hidden="true">⌕</span>
       <input id="catalogSearch" type="search" placeholder="Cari nama / kode akun..." autocomplete="off">
     </label>
-    <button id="clearSearch" class="kyGhostBtn" type="button">Reset</button>
+    <button id="clearSearch" class="kyReset" type="button">Reset</button>
   </div>
 
-  <div class="kyFilterLine" aria-label="Filter dan sortir produk">
+  <div class="kyFilterRow">
     <select id="gameFilter" class="kySelect" aria-label="Filter game">
       <option value="all">Semua game</option>
       <option value="genshin">Genshin</option>
@@ -40,14 +40,20 @@
 </header>
 
 <main class="kyMain">
-  <section class="kySection">
-    <div class="kySectionHead ready"><div><h2>Ready Stock</h2><p>Produk tersedia untuk dibeli</p></div><small>Hal. <span id="readyPageInfo">1/1</span></small></div>
+  <section class="kySection readySection">
+    <div class="kySectionHead ready">
+      <div><h2>Ready Stock</h2><p>Produk tersedia untuk dibeli</p></div>
+      <small>Hal. <span id="readyPageInfo">1/1</span></small>
+    </div>
     <div id="readyGrid" class="kyGrid"></div>
     <div id="readyPagination" class="kyPager"></div>
   </section>
 
   <section class="kySection soldSection">
-    <div class="kySectionHead sold"><div><h2>Sold Out</h2><p>Akun yang sudah terjual</p></div><small>Hal. <span id="soldPageInfo">1/1</span></small></div>
+    <div class="kySectionHead sold">
+      <div><h2>Sold Out</h2><p>Akun yang sudah terjual</p></div>
+      <small>Hal. <span id="soldPageInfo">1/1</span></small>
+    </div>
     <div id="soldGrid" class="kyGrid"></div>
     <div id="soldPagination" class="kyPager"></div>
   </section>
@@ -78,8 +84,6 @@
   </div>
 </div>
 
-
-<!-- Welcome popup: muncul sekali per tab/session, tidak muncul saat refresh di tab yang sama -->
 <div id="kyWelcomeModal" class="kyWelcomeModal" aria-hidden="true">
   <div class="kyWelcomeBox" role="dialog" aria-modal="true" aria-labelledby="kyWelcomeTitle">
     <button id="kyWelcomeClose" class="kyWelcomeClose" type="button" aria-label="Tutup">×</button>

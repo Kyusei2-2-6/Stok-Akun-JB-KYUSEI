@@ -3,11 +3,11 @@
 
   var READY_PER_PAGE = 4;
   var SOLD_PER_PAGE = 6;
-  var SOLD_COVER = 'assets/ui/sold-cover.png';
+  var SOLD_COVER = 'assets/ui/welcome.png';
+  var FALLBACK_COVER = 'assets/ui/top.png';
   var ADMIN_WA = '6283863831670';
   var ADMIN_TG = 'DedySetyadi226';
   var ADMIN_FB = 'https://www.facebook.com/kyu.sei.924076';
-
   var state = { q: '', game: 'all', sort: 'code', readyPage: 1, soldPage: 1 };
 
   function $(id) { return document.getElementById(id); }
@@ -50,7 +50,7 @@
   function coverOf(p) {
     if (isSold(p)) return SOLD_COVER;
     if (p.photos && p.photos[0]) return p.photos[0];
-    return 'assets/ui/bg-grid.jpg';
+    return FALLBACK_COVER;
   }
 
   function detailLink(p) {
@@ -65,19 +65,13 @@
     if (!p || isSold(p)) return;
     var modal = $('qrModal');
     if (!modal) return;
-
-    var product = $('qrProduct');
-    var price = $('qrPrice');
-    if (product) product.textContent = safe(p.code) + ' • ' + safe(p.name);
-    if (price) price.textContent = rupiah(p.price);
+    if ($('qrProduct')) $('qrProduct').textContent = safe(p.code) + ' • ' + safe(p.name);
+    if ($('qrPrice')) $('qrPrice').textContent = rupiah(p.price);
 
     var msg = buildMessage(p);
-    var wa = $('qrWA');
-    var tg = $('qrTG');
-    var fb = $('qrFB');
-    if (wa) wa.onclick = function () { window.open('https://wa.me/' + ADMIN_WA + '?text=' + encodeURIComponent(msg), '_blank'); };
-    if (tg) tg.onclick = function () { window.open('https://t.me/' + ADMIN_TG, '_blank'); };
-    if (fb) fb.onclick = function () { window.open(ADMIN_FB, '_blank'); };
+    if ($('qrWA')) $('qrWA').onclick = function () { window.open('https://wa.me/' + ADMIN_WA + '?text=' + encodeURIComponent(msg), '_blank'); };
+    if ($('qrTG')) $('qrTG').onclick = function () { window.open('https://t.me/' + ADMIN_TG, '_blank'); };
+    if ($('qrFB')) $('qrFB').onclick = function () { window.open(ADMIN_FB, '_blank'); };
 
     modal.classList.add('show');
     modal.setAttribute('aria-hidden', 'false');
@@ -96,45 +90,39 @@
     a.className = 'productCard ' + (isSold(p) ? 'isSold' : 'isReady');
     a.style.setProperty('--delay', (i * 35) + 'ms');
 
-    var media = document.createElement('div');
-    media.className = 'cardImg';
+    a.addEventListener('click', function () {
+      try { localStorage.setItem('lastProductUrl', a.getAttribute('href')); } catch (e) {}
+    });
 
+    var media = document.createElement('div');
+    media.className = 'cardMedia';
     var img = document.createElement('img');
     img.src = coverOf(p);
     img.alt = p.name || 'Produk';
     img.loading = 'lazy';
-    img.onerror = function () {
-      if (p.photos && p.photos[0]) img.src = p.photos[0];
-    };
-
+    img.onerror = function () { img.src = FALLBACK_COVER; };
     var badge = document.createElement('span');
-    badge.className = 'badge ' + (isSold(p) ? 'soldBadge' : 'readyBadge');
+    badge.className = 'statusBadge';
     badge.textContent = isSold(p) ? 'SOLD' : 'READY';
-
     media.appendChild(img);
     media.appendChild(badge);
 
     var body = document.createElement('div');
     body.className = 'cardBody';
-
     var row = document.createElement('div');
-    row.className = 'nameRow';
-
+    row.className = 'cardNameRow';
     var title = document.createElement('h3');
     title.textContent = p.name || '-';
-
     var code = document.createElement('b');
     code.textContent = p.code || '-';
-
     row.appendChild(title);
     row.appendChild(code);
 
     var price = document.createElement('p');
-    price.className = 'price';
+    price.className = 'cardPrice';
     price.textContent = rupiah(p.price);
-
     var game = document.createElement('p');
-    game.className = 'game';
+    game.className = 'cardGame';
     game.textContent = gameName(p.game);
 
     body.appendChild(row);
@@ -145,7 +133,6 @@
       var buy = document.createElement('button');
       buy.type = 'button';
       buy.className = 'buyBtn';
-      buy.innerHTML = '☎';
       buy.setAttribute('aria-label', 'Beli ' + (p.name || 'produk'));
       buy.addEventListener('click', function (e) {
         e.preventDefault();
@@ -183,7 +170,6 @@
     items.slice((page - 1) * per, page * per).forEach(function (p, i) {
       grid.appendChild(makeCard(p, i));
     });
-
     return { page: page, totalPages: totalPages, total: items.length };
   }
 
@@ -197,11 +183,7 @@
     var box = $(id);
     if (!box) return;
     box.innerHTML = '';
-
-    if (totalPages <= 1) {
-      box.style.display = 'none';
-      return;
-    }
+    if (totalPages <= 1) { box.style.display = 'none'; return; }
     box.style.display = 'flex';
 
     function add(txt, target, active, disabled) {
@@ -210,17 +192,13 @@
       b.className = 'pageBtn' + (active ? ' active' : '');
       b.textContent = txt;
       b.disabled = !!disabled;
-      b.onclick = function () {
-        if (!disabled) go(target);
-      };
+      b.onclick = function () { if (!disabled) go(target); };
       box.appendChild(b);
     }
-
     add('‹', page - 1, false, page <= 1);
     for (var i = 1; i <= totalPages; i++) {
-      if (i === 1 || i === totalPages || Math.abs(i - page) <= 1) {
-        add(String(i), i, i === page, false);
-      } else if (i === page - 2 || i === page + 2) {
+      if (i === 1 || i === totalPages || Math.abs(i - page) <= 1) add(String(i), i, i === page, false);
+      else if (i === page - 2 || i === page + 2) {
         var dots = document.createElement('span');
         dots.className = 'dots';
         dots.textContent = '…';
@@ -253,21 +231,15 @@
   function welcome() {
     var modal = $('kyWelcomeModal');
     if (!modal) return;
-
     var seen = false;
     try { seen = sessionStorage.getItem('kyuseiWelcomeSeen') === '1'; } catch (e) {}
-
     function close() {
       modal.classList.remove('show');
       modal.setAttribute('aria-hidden', 'true');
       try { sessionStorage.setItem('kyuseiWelcomeSeen', '1'); } catch (e) {}
     }
-
-    var closeBtn = $('kyWelcomeClose');
-    var enterBtn = $('kyWelcomeEnter');
-    if (closeBtn) closeBtn.onclick = close;
-    if (enterBtn) enterBtn.onclick = close;
-
+    if ($('kyWelcomeClose')) $('kyWelcomeClose').onclick = close;
+    if ($('kyWelcomeEnter')) $('kyWelcomeEnter').onclick = close;
     if (!seen) {
       modal.classList.add('show');
       modal.setAttribute('aria-hidden', 'false');
@@ -279,42 +251,12 @@
     var clear = $('clearSearch');
     var game = $('gameFilter');
     var sort = $('sortSelect');
-    var qrClose = $('qrClose');
-    var qrModal = $('qrModal');
-
-    if (input) input.oninput = function () {
-      state.q = input.value;
-      state.readyPage = 1;
-      state.soldPage = 1;
-      render();
-    };
-
-    if (clear) clear.onclick = function () {
-      state.q = '';
-      if (input) input.value = '';
-      state.readyPage = 1;
-      state.soldPage = 1;
-      render();
-    };
-
-    if (game) game.onchange = function () {
-      state.game = game.value;
-      state.readyPage = 1;
-      state.soldPage = 1;
-      render();
-    };
-
-    if (sort) sort.onchange = function () {
-      state.sort = sort.value;
-      state.readyPage = 1;
-      state.soldPage = 1;
-      render();
-    };
-
-    if (qrClose) qrClose.onclick = closeQR;
-    if (qrModal) qrModal.addEventListener('click', function (e) {
-      if (e.target === qrModal) closeQR();
-    });
+    if (input) input.oninput = function () { state.q = input.value; state.readyPage = 1; state.soldPage = 1; render(); };
+    if (clear) clear.onclick = function () { state.q = ''; if (input) input.value = ''; state.readyPage = 1; state.soldPage = 1; render(); };
+    if (game) game.onchange = function () { state.game = game.value; state.readyPage = 1; state.soldPage = 1; render(); };
+    if (sort) sort.onchange = function () { state.sort = sort.value; state.readyPage = 1; state.soldPage = 1; render(); };
+    if ($('qrClose')) $('qrClose').onclick = closeQR;
+    if ($('qrModal')) $('qrModal').onclick = function (e) { if (e.target === $('qrModal')) closeQR(); };
   }
 
   window.initHome = function () {

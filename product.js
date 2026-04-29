@@ -1,6 +1,5 @@
 (function () {
   'use strict';
-
   var ADMIN_WA = '6283863831670';
   var ADMIN_TG = 'DedySetyadi226';
   var ADMIN_FB = 'https://www.facebook.com/kyu.sei.924076';
@@ -20,19 +19,15 @@
     if (!p || p.sold) return;
     var modal = $('qrModal');
     if (!modal) return;
-
     if ($('qrProduct')) $('qrProduct').textContent = safe(p.code) + ' • ' + safe(p.name);
     if ($('qrPrice')) $('qrPrice').textContent = rupiah(p.price);
-
     var msg = 'Halo admin, saya mau beli akun ' + safe(p.code) + ' - ' + safe(p.name) + ' harga ' + rupiah(p.price) + '. Saya sudah scan QRIS, berikut bukti pembayaran saya.';
     if ($('qrWA')) $('qrWA').onclick = function () { window.open('https://wa.me/' + ADMIN_WA + '?text=' + encodeURIComponent(msg), '_blank'); };
     if ($('qrTG')) $('qrTG').onclick = function () { window.open('https://t.me/' + ADMIN_TG, '_blank'); };
     if ($('qrFB')) $('qrFB').onclick = function () { window.open(ADMIN_FB, '_blank'); };
-
     modal.classList.add('show');
     modal.setAttribute('aria-hidden', 'false');
   }
-
   function closeQR() {
     var modal = $('qrModal');
     if (!modal) return;
@@ -43,15 +38,15 @@
   window.initProduct = function (params) {
     var code = params && params.code ? params.code : '';
     var p = findProduct(code);
-
     if (!p) {
       document.getElementById('app').innerHTML = '<main class="wrap"><p>Produk tidak ditemukan.</p><a class="btn" href="#/home">Kembali</a></main>';
       return;
     }
-
     document.title = (p.name || 'Produk') + ' - Kyusei Store';
     if ($('prodName')) $('prodName').textContent = p.name || 'Produk';
     if ($('prodMeta')) $('prodMeta').textContent = safe(p.code) + ' • ' + rupiah(p.price) + (p.sold ? ' • SOLD' : '');
+
+    try { localStorage.setItem('lastProductUrl', '#/product?code=' + encodeURIComponent(p.code)); } catch (e) {}
 
     var photos = Array.isArray(p.photos) ? p.photos : [];
     var current = 0;
@@ -64,7 +59,6 @@
       hero.src = resolve(photos[current]);
       hero.alt = (p.name || 'Produk') + ' ' + (current + 1);
     }
-
     setHero(0);
 
     if (thumbs) {
@@ -94,7 +88,6 @@
       $('lbImg').src = resolve(photos[current]);
       if ($('lbCaption')) $('lbCaption').textContent = (p.name || 'Produk') + ' • ' + (current + 1) + ' / ' + photos.length;
     }
-
     function openLight(i) {
       if (!photos.length) return;
       current = i;
@@ -104,14 +97,12 @@
       lightbox.setAttribute('aria-hidden', 'false');
       renderLight();
     }
-
     function closeLight() {
       var lightbox = $('lightbox');
       if (!lightbox) return;
       lightbox.classList.remove('open');
       lightbox.setAttribute('aria-hidden', 'true');
     }
-
     if ($('openLightboxBtn')) $('openLightboxBtn').onclick = function () { openLight(current); };
     if ($('lbClose')) $('lbClose').onclick = closeLight;
     if ($('lbPrev')) $('lbPrev').onclick = function () { current = (current - 1 + photos.length) % photos.length; renderLight(); };
@@ -123,33 +114,19 @@
       var detailList = $('detailList');
       var empty = $('detailEmpty');
       if (!modal || !detailList) return;
-
       if ($('detailSub')) $('detailSub').textContent = safe(p.code) + ' • ' + rupiah(p.price) + (p.sold ? ' • SOLD' : '');
       detailList.innerHTML = '';
       var det = Array.isArray(p.detail) ? p.detail : [];
-
       if (!det.length) {
         if (empty) empty.style.display = 'block';
       } else {
         if (empty) empty.style.display = 'none';
-        det.forEach(function (t) {
-          var li = document.createElement('li');
-          li.textContent = safe(t);
-          detailList.appendChild(li);
-        });
+        det.forEach(function (t) { var li = document.createElement('li'); li.textContent = safe(t); detailList.appendChild(li); });
       }
-
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
     }
-
-    function closeDetail() {
-      var modal = $('detailModal');
-      if (!modal) return;
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
-    }
-
+    function closeDetail() { var modal = $('detailModal'); if (modal) { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); } }
     if ($('detailBtn')) $('detailBtn').onclick = openDetail;
     if ($('detailClose')) $('detailClose').onclick = closeDetail;
     if ($('detailModal')) $('detailModal').onclick = function (e) { if (e.target === $('detailModal')) closeDetail(); };
