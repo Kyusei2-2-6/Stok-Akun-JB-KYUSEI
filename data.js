@@ -209,7 +209,7 @@ var PRODUCTS = [
     "name": "Starter Neuvillette",
     "game": "genshin",
     "price": 60000,
-    "sold": false,
+    "sold": true,
     "photos": [
       "assets/products/genshin/A009/1.jpg",
       "assets/products/genshin/A009/2.jpg",
