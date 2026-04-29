@@ -49,17 +49,17 @@ img{display:block;max-width:100%}
   inset:0;
   z-index:-2;
   background:
-    linear-gradient(90deg,rgba(5,7,13,.94) 0%,rgba(5,7,13,.66) 47%,rgba(5,7,13,.88) 100%),
-    linear-gradient(180deg,rgba(5,7,13,.14),rgba(5,7,13,.92)),
-    url('assets/ui/top.png') center 36%/cover no-repeat;
-  opacity:.78;
+    linear-gradient(90deg,rgba(5,7,13,.50) 0%,rgba(5,7,13,.28) 48%,rgba(5,7,13,.56) 100%),
+    linear-gradient(180deg,rgba(5,7,13,.02),rgba(5,7,13,.42)),
+    url('assets/ui/top.png') center 34%/cover no-repeat;
+  opacity:1;
 }
 .kyHeader::after{
   content:"";
   position:absolute;
-  inset:auto -20% -20px -20%;
-  height:70px;
-  background:radial-gradient(circle at 50% 100%,rgba(255,65,99,.18),transparent 65%);
+  inset:auto -20% -16px -20%;
+  height:56px;
+  background:radial-gradient(circle at 50% 100%,rgba(255,65,99,.12),transparent 68%);
   pointer-events:none;
   z-index:-1;
 }
@@ -366,16 +366,16 @@ img{display:block;max-width:100%}
 .cardGame{margin-top:8px;color:var(--muted);font-size:14px;font-weight:850}
 .buyBtn{
   position:absolute;
-  right:13px;
-  bottom:13px;
-  width:54px;
-  height:54px;
+  right:12px;
+  bottom:12px;
+  width:42px;
+  height:42px;
   border:0;
   border-radius:50%;
   background:linear-gradient(135deg,#41e777,#19b856);
-  box-shadow:0 0 0 1px rgba(255,255,255,.13) inset,0 0 24px rgba(67,228,122,.34);
+  box-shadow:0 0 0 1px rgba(255,255,255,.13) inset,0 0 18px rgba(67,228,122,.30);
 }
-.buyBtn::before{content:"☎";font-size:24px;color:#fff;font-weight:900;line-height:54px}
+.buyBtn::before{content:"🛒";font-size:19px;color:#fff;font-weight:900;line-height:42px}
 .emptyBox{
   grid-column:1/-1;
   min-height:120px;
@@ -585,7 +585,38 @@ img{display:block;max-width:100%}
   .cardMedia{height:110px}
   .cardNameRow h3{font-size:19px}
   .cardPrice{font-size:22px}
-  .buyBtn{width:50px;height:50px}
-  .buyBtn::before{line-height:50px}
+  .buyBtn{width:40px;height:40px}
+  .buyBtn::before{font-size:18px;line-height:40px}
   .kySectionHead h2{font-size:28px}
+}
+
+
+/* =========================================================
+   FINAL HOTFIX: HEADER LEBIH TERANG + TOMBOL BELI KECIL
+   ========================================================= */
+.kyHeaderBg{
+  background:
+    linear-gradient(90deg,rgba(5,7,13,.48) 0%,rgba(5,7,13,.24) 48%,rgba(5,7,13,.52) 100%),
+    linear-gradient(180deg,rgba(5,7,13,.02),rgba(5,7,13,.40)),
+    url('assets/ui/top.png') center 34%/cover no-repeat !important;
+  opacity:1 !important;
+}
+.kyHeader::after{
+  height:52px !important;
+  background:radial-gradient(circle at 50% 100%,rgba(255,65,99,.10),transparent 70%) !important;
+}
+.buyBtn{
+  width:42px !important;
+  height:42px !important;
+  right:12px !important;
+  bottom:12px !important;
+}
+.buyBtn::before{
+  content:"🛒" !important;
+  font-size:18px !important;
+  line-height:42px !important;
+}
+@media (max-width:380px){
+  .buyBtn{width:40px !important;height:40px !important}
+  .buyBtn::before{font-size:17px !important;line-height:40px !important}
 }
