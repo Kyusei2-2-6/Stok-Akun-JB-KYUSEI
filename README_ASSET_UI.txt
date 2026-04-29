@@ -1,33 +1,36 @@
-DAFTAR ASSET UI YANG DIPAKAI
+KYUSEI UI ASSET - YANG KEPAKE
 
-Folder: assets/ui/
+Kalau mau ganti gambar, upload gambar baru dengan NAMA YANG SAMA ke folder assets/ui/.
 
 1. top.png
-   Dipakai untuk background utama/header/body tipis/background grid.
-   Kalau mau ganti tema Hu Tao/background web, upload gambar baru dengan nama yang sama: top.png
+   Background header atas + header detail produk.
 
-2. welcome.png
-   Dipakai untuk welcome popup dan cover depan produk SOLD.
-   Kalau mau ganti cover SOLD/welcome art, upload gambar baru dengan nama yang sama: welcome.png
+2. body.png
+   Background utama/body di belakang kartu produk.
 
-3. logo.jpg
-   Dipakai untuk logo bulat kanan atas.
-   Kalau mau ganti logo toko, upload gambar baru dengan nama yang sama: logo.jpg
+3. footer.png
+   Background footer bawah.
 
-4. qris.png
-   Dipakai untuk QRIS di popup pembayaran.
-   Kalau QRIS berubah, upload QR baru dengan nama yang sama: qris.png
+4. logo.jpg
+   Logo kanan atas.
 
-5. icon-wa.png
-   Icon WhatsApp di footer dan popup pembayaran.
+5. welcome-hutao.png
+   Gambar popup welcome.
 
-6. icon-facebook.png
-   Icon Facebook di footer dan popup pembayaran.
+6. sold-cover.png
+   Cover depan untuk produk SOLD. Saat diklik, detail tetap foto asli produk.
 
-7. icon-telegram.png
-   Icon Telegram di footer dan popup pembayaran.
+7. qris.png
+   QRIS popup pembayaran.
 
-CATATAN:
-- Folder assets/products/ jangan dihapus karena itu foto produk dari bot Telegram.
-- File data.js jangan dihapus karena itu data stok.
-- Patch ini sengaja meringkas asset UI supaya tidak kebanyakan file.
+8. bg-grid.png
+   Background tipis di panel/grid produk.
+
+9. bg-qris.jpg
+   Background popup QRIS.
+
+10. icon-wa.png, icon-facebook.png, icon-telegram.png
+   Icon tombol kontak footer dan popup QRIS.
+
+Asset lain di assets/ui adalah sisa backup/eksperimen lama. Boleh dibiarkan.
+Jangan hapus assets/products/ karena itu foto produk dari bot Telegram.

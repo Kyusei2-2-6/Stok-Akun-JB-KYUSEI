@@ -3,7 +3,7 @@
 
   var READY_PER_PAGE = 4;
   var SOLD_PER_PAGE = 6;
-  var SOLD_COVER = 'assets/ui/welcome.png';
+  var SOLD_COVER = 'assets/ui/sold-cover.png';
   var FALLBACK_COVER = 'assets/ui/top.png';
   var ADMIN_WA = '6283863831670';
   var ADMIN_TG = 'DedySetyadi226';
