@@ -49,10 +49,10 @@ img{display:block;max-width:100%}
   inset:0;
   z-index:-2;
   background:
-    linear-gradient(90deg,rgba(5,7,13,.68) 0%,rgba(5,7,13,.36) 48%,rgba(5,7,13,.64) 100%),
-    linear-gradient(180deg,rgba(5,7,13,.04),rgba(5,7,13,.54)),
+    linear-gradient(90deg,rgba(5,7,13,.94) 0%,rgba(5,7,13,.66) 47%,rgba(5,7,13,.88) 100%),
+    linear-gradient(180deg,rgba(5,7,13,.14),rgba(5,7,13,.92)),
     url('assets/ui/top.png') center 36%/cover no-repeat;
-  opacity:1;
+  opacity:.78;
 }
 .kyHeader::after{
   content:"";
@@ -101,7 +101,7 @@ img{display:block;max-width:100%}
 .kySub{
   margin-top:10px;
   max-width:330px;
-  color:rgba(255,255,255,.90);
+  color:rgba(255,255,255,.76);
   font-size:14px;
   font-weight:650;
 }
@@ -375,7 +375,7 @@ img{display:block;max-width:100%}
   background:linear-gradient(135deg,#41e777,#19b856);
   box-shadow:0 0 0 1px rgba(255,255,255,.13) inset,0 0 24px rgba(67,228,122,.34);
 }
-.buyBtn::before{content:"🛒";font-size:24px;color:#fff;font-weight:900;line-height:54px}
+.buyBtn::before{content:"☎";font-size:24px;color:#fff;font-weight:900;line-height:54px}
 .emptyBox{
   grid-column:1/-1;
   min-height:120px;
