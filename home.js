@@ -14,7 +14,10 @@
   function safe(v) { return String(v == null ? '' : v); }
   function low(v) { return safe(v).toLowerCase(); }
   function list() { return Array.isArray(window.PRODUCTS) ? window.PRODUCTS.slice() : []; }
-  function isSold(p) { return !!(p && p.sold === true); }
+  function isSold(p) {
+    if (!p) return false;
+    return p.sold === true || String(p.sold).toLowerCase() === 'true' || String(p.status || '').toLowerCase() === 'sold';
+  }
 
   function rupiah(num) {
     if (typeof window.rupiah === 'function') return window.rupiah(num);
@@ -260,6 +263,7 @@
   }
 
   window.initHome = function () {
+    try { if ("scrollRestoration" in history) history.scrollRestoration = "manual"; window.scrollTo(0, 0); } catch (e) {}
     if ($('siteName') && window.SITE_NAME) $('siteName').textContent = window.SITE_NAME;
     state = { q: '', game: 'all', sort: 'code', readyPage: 1, soldPage: 1 };
     bind();

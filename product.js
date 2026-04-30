@@ -13,10 +13,11 @@
     return 'Rp' + n.toLocaleString('id-ID');
   }
   function findProduct(code) { return list().find(function (p) { return safe(p.code) === safe(code); }); }
+  function isSold(p) { return !!(p && (p.sold === true || String(p.sold).toLowerCase() === "true" || String(p.status || "").toLowerCase() === "sold")); }
   function resolve(path) { try { return new URL(path, document.baseURI).href; } catch (e) { return path; } }
 
   function openQR(p) {
-    if (!p || p.sold) return;
+    if (!p || isSold(p)) return;
     var modal = $('qrModal');
     if (!modal) return;
     if ($('qrProduct')) $('qrProduct').textContent = safe(p.code) + ' • ' + safe(p.name);
@@ -44,7 +45,7 @@
     }
     document.title = (p.name || 'Produk') + ' - Kyusei Store';
     if ($('prodName')) $('prodName').textContent = p.name || 'Produk';
-    if ($('prodMeta')) $('prodMeta').textContent = safe(p.code) + ' • ' + rupiah(p.price) + (p.sold ? ' • SOLD' : '');
+    if ($('prodMeta')) $('prodMeta').textContent = safe(p.code) + ' • ' + rupiah(p.price) + (isSold(p) ? ' • SOLD' : '');
 
     try { localStorage.setItem('lastProductUrl', '#/product?code=' + encodeURIComponent(p.code)); } catch (e) {}
 
@@ -74,7 +75,7 @@
 
     var buy = $('buyProductBtn');
     if (buy) {
-      if (p.sold) {
+      if (isSold(p)) {
         buy.textContent = 'SOLD';
         buy.disabled = true;
         buy.style.opacity = '.55';
@@ -114,7 +115,7 @@
       var detailList = $('detailList');
       var empty = $('detailEmpty');
       if (!modal || !detailList) return;
-      if ($('detailSub')) $('detailSub').textContent = safe(p.code) + ' • ' + rupiah(p.price) + (p.sold ? ' • SOLD' : '');
+      if ($('detailSub')) $('detailSub').textContent = safe(p.code) + ' • ' + rupiah(p.price) + (isSold(p) ? ' • SOLD' : '');
       detailList.innerHTML = '';
       var det = Array.isArray(p.detail) ? p.detail : [];
       if (!det.length) {

@@ -41,6 +41,7 @@
       var res = await fetch(page, { cache: "no-cache" });
       var html = await res.text();
       app.innerHTML = html;
+      if (route === "home") { try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; window.scrollTo(0, 0); } catch (e) {} }
 
       if (route === "home" && typeof window.initHome === "function") {
         window.initHome();

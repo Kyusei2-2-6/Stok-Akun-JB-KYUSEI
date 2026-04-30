@@ -642,3 +642,19 @@ img{display:block;max-width:100%}
   .buyBtn{width:40px !important;height:40px !important}
   .buyBtn::before{font-size:17px !important;line-height:40px !important}
 }
+
+/* KYUSEI SAFE FIX 2026-04-30 */
+html,body{min-height:100%;background:#05070d!important}
+body{position:relative}
+#app{position:relative;z-index:0;background:transparent!important}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(5,7,13,.42),rgba(5,7,13,.72)),url('assets/ui/body.jpg') center/cover no-repeat;opacity:1;filter:brightness(1.14) saturate(1.12) contrast(1.04);pointer-events:none}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(circle at 78% 34%,rgba(255,65,99,.18),transparent 38%),radial-gradient(circle at 12% 60%,rgba(67,228,122,.07),transparent 40%);pointer-events:none}
+.kyHeader{position:relative!important;z-index:5!important;isolation:isolate;min-height:auto!important;background:rgba(5,7,13,.36)!important}
+.kyHeaderBg{z-index:-1!important;opacity:1!important;background:linear-gradient(90deg,rgba(5,7,13,.28) 0%,rgba(5,7,13,.08) 48%,rgba(5,7,13,.32) 100%),linear-gradient(180deg,rgba(5,7,13,.02),rgba(5,7,13,.22)),url('assets/ui/top.png') center 34%/cover no-repeat!important;filter:brightness(1.18) saturate(1.08) contrast(1.03)!important}
+.kyHeadTop,.kySub,.kyStats,.kySearchRow,.kyFilterRow{position:relative;z-index:2;visibility:visible!important;opacity:1!important}
+.kyMain{position:relative!important;z-index:1!important;background:rgba(5,7,13,.18)!important}
+.kyMain::before{position:absolute!important;inset:0!important;z-index:-2!important;background:transparent!important;opacity:0!important;filter:none!important}
+.kyMain::after{z-index:-1!important;opacity:.75!important}
+.readySection{min-height:0!important}
+.buyBtn{width:42px!important;height:42px!important;right:12px!important;bottom:12px!important}
+.buyBtn::before{content:"🛒"!important;font-size:18px!important;line-height:42px!important}
