@@ -814,3 +814,226 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradi
   .kyTools summary{min-height:34px !important;font-size:13px !important;border-radius:13px !important}
   .kyMain{padding-top:9px !important}
 }
+
+
+/* =========================================================
+   KYUSEI EMERGENCY FIX - HEADER MINI + NO BLACK BACKGROUND
+   Dipasang terakhir agar override patch lama yang bikin web hitam.
+   ========================================================= */
+html, body{
+  min-height:100% !important;
+  background:#05070d !important;
+}
+body::before, body::after{
+  content:none !important;
+  display:none !important;
+}
+#app{
+  min-height:100vh !important;
+  background:#05070d !important;
+  position:relative !important;
+  z-index:auto !important;
+}
+
+/* Header super ringkas tapi tetap ada fitur */
+.kyHeader{
+  position:relative !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+  padding:6px 14px 7px !important;
+  min-height:0 !important;
+  border-bottom:1px solid rgba(255,255,255,.09) !important;
+  background:
+    linear-gradient(90deg,rgba(5,7,13,.35),rgba(5,7,13,.05),rgba(5,7,13,.38)),
+    url('assets/ui/top.png') center 30%/cover no-repeat !important;
+}
+.kyHeaderBg{
+  display:none !important;
+}
+.kyHeader::after{
+  content:"" !important;
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  height:34px !important;
+  z-index:-1 !important;
+  background:linear-gradient(180deg,transparent,rgba(5,7,13,.38)) !important;
+  pointer-events:none !important;
+}
+.kyHeadTop{
+  position:relative !important;
+  z-index:2 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:8px !important;
+}
+.kyTitleBox h1{
+  font-size:23px !important;
+  line-height:.92 !important;
+  letter-spacing:-.6px !important;
+  font-weight:950 !important;
+}
+.kyTitleBox span{
+  margin-top:3px !important;
+  padding:4px 9px !important;
+  border-radius:999px !important;
+  font-size:8.8px !important;
+  letter-spacing:.07em !important;
+}
+.kyLogo{
+  width:35px !important;
+  height:35px !important;
+  border-width:2px !important;
+}
+.kyCompactInfo{
+  position:relative !important;
+  z-index:2 !important;
+  display:block !important;
+  margin-top:5px !important;
+}
+.kySub{
+  display:none !important;
+}
+.kyStats{
+  display:grid !important;
+  grid-template-columns:repeat(3,1fr) !important;
+  gap:5px !important;
+  margin-top:0 !important;
+}
+.kyStats>div{
+  min-height:31px !important;
+  padding:5px 8px !important;
+  border-radius:11px !important;
+  background:rgba(7,10,17,.70) !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+  backdrop-filter:blur(8px) !important;
+  box-shadow:0 6px 14px rgba(0,0,0,.18) !important;
+}
+.kyStats b{
+  font-size:16px !important;
+  line-height:.82 !important;
+}
+.kyStats small{
+  font-size:8.5px !important;
+  margin-top:3px !important;
+}
+
+/* Tombol Cari/Filter dibuat jelas seperti tombol */
+.kyTools{
+  position:relative !important;
+  z-index:3 !important;
+  margin-top:5px !important;
+}
+.kyTools summary{
+  list-style:none !important;
+  min-height:33px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:7px !important;
+  border-radius:13px !important;
+  color:#fff !important;
+  font-size:13px !important;
+  font-weight:950 !important;
+  background:linear-gradient(135deg,rgba(67,228,122,.98),rgba(25,184,86,.92)) !important;
+  border:1px solid rgba(255,255,255,.30) !important;
+  box-shadow:0 8px 22px rgba(67,228,122,.22), inset 0 1px 0 rgba(255,255,255,.22) !important;
+  text-shadow:0 1px 7px rgba(0,0,0,.30) !important;
+  cursor:pointer !important;
+  user-select:none !important;
+}
+.kyTools summary::-webkit-details-marker{display:none !important}
+.kyTools summary::before{
+  content:"🔎" !important;
+  font-size:14px !important;
+}
+.kyTools summary::after{
+  content:"⌄" !important;
+  margin-left:2px !important;
+  color:#fff !important;
+  font-size:14px !important;
+}
+.kyTools[open] summary{
+  background:linear-gradient(135deg,rgba(255,65,99,.98),rgba(255,107,61,.94)) !important;
+  box-shadow:0 8px 22px rgba(255,65,99,.22), inset 0 1px 0 rgba(255,255,255,.22) !important;
+}
+.kyTools[open] summary::after{content:"⌃" !important}
+.kyToolsPanel{
+  padding-top:6px !important;
+}
+.kySearchRow{
+  display:grid !important;
+  grid-template-columns:1fr auto !important;
+  gap:7px !important;
+  margin-top:0 !important;
+}
+.kySearch{
+  height:38px !important;
+  border-radius:13px !important;
+  padding:0 10px !important;
+  background:rgba(3,6,12,.88) !important;
+}
+.kySearch span{font-size:18px !important}
+.kySearch input{font-size:12.8px !important}
+.kyReset{
+  height:38px !important;
+  min-width:64px !important;
+  padding:0 11px !important;
+  border-radius:13px !important;
+  font-size:12.8px !important;
+}
+.kyFilterRow{
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:7px !important;
+  margin-top:7px !important;
+}
+.kySelect{
+  height:37px !important;
+  border-radius:13px !important;
+  font-size:12.8px !important;
+  padding:0 10px !important;
+}
+
+/* Body jangan hitam polos: background langsung di main, bukan pseudo minus z-index */
+.kyMain{
+  position:relative !important;
+  isolation:isolate !important;
+  z-index:1 !important;
+  padding:10px 18px 8px !important;
+  background:
+    linear-gradient(180deg,rgba(5,7,13,.50),rgba(5,7,13,.82)),
+    url('assets/ui/body.jpg') center top/cover fixed no-repeat !important;
+}
+.kyMain::before,
+.kyMain::after{
+  content:none !important;
+  display:none !important;
+}
+.kySection{margin-bottom:22px !important}
+.kySectionHead{margin-bottom:11px !important}
+.kySectionHead h2{font-size:29px !important}
+.kySectionHead p{font-size:14px !important}
+.kySectionHead small{font-size:13px !important;padding:8px 12px !important}
+
+/* Footer tetap punya background, tidak hitam polos */
+.kyFooter{
+  background:
+    linear-gradient(180deg,rgba(5,7,13,.86),rgba(5,7,13,.96)),
+    url('assets/ui/footer.png') center/cover no-repeat !important;
+}
+.kyFooter::before{content:none !important;display:none !important}
+
+@media (max-width:420px){
+  .kyHeader{padding:6px 13px 7px !important}
+  .kyTitleBox h1{font-size:22px !important}
+  .kyTitleBox span{font-size:8.5px !important;padding:4px 8px !important}
+  .kyLogo{width:34px !important;height:34px !important}
+  .kyStats>div{min-height:30px !important;padding:5px 7px !important}
+  .kyStats b{font-size:15.5px !important}
+  .kyStats small{font-size:8.2px !important}
+  .kyTools summary{min-height:32px !important;font-size:12.8px !important}
+  .kyMain{padding-top:9px !important}
+}
