@@ -658,3 +658,74 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradi
 .readySection{min-height:0!important}
 .buyBtn{width:42px!important;height:42px!important;right:12px!important;bottom:12px!important}
 .buyBtn::before{content:"🛒"!important;font-size:18px!important;line-height:42px!important}
+
+/* =========================================================
+   KYUSEI COMPACT HEADER FIX
+   Header dibuat minimal: fitur cari/filter disembunyikan dulu,
+   tetap bisa dibuka lewat tombol "Cari / Filter".
+   ========================================================= */
+.kyHeader{
+  padding:12px 18px 12px !important;
+  min-height:0 !important;
+  background:rgba(5,7,13,.34) !important;
+  border-bottom:1px solid rgba(255,255,255,.10) !important;
+}
+.kyHeaderBg{
+  background:
+    linear-gradient(90deg,rgba(5,7,13,.30) 0%,rgba(5,7,13,.06) 52%,rgba(5,7,13,.34) 100%),
+    linear-gradient(180deg,rgba(5,7,13,.00),rgba(5,7,13,.26)),
+    url('assets/ui/top.png') center 32%/cover no-repeat !important;
+  filter:brightness(1.24) saturate(1.10) contrast(1.02) !important;
+}
+.kyHeader::after{height:28px !important;opacity:.65 !important}
+.kyHeadTop{align-items:center !important;gap:10px !important}
+.kyTitleBox h1{font-size:31px !important;line-height:.95 !important}
+.kyTitleBox span{margin-top:6px !important;padding:6px 13px !important;font-size:11px !important}
+.kyLogo{width:48px !important;height:48px !important;border-width:2px !important}
+.kyCompactInfo{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px;position:relative;z-index:2}
+.kySub{margin-top:0 !important;font-size:12.5px !important;line-height:1.2 !important;max-width:none !important;color:rgba(255,255,255,.78) !important}
+.kyStats{margin-top:0 !important;gap:7px !important}
+.kyStats>div{min-height:48px !important;padding:8px 10px !important;border-radius:15px !important;background:rgba(8,12,20,.80) !important}
+.kyStats b{font-size:22px !important;line-height:.92 !important}
+.kyStats small{font-size:11px !important;margin-top:5px !important}
+.kyTools{position:relative;z-index:3;margin-top:9px}
+.kyTools summary{
+  list-style:none;
+  min-height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border-radius:16px;
+  color:#fff;
+  font-weight:900;
+  background:rgba(3,6,12,.82);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 10px 24px rgba(0,0,0,.20);
+  cursor:pointer;
+  user-select:none;
+}
+.kyTools summary::-webkit-details-marker{display:none}
+.kyTools summary::after{content:"⌄";margin-left:4px;font-size:16px;color:rgba(255,255,255,.76)}
+.kyTools[open] summary::after{content:"⌃"}
+.kyToolsPanel{padding-top:9px;animation:kyDrop .18s ease both}
+@keyframes kyDrop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.kySearchRow{margin-top:0 !important;gap:8px !important}
+.kySearch{height:44px !important;border-radius:15px !important;padding:0 12px !important;background:rgba(3,6,12,.86) !important}
+.kySearch input{font-size:13.5px !important}
+.kyReset{height:44px !important;min-width:72px !important;border-radius:15px !important;padding:0 14px !important;font-size:14px !important}
+.kyFilterRow{margin-top:8px !important;gap:8px !important}
+.kySelect{height:42px !important;border-radius:15px !important;font-size:14px !important;padding:0 12px !important}
+.kyMain{padding-top:14px !important}
+.kySectionHead{margin-bottom:12px !important}
+
+@media (max-width:420px){
+  .kyHeader{padding:11px 16px 11px !important}
+  .kyTitleBox h1{font-size:28px !important}
+  .kyTitleBox span{font-size:10.5px !important;padding:5px 12px !important}
+  .kyLogo{width:44px !important;height:44px !important}
+  .kyStats>div{min-height:45px !important;padding:7px 9px !important}
+  .kyStats b{font-size:21px !important}
+  .kyStats small{font-size:10.5px !important}
+  .kyTools summary{min-height:40px !important;border-radius:15px !important;font-size:14px !important}
+}

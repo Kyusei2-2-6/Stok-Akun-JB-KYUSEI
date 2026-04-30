@@ -7,36 +7,43 @@
     </div>
     <img class="kyLogo" src="assets/ui/logo.jpg" alt="Logo Kyusei">
   </div>
-  <p class="kySub">Klik produk untuk lihat detail & foto</p>
+  <div class="kyCompactInfo">
+    <p class="kySub">Klik produk untuk lihat detail & foto</p>
 
-  <div class="kyStats" aria-label="Ringkasan stok">
-    <div><b id="statReady">0</b><small>Ready</small></div>
-    <div><b id="statSold">0</b><small>Sold</small></div>
-    <div><b id="statTotal">0</b><small>Total</small></div>
+    <div class="kyStats" aria-label="Ringkasan stok">
+      <div><b id="statReady">0</b><small>Ready</small></div>
+      <div><b id="statSold">0</b><small>Sold</small></div>
+      <div><b id="statTotal">0</b><small>Total</small></div>
+    </div>
   </div>
 
-  <div class="kySearchRow">
-    <label class="kySearch">
-      <span aria-hidden="true">⌕</span>
-      <input id="catalogSearch" type="search" placeholder="Cari nama / kode akun..." autocomplete="off">
-    </label>
-    <button id="clearSearch" class="kyReset" type="button">Reset</button>
-  </div>
+  <details class="kyTools">
+    <summary>🔎 Cari / Filter</summary>
+    <div class="kyToolsPanel">
+      <div class="kySearchRow">
+        <label class="kySearch">
+          <span aria-hidden="true">⌕</span>
+          <input id="catalogSearch" type="search" placeholder="Cari nama / kode akun..." autocomplete="off">
+        </label>
+        <button id="clearSearch" class="kyReset" type="button">Reset</button>
+      </div>
 
-  <div class="kyFilterRow">
-    <select id="gameFilter" class="kySelect" aria-label="Filter game">
-      <option value="all">Semua game</option>
-      <option value="genshin">Genshin</option>
-      <option value="toram">Toram</option>
-      <option value="ml">ML</option>
-    </select>
-    <select id="sortSelect" class="kySelect" aria-label="Urutkan produk">
-      <option value="code">Urut kode</option>
-      <option value="cheap">Termurah</option>
-      <option value="expensive">Termahal</option>
-      <option value="new">Terbaru</option>
-    </select>
-  </div>
+      <div class="kyFilterRow">
+        <select id="gameFilter" class="kySelect" aria-label="Filter game">
+          <option value="all">Semua game</option>
+          <option value="genshin">Genshin</option>
+          <option value="toram">Toram</option>
+          <option value="ml">ML</option>
+        </select>
+        <select id="sortSelect" class="kySelect" aria-label="Urutkan produk">
+          <option value="code">Urut kode</option>
+          <option value="cheap">Termurah</option>
+          <option value="expensive">Termahal</option>
+          <option value="new">Terbaru</option>
+        </select>
+      </div>
+    </div>
+  </details>
 </header>
 
 <main class="kyMain">
