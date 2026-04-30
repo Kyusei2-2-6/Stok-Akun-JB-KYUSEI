@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#070b12" />
+  <meta name="theme-color" content="#0a0305" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-  <title>Kyusei Store</title>
+  <title>Kyusei Store — Akun Game Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <script>
     window.KYUSEI_ASSET_VERSION = Date.now();
     document.write('<link rel="stylesheet" href="./style.css?v=' + window.KYUSEI_ASSET_VERSION + '" />');
@@ -15,12 +16,11 @@
 </head>
 <body>
   <div id="app"></div>
-
   <script>
     (function () {
       var v = window.KYUSEI_ASSET_VERSION || Date.now();
-      ["data.js", "home.js", "product.js", "router.js", "auto-refresh.js"].forEach(function (file) {
-        document.write('<script src="./' + file + '?v=' + v + '"><\\/script>');
+      ["data.js","home.js","product.js","router.js","auto-refresh.js"].forEach(function(file){
+        document.write('<script src="./' + file + '?v=' + v + '"><\/script>');
       });
     })();
   </script>
