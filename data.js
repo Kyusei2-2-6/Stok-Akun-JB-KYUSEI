@@ -332,6 +332,22 @@ var PRODUCTS = [
     "detail": [
       "region baru mondo"
     ]
+  },
+  {
+    "code": "C002",
+    "name": "N",
+    "game": "ml",
+    "price": 1,
+    "sold": false,
+    "photos": [
+      "assets/products/ml/C002/1.jpg",
+      "assets/products/ml/C002/2.jpg",
+      "assets/products/ml/C002/3.jpg",
+      "assets/products/ml/C002/4.jpg"
+    ],
+    "detail": [
+      "P"
+    ]
   }
 ];
 function rupiah(n) {
