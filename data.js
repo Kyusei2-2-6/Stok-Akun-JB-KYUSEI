@@ -332,19 +332,6 @@ var PRODUCTS = [
     "detail": [
       "region baru mondo"
     ]
-  },
-  {
-    "code": "F001",
-    "name": "/cancelnew",
-    "game": "genshin",
-    "price": 100,
-    "sold": false,
-    "photos": [
-      "assets/products/genshin/F001/1.jpg"
-    ],
-    "detail": [
-      "J"
-    ]
   }
 ];
 function rupiah(n) {
