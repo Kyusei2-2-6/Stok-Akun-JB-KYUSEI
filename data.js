@@ -334,13 +334,13 @@ var PRODUCTS = [
     ]
   },
   {
-    "code": "B018",
+    "code": "A013",
     "name": "Akun End game",
     "game": "genshin",
     "price": 450000,
     "sold": false,
     "photos": [
-      "assets/products/genshin/B018/1.jpg"
+      "assets/products/genshin/A013/1.jpg"
     ],
     "detail": [
       "Akun end game bahan konten + showcase  mid build char + meta 😋 minus sign dikit gak ngaruh 😋"
