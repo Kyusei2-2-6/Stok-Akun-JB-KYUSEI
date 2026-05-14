@@ -345,6 +345,26 @@ var PRODUCTS = [
     "detail": [
       "Akun end game bahan konten + showcase  mid build char + meta 😋 minus sign dikit gak ngaruh 😋"
     ]
+  },
+  {
+    "code": "A014",
+    "name": "Starter Chasca",
+    "game": "genshin",
+    "price": 85000,
+    "sold": false,
+    "photos": [
+      "assets/products/genshin/A014/1.jpg",
+      "assets/products/genshin/A014/2.jpg"
+    ],
+    "detail": [
+      "🌐 Server: Asia",
+      "🔰 AR: 5",
+      "⭐ Karakter 5★:Chasca, Keqing",
+      "⚔️ Weapon 5★:-",
+      "👤 Username: Unset",
+      "🎂 Birthdate (BD): Unset",
+      "📝 Note: -"
+    ]
   }
 ];
 function rupiah(n) {
