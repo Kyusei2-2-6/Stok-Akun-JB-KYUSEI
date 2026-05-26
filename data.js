@@ -365,6 +365,27 @@ var PRODUCTS = [
       "🎂 Birthdate (BD): Unset",
       "📝 Note: -"
     ]
+  },
+  {
+    "code": "A015",
+    "name": "Starter Nicole",
+    "game": "genshin",
+    "price": 75000,
+    "sold": false,
+    "photos": [
+      "assets/products/genshin/A015/1.jpg",
+      "assets/products/genshin/A015/2.jpg",
+      "assets/products/genshin/A015/3.jpg"
+    ],
+    "detail": [
+      "🌐 Server: Asia",
+      "🔰 AR: 5",
+      "⭐ Karakter 5★: Nicole",
+      "⚔️ Weapon 5★: -",
+      "👤 Username: Unset",
+      "🎂 Birthdate (BD): Unset",
+      "📝 Note: -"
+    ]
   }
 ];
 function rupiah(n) {
