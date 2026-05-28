@@ -283,3 +283,24 @@ body{background:#f5fbff;color:var(--text);}
 
 @media (min-width:680px){.kyHeader{padding:18px 22px 18px;min-height:220px}.kyCompactInfo{grid-template-columns:1fr 300px}.kyLogo{width:72px;height:72px}}
 @media (max-width:520px){.kyHeader{min-height:210px;background:#f8fdff}.kyHeaderBg{background-position:58% center}.kyTitleBox h1{font-size:32px}.kyLogo{width:58px;height:58px}.kyCompactInfo{margin-top:12px}.kySub{white-space:normal}.kySectionHead{align-items:flex-start}.productCard{border-radius:18px}.cardBody{min-height:118px}}
+
+/* PATCH: tombol Beli / QRIS di halaman produk sempat putih di atas putih karena .btn menimpa .buyFull */
+.btn.buyFull,
+button#buyProductBtn.buyFull{
+  background:linear-gradient(135deg,#006ce8,#13a5ff) !important;
+  color:#ffffff !important;
+  border-color:rgba(255,255,255,.45) !important;
+  box-shadow:0 12px 26px rgba(0,118,255,.26),inset 0 1px 0 rgba(255,255,255,.30) !important;
+}
+.btn.buyFull:hover,
+button#buyProductBtn.buyFull:hover{
+  border-color:#0a7cff !important;
+  box-shadow:0 16px 34px rgba(0,118,255,.34),inset 0 1px 0 rgba(255,255,255,.30) !important;
+}
+.btn.buyFull:disabled,
+button#buyProductBtn.buyFull:disabled{
+  background:linear-gradient(180deg,#dbe8f3,#c6d6e6) !important;
+  color:#7b8da0 !important;
+  border-color:rgba(0,118,255,.12) !important;
+  box-shadow:none !important;
+}
