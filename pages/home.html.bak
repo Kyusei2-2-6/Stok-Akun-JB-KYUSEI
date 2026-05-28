@@ -8,7 +8,7 @@
     <img class="kyLogo" src="assets/ui/logo.jpg" alt="Logo Kyusei">
   </div>
   <div class="kyCompactInfo">
-    <p class="kySub">Cek stok akun game terpercaya • detail foto lengkap sebelum beli</p>
+    <p class="kySub">Klik produk untuk lihat detail & foto</p>
 
     <div class="kyStats" aria-label="Ringkasan stok">
       <div><b id="statReady">0</b><small>Ready</small></div>
@@ -96,8 +96,8 @@
     <button id="kyWelcomeClose" class="kyWelcomeClose" type="button" aria-label="Tutup">×</button>
     <div class="kyWelcomeArt" aria-hidden="true"></div>
     <div class="kyWelcomeContent">
-      <h2 id="kyWelcomeTitle">Selamat Datang di Kyu Sei Store</h2>
-      <p>Pilih akun, cek detail foto, lalu hubungi admin untuk transaksi aman.</p>
+      <h2 id="kyWelcomeTitle">Selamat Datang di Kyusei Store</h2>
+      <p>Terima kasih sudah berkunjung. Klik masuk untuk lihat stok akun terbaru.</p>
       <button id="kyWelcomeEnter" class="kyWelcomeEnter" type="button">Masuk ke Store</button>
     </div>
   </div>
