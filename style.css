@@ -304,3 +304,35 @@ button#buyProductBtn.buyFull:disabled{
   border-color:rgba(0,118,255,.12) !important;
   box-shadow:none !important;
 }
+
+
+/* SOLD performance patch: card sold tetap jadi arsip, tapi tidak buka detail/foto berat */
+.productCard.soldLocked{
+  cursor:not-allowed;
+}
+.productCard.soldLocked .cardMedia img{
+  filter:grayscale(1) brightness(.72);
+}
+.productCard.soldLocked::after{
+  content:'Sudah terjual';
+  position:absolute;
+  inset:auto 14px 14px 14px;
+  border-radius:14px;
+  padding:8px 10px;
+  background:rgba(255,255,255,.82);
+  color:#64748b;
+  font-weight:900;
+  text-align:center;
+  letter-spacing:.08em;
+  opacity:0;
+  transform:translateY(6px);
+  transition:.18s ease;
+  pointer-events:none;
+}
+.productCard.soldLocked:hover::after{
+  opacity:1;
+  transform:translateY(0);
+}
+button:disabled{
+  cursor:not-allowed;
+}

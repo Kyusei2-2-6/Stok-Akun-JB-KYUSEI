@@ -3,6 +3,7 @@
   var ADMIN_WA = '6283863831670';
   var ADMIN_TG = 'DedySetyadi226';
   var ADMIN_FB = 'https://www.facebook.com/kyu.sei.924076';
+  var SOLD_COVER = 'assets/ui/sold-cover.png';
 
   function $(id) { return document.getElementById(id); }
   function safe(v) { return String(v == null ? '' : v); }
@@ -49,7 +50,8 @@
 
     try { localStorage.setItem('lastProductUrl', '#/product?code=' + encodeURIComponent(p.code)); } catch (e) {}
 
-    var photos = Array.isArray(p.photos) ? p.photos : [];
+    var sold = isSold(p);
+    var photos = sold ? [SOLD_COVER] : (Array.isArray(p.photos) ? p.photos : []);
     var current = 0;
     var hero = $('heroImg');
     var thumbs = $('thumbs');
@@ -64,24 +66,41 @@
 
     if (thumbs) {
       thumbs.innerHTML = '';
-      photos.forEach(function (src, i) {
-        var im = document.createElement('img');
-        im.src = resolve(src);
-        im.alt = 'Foto ' + (i + 1);
-        im.onclick = function () { openLight(i); };
-        thumbs.appendChild(im);
-      });
+      if (!sold) {
+        photos.forEach(function (src, i) {
+          var im = document.createElement('img');
+          im.src = resolve(src);
+          im.alt = 'Foto ' + (i + 1);
+          im.loading = 'lazy';
+          im.onclick = function () { openLight(i); };
+          thumbs.appendChild(im);
+        });
+      }
+    }
+
+    if (sold) {
+      var hint = document.querySelector('.productHint');
+      if (hint) hint.textContent = 'Produk ini sudah terjual. Foto dan detail akun SOLD tidak ditampilkan agar web tetap ringan.';
+      var h2 = document.querySelector('.h2');
+      if (h2) h2.textContent = 'Produk sudah terjual';
     }
 
     var buy = $('buyProductBtn');
     if (buy) {
-      if (isSold(p)) {
-        buy.textContent = 'SOLD';
+      if (sold) {
+        buy.textContent = 'SOLD OUT';
         buy.disabled = true;
         buy.style.opacity = '.55';
       } else {
         buy.onclick = function () { openQR(p); };
       }
+    }
+
+    if (sold) {
+      var openBtn = $('openLightboxBtn');
+      var detailButton = $('detailBtn');
+      if (openBtn) { openBtn.textContent = 'Foto SOLD dikunci'; openBtn.disabled = true; openBtn.style.opacity = '.55'; }
+      if (detailButton) { detailButton.textContent = 'Detail SOLD dikunci'; detailButton.disabled = true; detailButton.style.opacity = '.55'; }
     }
 
     function renderLight() {
@@ -104,7 +123,7 @@
       lightbox.classList.remove('open');
       lightbox.setAttribute('aria-hidden', 'true');
     }
-    if ($('openLightboxBtn')) $('openLightboxBtn').onclick = function () { openLight(current); };
+    if ($('openLightboxBtn') && !sold) $('openLightboxBtn').onclick = function () { openLight(current); };
     if ($('lbClose')) $('lbClose').onclick = closeLight;
     if ($('lbPrev')) $('lbPrev').onclick = function () { current = (current - 1 + photos.length) % photos.length; renderLight(); };
     if ($('lbNext')) $('lbNext').onclick = function () { current = (current + 1) % photos.length; renderLight(); };
@@ -128,7 +147,7 @@
       modal.setAttribute('aria-hidden', 'false');
     }
     function closeDetail() { var modal = $('detailModal'); if (modal) { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); } }
-    if ($('detailBtn')) $('detailBtn').onclick = openDetail;
+    if ($('detailBtn') && !sold) $('detailBtn').onclick = openDetail;
     if ($('detailClose')) $('detailClose').onclick = closeDetail;
     if ($('detailModal')) $('detailModal').onclick = function (e) { if (e.target === $('detailModal')) closeDetail(); };
     if ($('qrClose')) $('qrClose').onclick = closeQR;

@@ -88,14 +88,29 @@
   }
 
   function makeCard(p, i) {
-    var a = document.createElement('a');
-    a.href = detailLink(p);
-    a.className = 'productCard ' + (isSold(p) ? 'isSold' : 'isReady');
+    var sold = isSold(p);
+    var a = document.createElement(sold ? 'div' : 'a');
+    if (!sold) a.href = detailLink(p);
+    a.className = 'productCard ' + (sold ? 'isSold soldLocked' : 'isReady');
     a.style.setProperty('--delay', (i * 35) + 'ms');
 
-    a.addEventListener('click', function () {
-      try { localStorage.setItem('lastProductUrl', a.getAttribute('href')); } catch (e) {}
-    });
+    if (!sold) {
+      a.addEventListener('click', function () {
+        try { localStorage.setItem('lastProductUrl', a.getAttribute('href')); } catch (e) {}
+      });
+    } else {
+      a.setAttribute('role', 'button');
+      a.setAttribute('tabindex', '0');
+      a.setAttribute('aria-disabled', 'true');
+      a.title = 'Produk ini sudah terjual';
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        try { alert('Produk ini sudah terjual. Detail dan foto akun SOLD tidak dibuka agar web tetap ringan.'); } catch (_) {}
+      });
+      a.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); a.click(); }
+      });
+    }
 
     var media = document.createElement('div');
     media.className = 'cardMedia';
@@ -132,7 +147,7 @@
     body.appendChild(price);
     body.appendChild(game);
 
-    if (!isSold(p)) {
+    if (!sold) {
       var buy = document.createElement('button');
       buy.type = 'button';
       buy.className = 'buyBtn';
