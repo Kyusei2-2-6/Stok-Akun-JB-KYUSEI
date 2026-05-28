@@ -371,7 +371,7 @@ var PRODUCTS = [
     "name": "Starter Nicole",
     "game": "genshin",
     "price": 75000,
-    "sold": false,
+    "sold": true,
     "photos": [
       "assets/products/genshin/A015/1.jpg",
       "assets/products/genshin/A015/2.jpg",
