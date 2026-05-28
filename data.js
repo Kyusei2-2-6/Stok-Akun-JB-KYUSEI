@@ -231,7 +231,7 @@ var PRODUCTS = [
     "name": "Starter Klee",
     "game": "genshin",
     "price": 150000,
-    "sold": false,
+    "sold": true,
     "photos": [
       "assets/products/genshin/A011/1.jpg",
       "assets/products/genshin/A011/2.jpg",
@@ -351,7 +351,7 @@ var PRODUCTS = [
     "name": "Starter Chasca",
     "game": "genshin",
     "price": 85000,
-    "sold": false,
+    "sold": true,
     "photos": [
       "assets/products/genshin/A014/1.jpg",
       "assets/products/genshin/A014/2.jpg"
