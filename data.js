@@ -6,16 +6,8 @@ var PRODUCTS = [
     "game": "genshin",
     "price": 75000,
     "sold": true,
-    "photos": [
-      "assets/products/genshin/A002/1.jpg",
-      "assets/products/genshin/A002/2.jpg",
-      "assets/products/genshin/A002/3.jpg",
-      "assets/products/genshin/A002/4.jpg",
-      "assets/products/genshin/A002/5.jpg"
-    ],
-    "detail": [
-      "Sold wak"
-    ]
+    "photos": [],
+    "detail": []
   },
   {
     "code": "B001",
@@ -23,12 +15,8 @@ var PRODUCTS = [
     "game": "ml",
     "price": 100000000,
     "sold": true,
-    "photos": [
-      "assets/products/ml/B001/1.png"
-    ],
-    "detail": [
-      "Gacor kang"
-    ]
+    "photos": [],
+    "detail": []
   },
   {
     "code": "C001",
@@ -59,18 +47,8 @@ var PRODUCTS = [
     "game": "genshin",
     "price": 50000,
     "sold": true,
-    "photos": [
-      "assets/products/genshin/A001/1.jpg",
-      "assets/products/genshin/A001/2.jpg",
-      "assets/products/genshin/A001/3.jpg",
-      "assets/products/genshin/A001/4.jpg",
-      "assets/products/genshin/A001/5.jpg",
-      "assets/products/genshin/A001/6.jpg",
-      "assets/products/genshin/A001/7.jpg"
-    ],
-    "detail": [
-      "Sold wak"
-    ]
+    "photos": [],
+    "detail": []
   },
   {
     "code": "A003",
@@ -78,21 +56,8 @@ var PRODUCTS = [
     "game": "genshin",
     "price": 50000,
     "sold": true,
-    "photos": [
-      "assets/products/genshin/A003/1.jpg",
-      "assets/products/genshin/A003/2.jpg",
-      "assets/products/genshin/A003/3.jpg",
-      "assets/products/genshin/A003/4.jpg"
-    ],
-    "detail": [
-      "🌐 Server: Asia",
-      "🔰 AR: 8",
-      "⭐ Karakter 5★: Zibai, Mizuki",
-      "⚔️ Weapon 5★: -",
-      "👤 Username: Unset",
-      "🎂 Birthdate (BD): Unset",
-      "📝 Note: Gmail belum ke set"
-    ]
+    "photos": [],
+    "detail": []
   },
   {
     "code": "A004",
@@ -100,21 +65,8 @@ var PRODUCTS = [
     "game": "genshin",
     "price": 50000,
     "sold": true,
-    "photos": [
-      "assets/products/genshin/A004/1.jpg",
-      "assets/products/genshin/A004/2.jpg",
-      "assets/products/genshin/A004/3.jpg",
-      "assets/products/genshin/A004/4.jpg"
-    ],
-    "detail": [
-      "🌐 Server: Asia",
-      "🔰 AR: 5",
-      "⭐ Karakter 5★: Zibai, Keqing",
-      "⚔️ Weapon 5★: -",
-      "👤 Username: unset",
-      "🎂 Birthdate (BD): unset",
-      "📝 Note: Fresh"
-    ]
+    "photos": [],
+    "detail": []
   },
   {
     "code": "A005",
@@ -122,21 +74,8 @@ var PRODUCTS = [
     "game": "genshin",
     "price": 60000,
     "sold": true,
-    "photos": [
-      "assets/products/genshin/A005/1.jpg",
-      "assets/products/genshin/A005/2.jpg",
-      "assets/products/genshin/A005/3.jpg",
-      "assets/products/genshin/A005/4.jpg"
-    ],
-    "detail": [
-      "🌐 Server: Asia",
-      "🔰 AR: 6",
-      "⭐ Karakter 5★: Colombina, qiqi C1",
-      "⚔️ Weapon 5★: -",
-      "👤 Username: unset",
-      "🎂 Birthdate (BD): unset",
-      "📝 Note: Fresh"
-    ]
+    "photos": [],
+    "detail": []
   },
   {
     "code": "A006",
@@ -144,21 +83,8 @@ var PRODUCTS = [
     "game": "genshin",
     "price": 60000,
     "sold": true,
-    "photos": [
-      "assets/products/genshin/A006/1.jpg",
-      "assets/products/genshin/A006/2.jpg",
-      "assets/products/genshin/A006/3.jpg",
-      "assets/products/genshin/A006/4.jpg"
-    ],
-    "detail": [
-      "🌐 Server: Asia",
-      "🔰 AR: 5",
-      "⭐ Karakter 5★: Colombina, Jean, Dehya",
-      "⚔️ Weapon 5★:-",
-      "👤 Username: unset",
-      "🎂 Birthdate (BD): unset",
-      "📝 Note: unknow"
-    ]
+    "photos": [],
+    "detail": []
   },
   {
     "code": "A007",
@@ -166,21 +92,8 @@ var PRODUCTS = [
     "game": "genshin",
     "price": 50000,
     "sold": true,
-    "photos": [
-      "assets/products/genshin/A007/1.jpg",
-      "assets/products/genshin/A007/2.jpg",
-      "assets/products/genshin/A007/3.jpg",
-      "assets/products/genshin/A007/4.jpg"
-    ],
-    "detail": [
-      "🌐 Server: Asia",
-      "🔰 AR: 5",
-      "⭐ Karakter 5★: Zibai, diluc",
-      "⚔️ Weapon 5★: -",
-      "👤 Username: unset",
-      "🎂 Birthdate (BD): unset",
-      "📝 Note: unknown"
-    ]
+    "photos": [],
+    "detail": []
   },
   {
     "code": "A008",
@@ -188,21 +101,8 @@ var PRODUCTS = [
     "game": "genshin",
     "price": 50000,
     "sold": true,
-    "photos": [
-      "assets/products/genshin/A008/1.jpg",
-      "assets/products/genshin/A008/2.jpg",
-      "assets/products/genshin/A008/3.jpg",
-      "assets/products/genshin/A008/4.jpg"
-    ],
-    "detail": [
-      "🌐 Server: Asia",
-      "🔰 AR: 5",
-      "⭐ Karakter 5★: Zibai, Mizuki",
-      "⚔️ Weapon 5★: -",
-      "👤 Username: unset",
-      "🎂 Birthdate (BD): unset",
-      "📝 Note: email unset"
-    ]
+    "photos": [],
+    "detail": []
   },
   {
     "code": "A009",
@@ -210,21 +110,8 @@ var PRODUCTS = [
     "game": "genshin",
     "price": 60000,
     "sold": true,
-    "photos": [
-      "assets/products/genshin/A009/1.jpg",
-      "assets/products/genshin/A009/2.jpg",
-      "assets/products/genshin/A009/3.jpg",
-      "assets/products/genshin/A009/4.jpg"
-    ],
-    "detail": [
-      "🌐 Server: Asia",
-      "🔰 AR: 5",
-      "⭐ Karakter 5★: Neuvillette",
-      "⚔️ Weapon 5★: -",
-      "👤 Username: unset",
-      "🎂 Birthdate (BD): unset",
-      "📝 Note: email unset"
-    ]
+    "photos": [],
+    "detail": []
   },
   {
     "code": "A011",
@@ -232,21 +119,8 @@ var PRODUCTS = [
     "game": "genshin",
     "price": 150000,
     "sold": true,
-    "photos": [
-      "assets/products/genshin/A011/1.jpg",
-      "assets/products/genshin/A011/2.jpg",
-      "assets/products/genshin/A011/3.jpg",
-      "assets/products/genshin/A011/4.jpg"
-    ],
-    "detail": [
-      "🌐 Server:Asia",
-      "🔰 AR: 5",
-      "⭐ Karakter 5★: Klee,mizuki",
-      "⚔️ Weapon 5★: -",
-      "👤 Username: Unset",
-      "🎂 Birthdate (BD): Unset",
-      "📝 Note: Gmail belum ke set"
-    ]
+    "photos": [],
+    "detail": []
   },
   {
     "code": "A010",
@@ -254,28 +128,8 @@ var PRODUCTS = [
     "game": "genshin",
     "price": 175000,
     "sold": true,
-    "photos": [
-      "assets/products/genshin/A010/1.jpg",
-      "assets/products/genshin/A010/2.jpg",
-      "assets/products/genshin/A010/3.jpg",
-      "assets/products/genshin/A010/4.jpg",
-      "assets/products/genshin/A010/5.jpg",
-      "assets/products/genshin/A010/6.jpg",
-      "assets/products/genshin/A010/7.jpg",
-      "assets/products/genshin/A010/8.jpg"
-    ],
-    "detail": [
-      "🌐 Server:Asia",
-      "🔰 AR: 54",
-      "⭐ Karakter 5★: Diluc,Navia,Flins,mona,Skrk,es copi",
-      "⚔️ Weapon 5★: (njir gw males nulis, liat aja di foto)",
-      "👤 Username: unset",
-      "🎂 Birthdate (BD): (30/12)",
-      "📝 Note:",
-      ">Map banyak yang gelap ladang masih banyak",
-      ">Akun premium tentunya",
-      ">Akun ke dua (2nd)"
-    ]
+    "photos": [],
+    "detail": []
   },
   {
     "code": "B007",
@@ -283,14 +137,8 @@ var PRODUCTS = [
     "game": "genshin",
     "price": 60000,
     "sold": true,
-    "photos": [
-      "assets/products/genshin/B007/1.jpg",
-      "assets/products/genshin/B007/2.jpg",
-      "assets/products/genshin/B007/3.jpg"
-    ],
-    "detail": [
-      "Ladang primo masi banyak"
-    ]
+    "photos": [],
+    "detail": []
   },
   {
     "code": "A012",
@@ -298,25 +146,8 @@ var PRODUCTS = [
     "game": "genshin",
     "price": 175000,
     "sold": true,
-    "photos": [
-      "assets/products/genshin/A012/1.jpg",
-      "assets/products/genshin/A012/2.jpg",
-      "assets/products/genshin/A012/3.jpg",
-      "assets/products/genshin/A012/4.jpg",
-      "assets/products/genshin/A012/5.jpg",
-      "assets/products/genshin/A012/6.jpg",
-      "assets/products/genshin/A012/7.jpg",
-      "assets/products/genshin/A012/8.jpg"
-    ],
-    "detail": [
-      "🌐 Server:Asia",
-      "🔰 AR: 55",
-      "⭐ Karakter 5★: (sesuai foto)",
-      "⚔️ Weapon 5★: (sesuai foto)",
-      "👤 Username: Unset",
-      "🎂 Birthdate (BD): Unset",
-      "📝 Note: End game, ladang primo masih banyak, quest numpuk, Sudah terbuild"
-    ]
+    "photos": [],
+    "detail": []
   },
   {
     "code": "B009",
@@ -324,14 +155,8 @@ var PRODUCTS = [
     "game": "genshin",
     "price": 50000,
     "sold": true,
-    "photos": [
-      "assets/products/genshin/B009/1.jpg",
-      "assets/products/genshin/B009/2.jpg",
-      "assets/products/genshin/B009/3.jpg"
-    ],
-    "detail": [
-      "region baru mondo"
-    ]
+    "photos": [],
+    "detail": []
   },
   {
     "code": "A013",
@@ -352,19 +177,8 @@ var PRODUCTS = [
     "game": "genshin",
     "price": 85000,
     "sold": true,
-    "photos": [
-      "assets/products/genshin/A014/1.jpg",
-      "assets/products/genshin/A014/2.jpg"
-    ],
-    "detail": [
-      "🌐 Server: Asia",
-      "🔰 AR: 5",
-      "⭐ Karakter 5★:Chasca, Keqing",
-      "⚔️ Weapon 5★:-",
-      "👤 Username: Unset",
-      "🎂 Birthdate (BD): Unset",
-      "📝 Note: -"
-    ]
+    "photos": [],
+    "detail": []
   },
   {
     "code": "A015",
@@ -372,20 +186,8 @@ var PRODUCTS = [
     "game": "genshin",
     "price": 75000,
     "sold": true,
-    "photos": [
-      "assets/products/genshin/A015/1.jpg",
-      "assets/products/genshin/A015/2.jpg",
-      "assets/products/genshin/A015/3.jpg"
-    ],
-    "detail": [
-      "🌐 Server: Asia",
-      "🔰 AR: 5",
-      "⭐ Karakter 5★: Nicole",
-      "⚔️ Weapon 5★: -",
-      "👤 Username: Unset",
-      "🎂 Birthdate (BD): Unset",
-      "📝 Note: -"
-    ]
+    "photos": [],
+    "detail": []
   }
 ];
 function rupiah(n) {

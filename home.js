@@ -105,7 +105,7 @@
       a.title = 'Produk ini sudah terjual';
       a.addEventListener('click', function (e) {
         e.preventDefault();
-        try { alert('Produk ini sudah terjual. Detail dan foto akun SOLD tidak dibuka agar web tetap ringan.'); } catch (_) {}
+        try { alert('Akun ini telah terjual 😭🙏 Silahkan pilih akun yang READY ya ✨🛒'); } catch (_) {}
       });
       a.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); a.click(); }
