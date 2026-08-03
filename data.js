@@ -184,6 +184,26 @@ var PRODUCTS = [
     "sold": true,
     "photos": [],
     "detail": []
+  },
+  {
+    "code": "A016",
+    "name": "END GAME",
+    "game": "genshin",
+    "price": 200000,
+    "sold": false,
+    "photos": [
+      "assets/products/genshin/A016/1.jpg",
+      "assets/products/genshin/A016/2.jpg"
+    ],
+    "detail": [
+      "🌐 Server: Asia",
+      "🔰 AR: 55",
+      "⭐ Karakter 5★: 8",
+      "⚔️ Weapon 5★: 2",
+      "👤 Username: unset",
+      "🎂 Birthdate (BD):unset",
+      "📝 Note: ladang primo masi banyak 😎"
+    ]
   }
 ];
 function rupiah(n) {
