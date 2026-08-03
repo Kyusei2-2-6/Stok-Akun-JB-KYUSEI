@@ -204,6 +204,26 @@ var PRODUCTS = [
       "🎂 Birthdate (BD):unset",
       "📝 Note: ladang primo masi banyak 😎"
     ]
+  },
+  {
+    "code": "A017",
+    "name": "END GAME",
+    "game": "genshin",
+    "price": 300000,
+    "sold": false,
+    "photos": [
+      "assets/products/genshin/A017/1.jpg",
+      "assets/products/genshin/A017/2.jpg"
+    ],
+    "detail": [
+      "🌐 Server: Asia",
+      "🔰 AR:  56",
+      "⭐ Karakter 5★: 12",
+      "⚔️ Weapon 5★: 4",
+      "👤 Username: unset",
+      "🎂 Birthdate (BD): set (2/2)",
+      "📝 Note: meta + ladang masi banyak 😎"
+    ]
   }
 ];
 function rupiah(n) {
