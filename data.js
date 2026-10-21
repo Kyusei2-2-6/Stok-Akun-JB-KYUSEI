@@ -176,23 +176,9 @@ var PRODUCTS = [
     "name": "End Game",
     "game": "genshin",
     "price": 250000,
-    "sold": false,
-    "photos": [
-      "assets/products/genshin/A017/1.jpg",
-      "assets/products/genshin/A017/2.jpg",
-      "assets/products/genshin/A017/3.jpg",
-      "assets/products/genshin/A017/4.jpg",
-      "assets/products/genshin/A017/5.jpg"
-    ],
-    "detail": [
-      "🌐 Server:Asia",
-      "🔰 AR: 56",
-      "⭐ Karakter 5★: 8",
-      "⚔️ Weapon 5★: 3",
-      "👤 Username: Unset",
-      "🎂 Birthdate (BD): Unset",
-      "📝 Note: Low eksplor ladang luas dan all Unset.... cocok buat pribadi"
-    ]
+    "sold": true,
+    "photos": [],
+    "detail": []
   }
 ];
 function rupiah(n) {
