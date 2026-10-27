@@ -179,6 +179,26 @@ var PRODUCTS = [
     "sold": true,
     "photos": [],
     "detail": []
+  },
+  {
+    "code": "A018",
+    "name": "Starter Skirk",
+    "game": "genshin",
+    "price": 50000,
+    "sold": false,
+    "photos": [
+      "assets/products/genshin/A018/1.jpg",
+      "assets/products/genshin/A018/2.jpg"
+    ],
+    "detail": [
+      "🌐 Server: Asia",
+      "🔰 AR:  5",
+      "⭐ Karakter 5★: 2",
+      "⚔️ Weapon 5★: -",
+      "👤 Username: unset",
+      "🎂 Birthdate (BD): unset",
+      "📝 Note:-"
+    ]
   }
 ];
 function rupiah(n) {
