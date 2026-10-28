@@ -199,6 +199,29 @@ var PRODUCTS = [
       "🎂 Birthdate (BD): unset",
       "📝 Note:-"
     ]
+  },
+  {
+    "code": "A019",
+    "name": "End game",
+    "game": "genshin",
+    "price": 210000,
+    "sold": false,
+    "photos": [
+      "assets/products/genshin/A019/1.jpg",
+      "assets/products/genshin/A019/2.jpg",
+      "assets/products/genshin/A019/3.jpg",
+      "assets/products/genshin/A019/4.jpg",
+      "assets/products/genshin/A019/5.jpg"
+    ],
+    "detail": [
+      "🌐 Server: Asia",
+      "🔰 AR:  57",
+      "⭐ Karakter 5★: 14",
+      "⚔️ Weapon 5★: 4",
+      "👤 Username: unset",
+      "🎂 Birthdate (BD): set",
+      "📝 Note: Well build low ekplore di map terbaru"
+    ]
   }
 ];
 function rupiah(n) {
